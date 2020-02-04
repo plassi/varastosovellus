@@ -37,7 +37,7 @@ class AppNavbar extends Component {
       <Fragment>
         <NavItem>
           <span className='navbar-text mr-3'>
-            <strong>{user ? `Welcome ${user.name}` : ''}</strong>
+            <strong>{user ? `Tervetuloa ${user.name}` : ''}</strong>
           </span>
         </NavItem>
         <NavItem>
@@ -61,7 +61,7 @@ class AppNavbar extends Component {
       <div>
         <Navbar color='dark' dark expand='sm' className='mb-5'>
           <Container>
-            <NavbarBrand href='/'>ShoppingList</NavbarBrand>
+            <NavbarBrand href='/'>Varastosovellus</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className='ml-auto' navbar>

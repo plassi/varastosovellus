@@ -1,7 +1,7 @@
 {
-  "name": "mern_shopping_list",
+  "name": "varastosovellus",
   "version": "1.0.0",
-  "description": "Shopping list built with the MERN stack",
+  "description": "Ohjelmistotuotanto II kurssin ryhmä S:n Varastosovellus",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -11,7 +11,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "author": "Brad Traversy",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",

@@ -80,38 +80,38 @@ class LoginModal extends Component {
     return (
       <div>
         <NavLink onClick={this.toggle} href='#'>
-          Login
+          Kirjaudu sisään
         </NavLink>
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Login</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Kirjaudu sisään</ModalHeader>
           <ModalBody>
             {this.state.msg ? (
               <Alert color='danger'>{this.state.msg}</Alert>
             ) : null}
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for='email'>Email</Label>
+                <Label for='email'>Sähköposti</Label>
                 <Input
                   type='email'
                   name='email'
                   id='email'
-                  placeholder='Email'
+                  placeholder='Sähköposti'
                   className='mb-3'
                   onChange={this.onChange}
                 />
 
-                <Label for='password'>Password</Label>
+                <Label for='password'>Salasana</Label>
                 <Input
                   type='password'
                   name='password'
                   id='password'
-                  placeholder='Password'
+                  placeholder='Salasana'
                   className='mb-3'
                   onChange={this.onChange}
                 />
                 <Button color='dark' style={{ marginTop: '2rem' }} block>
-                  Login
+                  Kirjaudu sisään
                 </Button>
               </FormGroup>
             </Form>

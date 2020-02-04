@@ -17,18 +17,18 @@ router.post('/', (req, res) => {
 
   // Simple validation
   if(!email || !password) {
-    return res.status(400).json({ msg: 'Please enter all fields' });
+    return res.status(400).json({ msg: 'Täytä kaikki kentät' });
   }
 
   // Check for existing user
   User.findOne({ email })
     .then(user => {
-      if(!user) return res.status(400).json({ msg: 'User Does not exist' });
+      if(!user) return res.status(400).json({ msg: 'Käyttäjää ei ole olemassa' });
 
       // Validate password
       bcrypt.compare(password, user.password)
         .then(isMatch => {
-          if(!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
+          if(!isMatch) return res.status(400).json({ msg: 'Väärä käyttäjä tai salasana' });
 
           jwt.sign(
             { id: user.id },

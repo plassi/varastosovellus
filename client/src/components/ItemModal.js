@@ -56,27 +56,27 @@ class ItemModal extends Component {
             style={{ marginBottom: '2rem' }}
             onClick={this.toggle}
           >
-            Add Item
+            Lisää tarvike
           </Button>
         ) : (
-          <h4 className='mb-3 ml-4'>Please log in to manage items</h4>
+          <h4 className='mb-3 ml-4'>Kirjaudu sisään tai rekisteröidy uutena käyttäjänä</h4>
         )}
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Add To Shopping List</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Lisää tarvike varastoon</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for='item'>Item</Label>
+                <Label for='item'>Tarvike</Label>
                 <Input
                   type='text'
                   name='name'
                   id='item'
-                  placeholder='Add shopping item'
+                  placeholder='Lisää tarvike'
                   onChange={this.onChange}
                 />
                 <Button color='dark' style={{ marginTop: '2rem' }} block>
-                  Add Item
+                  Lisää tarvike
                 </Button>
               </FormGroup>
             </Form>
