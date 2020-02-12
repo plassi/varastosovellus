@@ -1,0 +1,51 @@
+12.2.2020
+Tehtävä: Luokan Tarvike lisääminen
+Tekijä: Lassi Puurunen
+
+-------
+Backend
+-------
+
+tiedosto: /models/Tarvike.js 
+muutokset: luonti ja määritys
+
+
+tiedosto: /routes/api/tarvikkeet.js 
+muutokset: luonti ja määritys
+
+tiedosto: /server.js
+muutokset: routen lisäys palvelimelle
+
+--------
+Frontend
+--------
+
+tiedosto: /client/src/actions/types.js
+muutokset: seuraavat määritykset lisätty
+GET_TARVIKKEET
+ADD_TARVIKE
+DELETE_TARVIKE
+TARVIKKEET_LADATAAN
+
+tiedosto: /client/src/actions/tarvikeActions.js
+muutokset: luonti ja määritys
+
+tiedosto: /client/src/reducers/tarvikeReducer.js
+muutokset: luonti ja määritys
+
+tiedosto: /client/src/reducers/index.js
+muutokset: lisätty tarvikeReducer
+
+tiedosto: /client/src/components/TarvikeModal.js
+muutokset: luonti ja määritys
+
+tiedosto: /client/src/components/TarvikeLista.js
+muutokset: muutokset: luonti ja määritys
+
+tiedosto: /client/src/App.js
+muutokset: TarvikeModal.js:n ja TarvikeLista.js:n lisäys
+
+
+TODO:
+avainsanat tietokantaan taulukkona
+kuvan lataaminen palvelimelle
