@@ -19,3 +19,15 @@
   opacity: 0.01;
   transition: opacity 1000ms ease-in;
 }
+.asetukset-dropdown {
+  max-height: 350px;
+  min-width: 30px;
+  
+
+}
+
+
+.etsia {
+  max-width: 200px
+}
+  

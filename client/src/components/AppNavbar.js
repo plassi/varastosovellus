@@ -6,6 +6,10 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
   NavLink,
   Container
 } from 'reactstrap';
@@ -36,15 +40,33 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <NavItem>
-          <span className='navbar-text mr-3'>
+        <span className='navbar-text mr-3'>
             <strong>{user ? `Tervetuloa ${user.name}` : ''}</strong>
           </span>
         </NavItem>
         <NavItem>
           <Logout />
         </NavItem>
-      </Fragment>
+       <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                Asetukset
+              </DropdownToggle>
+              <DropdownMenu className="asetukset-dropdown">
+                <DropdownItem  >
+                  Omat tiedot
+                </DropdownItem>
+                <DropdownItem>
+                  Sivu
+                </DropdownItem>
+                </DropdownMenu>
+            </UncontrolledDropdown>
+</Fragment>
     );
+    
+    
+    
+   
+    
 
     const guestLinks = (
       <Fragment>
@@ -56,6 +78,7 @@ class AppNavbar extends Component {
         </NavItem>
       </Fragment>
     );
+   
 
     return (
       <div>
@@ -73,13 +96,21 @@ class AppNavbar extends Component {
       </div>
     );
   }
+  
 }
+
+    
+
 
 const mapStateToProps = state => ({
   auth: state.auth
 });
 
+
 export default connect(
   mapStateToProps,
   null
 )(AppNavbar);
+
+
+

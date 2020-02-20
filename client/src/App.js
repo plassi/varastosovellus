@@ -4,6 +4,7 @@ import TarvikeLista from './components/TarvikeLista'
 import TarvikeModal from './components/TarvikeModal'
 import { Container } from 'reactstrap';
 
+
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/authActions';
@@ -30,5 +31,6 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;
