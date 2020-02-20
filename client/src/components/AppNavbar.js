@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, useState } from 'react';
 import {
   Collapse,
   Navbar,
@@ -7,13 +7,16 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Container
+  Container,
+  Button
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import RegisterModal from './auth/RegisterModal';
 import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
+import Sidebar from './Sidebar';
+
 
 class AppNavbar extends Component {
   state = {
@@ -59,7 +62,7 @@ class AppNavbar extends Component {
 
     return (
       <div>
-        <Navbar color='dark' dark expand='sm' className='mb-5'>
+        <Navbar className='navbar' color='dark' dark expand='sm'>
           <Container>
             <NavbarBrand href='/'>Varastosovellus</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
@@ -70,6 +73,7 @@ class AppNavbar extends Component {
             </Collapse>
           </Container>
         </Navbar>
+        <Sidebar />
       </div>
     );
   }

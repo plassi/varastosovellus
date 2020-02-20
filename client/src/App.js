@@ -3,7 +3,7 @@ import AppNavbar from './components/AppNavbar';
 import TarvikeLista from './components/TarvikeLista'
 import TarvikeModal from './components/TarvikeModal'
 import { Container } from 'reactstrap';
-
+//import Sidebar from './components/Sidebar';
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/authActions';
@@ -21,6 +21,7 @@ class App extends Component {
       <Provider store={store}>
         <div className='App'>
           <AppNavbar />
+          
           <Container>
             <TarvikeModal />
             <TarvikeLista />
