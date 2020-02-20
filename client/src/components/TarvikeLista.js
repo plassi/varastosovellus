@@ -19,7 +19,8 @@ class TarvikeLista extends Component {
   onDeleteClick = id => {
     this.props.deleteTarvike(id);
   };
-
+        
+     
   render() {
     const { tarvikkeet } = this.props.tarvike;
     return (
@@ -84,6 +85,7 @@ class TarvikeLista extends Component {
     );
   }
 }
+
 
 const mapStateToProps = state => ({
   tarvike: state.tarvike,

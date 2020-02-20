@@ -7,7 +7,11 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  Dropdown, 
+  DropdownToggle, 
+  DropdownMenu, 
+  DropdownItem 
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addTarvike } from '../actions/tarvikeActions';
@@ -29,6 +33,7 @@ class TarvikeModal extends Component {
       modal: !this.state.modal
     });
   };
+  
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -61,14 +66,25 @@ class TarvikeModal extends Component {
         {this.props.isAuthenticated ? (
           <Button
             color='dark'
-            style={{ marginBottom: '2rem' }}
+            style={{ marginBottom: '4rem' }}
             onClick={this.toggle}
-          >
-            Lisää tarvike
-          </Button>
-        ) : (
+          > Lisää tarvike</Button>
+          ) : 
+         
+          (
+           
           <h4 className='mb-3 ml-4'>Kirjaudu sisään tai rekisteröidy uutena käyttäjänä</h4>
         )}
+
+        
+        <Input className="etsia  mr-3" type="text" name='etsi' placeholder="Hae esine" aria-label="Search"/>
+        <Button color='dark'
+            style={{ marginTop: '1rem' }} className="btn-etsi" type="submit" >Hae</Button>
+             
+     
+    
+
+
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Lisää tarvike</ModalHeader>
@@ -148,8 +164,10 @@ class TarvikeModal extends Component {
         </Modal>
       </div>
     );
-  }
-}
+          }
+        }
+  
+               
 
 const mapStateToProps = state => ({
   item: state.item,
