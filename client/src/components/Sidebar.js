@@ -6,6 +6,7 @@ import {
     Card
 } from 'reactstrap';
 import "./componentStyles.css"
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class Sidebar extends Component {
@@ -14,8 +15,8 @@ class Sidebar extends Component {
     };
 
     static propTypes = {
-        isAuthenticated: PropTypes.bool
-      };
+        auth: PropTypes.object.isRequired
+    };
 
     toggle = () => {
         this.setState({
@@ -24,18 +25,16 @@ class Sidebar extends Component {
     };
 
     render() {
+        const { isAuthenticated, user } = this.props.auth;
         return (
             <div>
-                {this.props.isAuthenticated ? (
+                {isAuthenticated ?
                     <Button
                         color='dark'
                         onClick={this.toggle}>Sidebar</Button>
-                ) : (
-//Tässä pitäisi olla tyhjä rivi, jos käyttäjä ei ole kirjautunut (en saanut toimimaan)
-                        <Button
-                        color='dark'
-                        onClick={this.toggle}>Sidebar</Button>
-                    )}
+                    :
+                    <></>
+                }
                 <Collapse isOpen={this.state.isOpen}>
                     <div className='sidebar'>
                         <h5 href="">Lokitiedot</h5>
@@ -50,8 +49,10 @@ class Sidebar extends Component {
 }
 
 const mapStateToProps = state => ({
-    item: state.item,
-    isAuthenticated: state.auth.isAuthenticated
-  });
+    auth: state.auth
+});
 
-  export default Sidebar;
+export default connect(
+    mapStateToProps,
+    null
+  )(Sidebar);

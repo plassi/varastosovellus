@@ -19,7 +19,6 @@ import PropTypes from 'prop-types';
 import RegisterModal from './auth/RegisterModal';
 import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
-import Sidebar from './Sidebar';
 
 
 class AppNavbar extends Component {
@@ -96,7 +95,6 @@ class AppNavbar extends Component {
             </Collapse>
           </Container>
         </Navbar>
-        <Sidebar />
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AppNavbar from './components/AppNavbar';
+import Sidebar from './components/Sidebar';
 import TarvikeLista from './components/TarvikeLista'
 import TarvikeModal from './components/TarvikeModal'
 import { Container } from 'reactstrap';
@@ -19,7 +20,8 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className='App'>
-          <AppNavbar />          
+          <AppNavbar />
+          <Sidebar />
           <Container>
             <TarvikeModal />
             <TarvikeLista />
