@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const config = require('config');
+const logger = require('express-log-mongo');
 
 const app = express();
 
@@ -9,7 +10,20 @@ const app = express();
 app.use(express.json());
 
 // DB Config
-const db = config.get('mongoURI');
+const url = config.get('mongoURI');
+const databaseName = config.get('databaseName')
+const db = url + "/" + databaseName
+
+// Logger Config
+logger.token('body', (req) => {
+  return req.body;
+})
+
+app.use(logger(':date :method :url :status :remote-addr :response-time :http-version :remote-user :res[content-length] :referrer :user-agent :body', {
+  url: url,
+  db: databaseName,
+  collection: 'logs'
+}));
 
 // Connect to Mongo
 mongoose

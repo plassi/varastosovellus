@@ -18,8 +18,16 @@ const TarvikeSchema = new Schema({
     required: true
   },
   sijainti: String,
-  avainsanat: [String],
-  kuva: String
+  kuva: String,
+  hinta: Number
 });
+
+TarvikeSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
 
 module.exports = Tarvike = mongoose.model('Tarvike', TarvikeSchema);
