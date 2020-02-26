@@ -18,6 +18,7 @@
     "concurrently": "^5.1.0",
     "config": "^3.2.5",
     "express": "^4.17.1",
+    "express-log-mongo": "^1.1.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.11"
   },
