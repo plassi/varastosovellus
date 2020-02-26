@@ -4,6 +4,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { getTarvikkeet, deleteTarvike } from '../actions/tarvikeActions';
 import PropTypes from 'prop-types';
+import "./componentStyles.css"
 
 class TarvikeLista extends Component {
   static propTypes = {
@@ -27,52 +28,29 @@ class TarvikeLista extends Component {
       <Container>
         <ListGroup>
           <TransitionGroup className='tarvike-lista'>
-            <Table>
+            <Table className='table'>
               <thead>
                 <tr>
                   <th>Kategoria</th>
-                  <th>Nimi</th>
-                  <th>Kuvaus</th>
+                  <th>Nimi</th>                  
                   <th>Määrä</th>
                   <th>Yksikkö</th>
                   <th>Sijainti</th>
-                  <th>Avainsanat</th>
-                  <th>Kuva</th>
-                  <th>Poista</th>
+                  <th>Lisätiedot</th>
                 </tr>
               </thead>
               {tarvikkeet.map(({ _id, nimi, kategoria,
                 kuvaus, maara, maarayksikko, sijainti, avainsanat, kuva }) => (
                   <CSSTransition key={_id} timeout={500} classNames='fade'>
 
-
-
                     <tbody>
                       <tr>
                         <td>{kategoria}</td>
-                        <td>{nimi}</td>
-                        <td>{kuvaus}</td>
+                        <td>{nimi}</td>                        
                         <td>{maara}</td>
                         <td>{maarayksikko}</td>
                         <td>{sijainti}</td>
-                        <td>{avainsanat}</td>
-                        <td>{kuva}</td>
-
-                        <td>
-
-                          {this.props.isAuthenticated ? (
-
-                            <Button
-                              className='remove-btn'
-                              color='danger'
-                              size='sm'
-                              onClick={this.onDeleteClick.bind(this, _id)}
-                            >
-                              &times;
-                    </Button>
-                          ) : null}
-
-                        </td>
+                        <td>-></td>
                       </tr>
                     </tbody>
 

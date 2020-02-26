@@ -75,17 +75,7 @@ class TarvikeModal extends Component {
            
           <h4 className='mb-3 ml-4'>Kirjaudu sisään tai rekisteröidy uutena käyttäjänä</h4>
         )}
-
         
-        <Input className="etsia  mr-3" type="text" name='etsi' placeholder="Hae esine" aria-label="Search"/>
-        <Button color='dark'
-            style={{ marginTop: '1rem' }} className="btn-etsi" type="submit" >Hae</Button>
-             
-     
-    
-
-
-
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Lisää tarvike</ModalHeader>
           <ModalBody>

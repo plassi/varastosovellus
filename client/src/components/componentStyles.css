@@ -26,6 +26,10 @@
     margin-bottom: 2rem;
 }
 
+.table {
+    table-layout: fixed;
+}
+
 @keyframes slide-open {
     100% { left: 0;}
 }

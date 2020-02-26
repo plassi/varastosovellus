@@ -7,6 +7,7 @@ import { Container } from 'reactstrap';
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/authActions';
+import Search from './components/Search';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -24,6 +25,7 @@ class App extends Component {
           <Sidebar />
           <Container>
             <TarvikeModal />
+            <Search />
             <TarvikeLista />
           </Container>
         </div>

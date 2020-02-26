@@ -37,6 +37,7 @@ class Sidebar extends Component {
                 }
                 <Collapse isOpen={this.state.isOpen}>
                     <div className='sidebar'>
+                        <p></p>
                         <h5 href="">Lokitiedot</h5>
                         <h5 href="">Tee ostoslista</h5>
                         <h5 href="">Ryhmät</h5>
