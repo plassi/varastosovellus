@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import AppNavbar from './components/AppNavbar';
-import TarvikeLista from './components/TarvikeLista'
 import TarvikeModal from './components/TarvikeModal'
+import TarvikeHaku from './components/TarvikeHaku'
+import TarvikeTable from './components/TarvikeTable'
 import { Container } from 'reactstrap';
 
 
@@ -23,8 +24,9 @@ class App extends Component {
         <div className='App'>
           <AppNavbar />
           <Container>
+            <TarvikeHaku />
+            <TarvikeTable />
             <TarvikeModal />
-            <TarvikeLista />
           </Container>
         </div>
       </Provider>

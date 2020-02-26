@@ -8,10 +8,11 @@ import {
   FormGroup,
   Label,
   Input,
-  Dropdown, 
-  DropdownToggle, 
-  DropdownMenu, 
-  DropdownItem 
+  Col,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addTarvike } from '../actions/tarvikeActions';
@@ -32,7 +33,7 @@ class TarvikeModal extends Component {
       modal: !this.state.modal
     });
   };
-  
+
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -50,7 +51,7 @@ class TarvikeModal extends Component {
       sijainti: this.state.sijainti,
       avainsanat: this.state.avainsanat,
       kuva: this.state.kuva
-    };  
+    };
 
     // Add item via addItem action
     this.props.addTarvike(newTarvike);
@@ -63,27 +64,18 @@ class TarvikeModal extends Component {
     return (
       <div>
         {this.props.isAuthenticated ? (
-          <Button
-            color='dark'
-            style={{ marginBottom: '4rem' }}
-            onClick={this.toggle}
-          > Lisää tarvike</Button>
-          ) : 
-         
+          <Col>
+            <Button
+              color='dark'
+              style={{ marginBottom: '4rem' }}
+              onClick={this.toggle}
+            > Lisää tarvike</Button>
+          </Col>
+        ) :
+
           (
-           
-          <h4 className='mb-3 ml-4'>Kirjaudu sisään tai rekisteröidy uutena käyttäjänä</h4>
-        )}
-
-        
-        <Input className="etsia  mr-3" type="text" name='etsi' placeholder="Hae esine" aria-label="Search"/>
-        <Button color='dark'
-            style={{ marginTop: '1rem' }} className="btn-etsi" type="submit" >Hae</Button>
-             
-     
-    
-
-
+            <></>
+          )}
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Lisää tarvike</ModalHeader>
@@ -140,33 +132,25 @@ class TarvikeModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
-                  type='text'
-                  name='avainsanat'
-                  placeholder='avainsanat'
-                  onChange={this.onChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Input
                   type='file'
                   name='kuva'
                   placeholder='kuva'
                   onChange={this.onChange}
                 />
               </FormGroup>
-                <Button color='dark' style={{ marginTop: '2rem' }} block>
-                  Lisää tarvike
+              <Button color='dark' style={{ marginTop: '2rem' }} block>
+                Lisää tarvike
                 </Button>
-              
+
             </Form>
           </ModalBody>
         </Modal>
       </div>
     );
-          }
-        }
-  
-               
+  }
+}
+
+
 
 const mapStateToProps = state => ({
   item: state.item,
