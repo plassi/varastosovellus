@@ -3,23 +3,22 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const UserSchema = new Schema({
-  name: {
-    type: String,
-    required: true
+  nimi: {
+    type: String
   },
-  email: {
+  kayttajatunnus: {
     type: String,
     required: true,
     unique: true
   },
-  password: {
+  salasana: {
     type: String,
     required: true
   },
-  register_date: {
-    type: Date,
-    default: Date.now
-  }
+  rooli: {
+    type: String,
+    required: true
+  },
 });
 
 module.exports = User = mongoose.model('user', UserSchema);

@@ -12,29 +12,29 @@ const User = require('../../models/User');
 // @desc    Register new user
 // @access  Public
 router.post('/', (req, res) => {
-  const { name, email, password } = req.body;
+  const { kayttajatunnus, salasana, rooli } = req.body;
 
   // Simple validation
-  if(!name || !email || !password) {
+  if(!kayttajatunnus || !salasana) {
     return res.status(400).json({ msg: 'Täytä kaikki kentät' });
   }
 
   // Check for existing user
-  User.findOne({ email })
+  User.findOne({ kayttajatunnus })
     .then(user => {
       if(user) return res.status(400).json({ msg: 'Käyttäjä on jo olemassa' });
 
       const newUser = new User({
-        name,
-        email,
-        password
+        kayttajatunnus,
+        salasana,
+        rooli
       });
 
       // Create salt & hash
       bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
+        bcrypt.hash(newUser.salasana, salt, (err, hash) => {
           if(err) throw err;
-          newUser.password = hash;
+          newUser.salasana = hash;
           newUser.save()
             .then(user => {
               jwt.sign(
@@ -47,8 +47,8 @@ router.post('/', (req, res) => {
                     token,
                     user: {
                       id: user.id,
-                      name: user.name,
-                      email: user.email
+                      kayttajatunnus: user.kayttajatunnus,
+                      rooli: user.rooli
                     }
                   });
                 }

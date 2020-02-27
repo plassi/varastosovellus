@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container, ListGroup, ListGroupItem, Button, Table } from 'reactstrap'
 import { connect } from 'react-redux'
-import { getTarvikkeet } from '../actions/tarvikeActions'
+import { getTarvikkeet } from '../../actions/tarvikeActions'
 import PropTypes from 'prop-types'
 
 class TarvikeTable extends Component {
@@ -32,7 +32,6 @@ class TarvikeTable extends Component {
   }
 
   renderItem(tarvike) {
-    console.log(tarvike);
 
     const clickCallback = () => this.handleRowClick(tarvike.id);
     const tarvikeRows = [

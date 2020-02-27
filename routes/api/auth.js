@@ -13,20 +13,20 @@ const User = require('../../models/User');
 // @desc    Auth user
 // @access  Public
 router.post('/', (req, res) => {
-  const { email, password } = req.body;
+  const { kayttajatunnus, salasana } = req.body;
 
   // Simple validation
-  if(!email || !password) {
+  if(!kayttajatunnus || !salasana) {
     return res.status(400).json({ msg: 'Täytä kaikki kentät' });
   }
 
   // Check for existing user
-  User.findOne({ email })
+  User.findOne({ kayttajatunnus })
     .then(user => {
       if(!user) return res.status(400).json({ msg: 'Käyttäjää ei ole olemassa' });
 
-      // Validate password
-      bcrypt.compare(password, user.password)
+      // Validate salasana
+      bcrypt.compare(salasana, user.salasana)
         .then(isMatch => {
           if(!isMatch) return res.status(400).json({ msg: 'Väärä käyttäjä tai salasana' });
 
@@ -40,8 +40,7 @@ router.post('/', (req, res) => {
                 token,
                 user: {
                   id: user.id,
-                  name: user.name,
-                  email: user.email
+                  kayttajatunnus: user.kayttajatunnus
                 }
               });
             }
@@ -55,7 +54,7 @@ router.post('/', (req, res) => {
 // @access  Private
 router.get('/user', auth, (req, res) => {
   User.findById(req.user.id)
-    .select('-password')
+    .select('-salasana')
     .then(user => res.json(user));
 });
 

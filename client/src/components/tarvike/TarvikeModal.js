@@ -15,9 +15,9 @@ import {
   DropdownItem
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addTarvike } from '../actions/tarvikeActions';
+import { addTarvike } from '../../actions/tarvikeActions';
 import PropTypes from 'prop-types';
-import "./componentStyles.css"
+import "../componentStyles.css"
 
 class TarvikeModal extends Component {
   state = {

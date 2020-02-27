@@ -1,0 +1,7 @@
+Asenna lisäosa vscodeen: REST Client
+https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+Nyt voit käyttää requests-kansiossa olevaa create_user_admin.rest
+tiedostoa tehdäksesi palvelimelle pyynnön admin-käyttäjän luomiseksi.
+
+Kirjaudu sovellukseen käyttäjätunnus: admin, salasana: admin

@@ -16,8 +16,6 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import RegisterModal from './auth/RegisterModal';
-import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
 
 
@@ -42,45 +40,46 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <NavItem>
-        <span className='navbar-text mr-3'>
-            <strong>{user ? `Tervetuloa ${user.name}` : ''}</strong>
+          <span className='navbar-text mr-3'>
+            <strong>{user ? `Tervetuloa ${user.kayttajatunnus}` : ''}</strong>
           </span>
         </NavItem>
         <NavItem>
           <Logout />
         </NavItem>
-       <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Asetukset
+        <UncontrolledDropdown nav inNavbar>
+          <DropdownToggle nav caret>
+            Asetukset
               </DropdownToggle>
-              <DropdownMenu className="asetukset-dropdown">
-                <DropdownItem  >
-                  Omat tiedot
+          <DropdownMenu className="asetukset-dropdown">
+            <DropdownItem  >
+              Omat tiedot
                 </DropdownItem>
-                <DropdownItem>
-                  Sivu
+            <DropdownItem>
+              Sivu
                 </DropdownItem>
-                </DropdownMenu>
-            </UncontrolledDropdown>
-</Fragment>
-    );
-    
-    
-    
-   
-    
-
-    const guestLinks = (
-      <Fragment>
-        <NavItem>
-          <RegisterModal />
-        </NavItem>
-        <NavItem>
-          <LoginModal />
-        </NavItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
       </Fragment>
     );
-   
+
+
+
+
+
+
+    const guestLinks = (
+      // <Fragment>
+      //   <NavItem>
+      //     <RegisterModal />
+      //   </NavItem>
+      //   <NavItem>
+      //     
+      //   </NavItem>
+      // </Fragment>
+      <></>
+    );
+
 
     return (
       <div>
@@ -98,7 +97,7 @@ class AppNavbar extends Component {
       </div>
     );
   }
-  
+
 }
 
 const mapStateToProps = state => ({
