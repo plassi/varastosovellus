@@ -64,11 +64,6 @@ class AppNavbar extends Component {
             </UncontrolledDropdown>
 </Fragment>
     );
-    
-    
-    
-   
-    
 
     const guestLinks = (
       <Fragment>
@@ -81,7 +76,6 @@ class AppNavbar extends Component {
       </Fragment>
     );
    
-
     return (
       <div>
         <Navbar className='navbar' color='dark' dark expand='sm'>

@@ -1,56 +1,64 @@
-import React, { useState, Component } from "react"
+import React from "react"
 import {
-    Collapse,
-    Button,
-    CardBody,
-    Card
+  NavLink,  
 } from 'reactstrap';
+import "./componentStyles.css"
+import { connect } from 'react-redux';
+import SidebarIcon from './SidebarIcon'
 
-class Sidebar extends Component {
-    state = {
-        isOpen: false
-    };
 
-    static propTypes = {
-        auth: PropTypes.object.isRequired
-    };
+//Tähän kuuluvat tiedostot: SidebarContent, SidebarIcon, 
+//https://medium.com/@luqman.qureshi/create-animated-sidebar-component-in-react-with-react-transition-group-7956ed575c00
+class Sidebar extends React.Component {
+  state = {
+     isOpen: false
+   }
+ 
+   renderSidebar = () => {
+     if (!this.state.isOpen) {
+       return null
+     }
+ 
+     return <div className="sidebar">
+       <NavLink href='/' className="sidebar-link">Lokitiedot</NavLink>
+       <NavLink href='/' className="sidebar-link">Tee ostoslista</NavLink>
+       <NavLink href='/' className="sidebar-link">Ryhmät</NavLink>
+       <NavLink href='/' className="sidebar-link">Lisää ryhmä</NavLink>
 
-    toggle = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    };
+    </div>
+  }
 
-    render() {
-        const { isAuthenticated, user } = this.props.auth;
-        return (
-            <div>
-                {isAuthenticated ?
-                    <Button
-                        color='dark'
-                        onClick={this.toggle}>Sidebar</Button>
-                    :
-                    <></>
-                }
-                <Collapse isOpen={this.state.isOpen}>
-                    <div className='sidebar'>
-                        <p></p>
-                        <h5 href="">Lokitiedot</h5>
-                        <h5 href="">Tee ostoslista</h5>
-                        <h5 href="">Ryhmät</h5>
-                        <h5 href="">Lisää ryhmä</h5>
-                    </div>
-                </Collapse>
-            </div>
-        )
-    }
+  toggleSidebar = () => {
+    this.setState(prevState => ({
+      isOpen: !prevState.isOpen
+    }))
+  }
+
+render() {
+  const { isAuthenticated, user } = this.props.auth;
+    return <div className="sidebar.close">
+      {this.renderSidebar()}
+      {isAuthenticated ?
+      <div className="sidebar-icon">
+     
+        <SidebarIcon
+          isOpen={this.state.isOpen}
+          handleClick={this.toggleSidebar}
+        />
+
+      </div>
+        :
+        <></>
+      }
+    </div>
+  }
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+  auth: state.auth
 });
 
 export default connect(
-    mapStateToProps,
-    null
-  )(Sidebar);
+  mapStateToProps,
+  null
+)(Sidebar);
