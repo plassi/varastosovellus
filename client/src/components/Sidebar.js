@@ -5,9 +5,6 @@ import {
     CardBody,
     Card
 } from 'reactstrap';
-import "./componentStyles.css"
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 class Sidebar extends Component {
     state = {
