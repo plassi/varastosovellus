@@ -68,7 +68,7 @@ class TarvikeModal extends Component {
           <Col>
             <Button
               color='dark'
-              style={{ marginBottom: '4rem' }}
+              style={{ marginTop: '2rem'}}
               onClick={this.toggle}
             > Lisää tarvike</Button>
           </Col>

@@ -21,13 +21,11 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className='App'>
-          <AppNavbar />   
-          <Sidebar />       
-          <Container>          
-            <TarvikeHaku />
-            
-            <TarvikeTable2 />
+          <AppNavbar />
+          <Sidebar />
+          <Container>
             <TarvikeModal />
+            <TarvikeTable2 />
           </Container>
         </div>
       </Provider>
