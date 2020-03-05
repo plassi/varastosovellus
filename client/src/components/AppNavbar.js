@@ -61,13 +61,8 @@ class AppNavbar extends Component {
           </DropdownMenu>
         </UncontrolledDropdown>
       </Fragment>
-    );
-
-
-
-
-
-
+    )
+    
     const guestLinks = (
       // <Fragment>
       //   <NavItem>
@@ -79,8 +74,7 @@ class AppNavbar extends Component {
       // </Fragment>
       <></>
     );
-
-
+   
     return (
       <div>
         <Navbar className='navbar' color='dark' dark expand='sm'>

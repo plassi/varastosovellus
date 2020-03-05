@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import TarvikeModal from './TarvikeModal'
-import TarvikeHaku from './TarvikeHaku'
-import TarvikeTable from './TarvikeTable'
+import TarvikeTable2 from './TarvikeTable2'
 
 class TarvikeView extends Component {
 
@@ -13,14 +12,11 @@ class TarvikeView extends Component {
 
 
   render() {
-    console.log(this.props.isAuthenticated);
     if (this.props.isAuthenticated) {
       return (
         <div>
-  
-        <TarvikeHaku />
-        <TarvikeTable />
-        <TarvikeModal />
+          <TarvikeTable2 />
+          <TarvikeModal />
         </div>
       )
     } else {

@@ -7,8 +7,6 @@ import { Container } from 'reactstrap';
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/authActions';
-import PropTypes from 'prop-types';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
