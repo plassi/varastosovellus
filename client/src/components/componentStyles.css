@@ -27,11 +27,6 @@
     table-layout: fixed;
 }
 
-@keyframes slide-open {
-    100% { left: 0;}
-}
-
-
 .sidebar-container {
     min-height: 100vh;
     background-color: lightgray;
@@ -70,3 +65,13 @@
     position: fixed;
 
     }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 70% auto;
+    grid-gap: 10px;    
+}
+
+@keyframes slide-open {
+    100% { left: 0;}
+}

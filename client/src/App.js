@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar';
 import TarvikeModal from './components/TarvikeModal';
 import TarvikeHaku from './components/TarvikeHaku';
 import TarvikeTable from './components/TarvikeTable';
+import TarvikeTable2 from './components/TarvikeTable2';
 import { Container } from 'reactstrap';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -24,7 +25,8 @@ class App extends Component {
           <Sidebar />       
           <Container>          
             <TarvikeHaku />
-            <TarvikeTable />
+            
+            <TarvikeTable2 />
             <TarvikeModal />
           </Container>
         </div>
