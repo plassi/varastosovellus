@@ -1,0 +1,5 @@
+{
+  "jwtSecret": "fwjiofw4j0fjw48909j09w4j0fwefw",
+  "mongoURI": "mongodb://heroku_m3nklbl3:ppt32ZG5vq7hXK@ds125945.mlab.com:25945",
+  "databaseName": "heroku_m3nklbl3"
+}
