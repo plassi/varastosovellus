@@ -1,5 +1,5 @@
 {
-  "mongoURI": "mongodb://localhost:27017",
+  "mongoURI": "mongodb://localhost:27017/varastosovellus-testi",
   "databaseName": "varastosovellus-testi",
   "jwtSecret": "sl_myJwtSecret",
   "port": "5000"
