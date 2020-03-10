@@ -6,27 +6,28 @@
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "npm start --prefix client",
+    "server": "cross-env NODE_ENV=development nodemon server.js",
+    "client": "cross-env NODE_ENV=development npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "concurrently": "^5.1.0",
     "config": "^3.2.5",
+    "cross-env": "^7.0.2",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
     "express-log-mongo": "^1.1.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.11",
-    "react-bootstrap-sidebar": "0.0.1",
-    "react-bootstrap-table-next": "^3.3.5",
-    "react-icons": "^3.9.0",
-    "react-sidebar": "^3.0.2"
+    "mongoose": "^5.8.11"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "concurrently": "^5.1.0",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
   }
 }
