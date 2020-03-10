@@ -11,7 +11,7 @@ const mongoose = require('mongoose')
 app.use(cors())
 
 // Serve static assets if in production
-if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'local') {
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'local-build') {
   // Set static folder
   console.log(process.env.NODE_ENV)
   
