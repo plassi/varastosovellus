@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb://localhost:27017/varastosovellus-local",
+  "databaseName": "varastosovellus-local",
+  "jwtSecret": "sl_myJwtSecret",
+  "port": "5000"
+}
