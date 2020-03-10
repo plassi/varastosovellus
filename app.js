@@ -31,11 +31,6 @@ mongoose
 // Bodyparser Middleware
 app.use(express.json())
 
-// Use Routes
-app.use('/api/tarvikkeet', require('./routes/api/tarvikkeet'))
-app.use('/api/users', require('./routes/api/users'))
-app.use('/api/auth', require('./routes/api/auth'))
-
 // express-log-mongo Config
 const mLogger = require('express-log-mongo')
 mLogger.token('body', (request) => {
@@ -48,6 +43,12 @@ app.use(mLogger(':date :method :url :status :remote-addr :response-time :http-ve
   db: config.get('databaseName'),
   collection: 'logs'
 }))
+
+// Use Routes
+app.use('/api/tarvikkeet', require('./routes/api/tarvikkeet'))
+app.use('/api/users', require('./routes/api/users'))
+app.use('/api/auth', require('./routes/api/auth'))
+
 
 
 
