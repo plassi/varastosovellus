@@ -100,7 +100,7 @@ class LoginForm extends Component {
 
                     <Label for='salasana'>Salasana</Label>
                     <Input
-                      type='salasana'
+                      type='password'
                       name='salasana'
                       id='salasana'
                       placeholder='Salasana'
