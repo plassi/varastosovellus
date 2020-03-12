@@ -1,0 +1,2 @@
+GET http://localhost:5000/api/tarvikkeet HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrYXl0dGFqYXR1bm51cyI6ImFkbWluIiwiaWQiOiI1ZTZhODRjMjc5MWQ0OTc4YzFmNTFkNzAiLCJpYXQiOjE1ODQwMzk2MTJ9.Gbk9IFn_IVbLE3HYyl6ZItS5A7krm3zWzspyb3-drds

@@ -3,10 +3,10 @@ import { GET_TARVIKKEET, ADD_TARVIKE, DELETE_TARVIKE, TARVIKKEET_LADATAAN } from
 import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
 
-export const getTarvikkeet = () => dispatch => {
+export const getTarvikkeet = () => (dispatch, getState) => {
   dispatch(setTarvikkeetLadataan());
   axios
-    .get('/api/tarvikkeet')
+    .get('/api/tarvikkeet', tokenConfig(getState))
     .then(res =>
       dispatch({
         type: GET_TARVIKKEET,
