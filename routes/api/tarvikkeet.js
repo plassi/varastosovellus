@@ -38,8 +38,8 @@ router.post('/', auth, async (req, res) => {
 // @access  Private
 router.delete('/:id', auth, async (req, res) => {
 
-  const tarvike = await Tarvike.findById(req.params.id)
-  await Tarvike.remove(tarvike)
+  await Tarvike.findByIdAndRemove(req.params.id)
+  res.status(204).end()
 });
 
 module.exports = router;

@@ -26,15 +26,14 @@ router.post('/', (req, res) => {
 
       const newUser = new User({
         kayttajatunnus,
-        salasana,
         rooli
       });
 
       // Create salt & hash
       bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.salasana, salt, (err, hash) => {
+        bcrypt.hash(salasana, salt, (err, hash) => {
           if(err) throw err;
-          newUser.salasana = hash;
+          newUser.salasanaHash = hash;
           newUser.save()
             .then(user => {
               jwt.sign(

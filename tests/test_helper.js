@@ -1,5 +1,11 @@
 const Tarvike = require('../models/Tarvike')
 
+const adminUser = {
+  'kayttajatunnus': 'testi',
+  'salasana': 'testi',
+  'rooli': 'admin'
+}
+
 const initialTarvikkeet = [
   {
     nimi: 'Tarvike 1',
@@ -35,5 +41,5 @@ const tarvikkeetInDb = async () => {
 }
 
 module.exports = {
-  initialTarvikkeet, nonExistingTarvikeId, tarvikkeetInDb
+  adminUser, initialTarvikkeet, nonExistingTarvikeId, tarvikkeetInDb
 }

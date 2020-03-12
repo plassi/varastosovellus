@@ -1417,3 +1417,4 @@ client/.yarn/cache/yargs-parser-npm-13.1.1-d8e141761a-1.zip
 client/.yarn/cache/yarn-upgrade-all-npm-0.5.2-be48cf155f-1.zip
 client/.yarn/releases/yarn-rc.js
 npm-debug.log
+.vscode/launch.json

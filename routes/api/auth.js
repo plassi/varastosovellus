@@ -12,41 +12,36 @@ const User = require('../../models/User');
 // @route   POST api/auth
 // @desc    Auth user
 // @access  Public
-router.post('/', (req, res) => {
-  const { kayttajatunnus, salasana } = req.body;
+router.post('/', async (req, res) => {
+  const body = req.body;
 
   // Simple validation
-  if(!kayttajatunnus || !salasana) {
+  if (!body.kayttajatunnus || !body.salasana) {
     return res.status(400).json({ msg: 'Täytä kaikki kentät' });
   }
 
   // Check for existing user
-  User.findOne({ kayttajatunnus })
-    .then(user => {
-      if(!user) return res.status(400).json({ msg: 'Käyttäjää ei ole olemassa' });
+  const user = await User.findOne({ kayttajatunnus: body.kayttajatunnus})
+  const passwordCorrect = user === null
+    ? false
+    : await bcrypt.compare(body.salasana, user.salasanaHash)
 
-      // Validate salasana
-      bcrypt.compare(salasana, user.salasana)
-        .then(isMatch => {
-          if(!isMatch) return res.status(400).json({ msg: 'Väärä käyttäjä tai salasana' });
-
-          jwt.sign(
-            { id: user.id },
-            config.get('jwtSecret'),
-            { expiresIn: 3600 },
-            (err, token) => {
-              if(err) throw err;
-              res.json({
-                token,
-                user: {
-                  id: user.id,
-                  kayttajatunnus: user.kayttajatunnus
-                }
-              });
-            }
-          )
-        })
+  if (!(user && passwordCorrect)) {
+    return response.status(401).json({
+      error: 'väärä käyttäjätunnus tai salasana'
     })
+  }
+
+  const userForToken = {
+    kayttajatunnus: user.kayttajatunnus,
+    id: user._id
+  }
+
+  const token = jwt.sign(userForToken, config.get('jwtSecret'))
+
+  res
+    .status(200)
+    .send({ token, kayttajatunnus: user.kayttajatunnus })
 });
 
 // @route   GET api/auth/user
@@ -54,7 +49,6 @@ router.post('/', (req, res) => {
 // @access  Private
 router.get('/user', auth, (req, res) => {
   User.findById(req.user.id)
-    .select('-salasana')
     .then(user => res.json(user));
 });
 
