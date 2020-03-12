@@ -8,7 +8,7 @@ const Tarvike = require('../../models/Tarvike');
 // @route   GET api/items
 // @desc    Get All Items
 // @access  Public
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
   const tarvikkeet = await Tarvike.find()
   // .sort({ date: -1 }) Palvelimelta haettavan listan järjestely
   res.json(tarvikkeet)

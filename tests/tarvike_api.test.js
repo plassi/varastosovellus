@@ -116,6 +116,56 @@ describe('Admin kirjautunut', () => {
 
 })
 
+describe('käyttäjä ei kirjautunut', () => {
+
+  beforeEach(async () => {
+    // Alustetaan tarvikkeet tietokantaan
+    await Tarvike.deleteMany({})
+    await Tarvike.insertMany(helper.initialTarvikkeet)
+  })
+
+  test('tarvikkeiden haku palauttaa virheen 401 unauthorized', async () => {
+    const response = await api.get('/api/tarvikkeet')
+      .expect(401)
+  })
+
+  test('tarvikkeiden lisäys palauttaa virheen 401 unauthorized', async () => {
+    const uusiTarvike = {
+      nimi: 'Tarvike 3',
+      kategoria: 'Tarvikkeen 3 kategoria',
+      kuvaus: 'Tarvikkeen 3 kuvaus',
+      maara: 30,
+      maarayksikko: "ltr",
+      sijainti: "C3",
+      hinta: "30"
+    }
+    
+    await api
+      .post('/api/tarvikkeet')
+      .send(uusiTarvike)
+      .expect(401)
+  })
+
+  test('tarvikkeen poisto aiheuttaa virheen 401 unauthorized', async () => {
+    const tarvikkeetAtStart = await helper.tarvikkeetInDb()
+    const tarvikeToDelete = tarvikkeetAtStart[0]
+
+    await api
+      .delete(`/api/tarvikkeet/${tarvikeToDelete.id}`)
+      .expect(401)
+
+    const tarvikkeetAtEnd = await helper.tarvikkeetInDb()
+    
+    expect(tarvikkeetAtEnd.length).toBe(helper.initialTarvikkeet.length)
+
+    const nimet = tarvikkeetAtEnd.map(r => r.nimi)
+
+    expect(nimet).toContain(tarvikeToDelete.nimi)
+  })
+
+
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
