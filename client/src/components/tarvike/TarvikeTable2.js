@@ -1,22 +1,17 @@
-import React, { Component } from 'react'
-import { Container } from 'reactstrap'
+import React, { Component, Code } from 'react'
 import { connect } from 'react-redux'
 import { getTarvikkeet } from '../../actions/tarvikeActions'
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import paginationFactory from 'react-bootstrap-table2-paginator';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 
 class TarvikeTable2 extends Component {
     state = {
         columns: [{
-            dataField: 'kategoria',
-            text: 'Kategoria',
-            sort: true
-        },
-        {
             dataField: 'nimi',
             text: 'Nimi',
             sort: true
@@ -28,7 +23,11 @@ class TarvikeTable2 extends Component {
             dataField: 'sijainti',
             text: 'Sijainti',
             sort: true
-        }
+        }, {
+            dataField: 'kategoria',
+            text: 'Kategoria',
+            sort: true
+        },
         ],
     }
 
@@ -83,26 +82,22 @@ class TarvikeTable2 extends Component {
         };
 
         const customTotal = (from, to, size) => (
-            <span className="react-bootstrap-table-pagination-total">
+            <span className="react-bootstrap-table-pagination-total pagination pagination-sm">
                 Näytetään {from} - {to} / {size} tarviketta
             </span>
         );
 
         const options = {
-            paginationSize: 5,
+            paginationSize: 4,
             pageStartIndex: 1,
-            // alwaysShowAllBtns: true, // Always show next and previous button
-            // withFirstAndLast: false, // Hide the going to First and Last page button
-            // hideSizePerPage: true, // Hide the sizePerPage dropdown always
-            //hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
-            firstPageText: 'First',
-            prePageText: 'Edellinen',
-            nextPageText: 'Seuraava',
-            lastPageText: 'Last',
-            nextPageTitle: 'First page',
-            prePageTitle: 'Pre page',
-            firstPageTitle: 'Next page',
-            lastPageTitle: 'Last page',
+            firstPageText: 'Alkuun',
+            prePageText: '<<',
+            nextPageText: '>>',
+            lastPageText: 'Loppuun',
+            nextPageTitle: 'Seuraava',
+            prePageTitle: 'Edellinen',
+            firstPageTitle: 'Ensimmäinen',
+            lastPageTitle: 'Viimeinen',
             showTotal: true,
             paginationTotalRenderer: customTotal,
             sizePerPageList: [{
@@ -117,33 +112,89 @@ class TarvikeTable2 extends Component {
         };
 
         return (
-            
-                <ToolkitProvider
-                    keyField="id"
-                    data={tarvikkeet}
-                    columns={this.state.columns}
-                    search
-                >
-                    {
-                        props => (
-                            <Container>
-                            <SearchBar className='search' placeholder='Hae' {...props.searchProps}/>
+<div>
+            <ToolkitProvider
+                keyField="id"
+                data={tarvikkeet}
+                columns={this.state.columns}
+                search
+            >
+                {
+                    props => (
+                        <div>
+                            <SearchBar className='search' placeholder='Hae' {...props.searchProps} />
                             <BootstrapTable
                                 hover
-                                { ...props.baseProps }
+                                {...props.baseProps}
                                 bordered={false}
                                 expandRow={expandRow}
                                 pagination={paginationFactory(options)}
+                                noDataIndication="No Data Is Available"
                             />
-                            </Container>
-                            
-                )
-                    }
-                </ToolkitProvider>
-            
+                        </div>
+
+                    )
+                }
+            </ToolkitProvider>
+            </div>
         );
     }
 }
+/*
+ <div>
+            <ToolkitProvider
+                keyField="id"
+                data={tarvikkeet}
+                columns={this.state.columns}
+                search
+            >
+                {
+                    props => (
+                        <div>
+                            <SearchBar className='search' placeholder='Hae' {...props.searchProps} />
+                            <BootstrapTable
+                                hover
+                                {...props.baseProps}
+                                bordered={false}
+                                expandRow={expandRow}
+                                pagination={paginationFactory(options)}
+                                noDataIndication="No Data Is Available"
+                            />
+                        </div>
+
+                    )
+                }
+            </ToolkitProvider>
+            </div>
+*/
+
+/*
+const options = {
+            custom: true,
+            paginationSize: 4,
+            pageStartIndex: 1,
+            firstPageText: 'Alkuun',
+            prePageText: '<<',
+            nextPageText: '>>',
+            lastPageText: 'Loppuun',
+            nextPageTitle: 'Seuraava',
+            prePageTitle: 'Edellinen',
+            firstPageTitle: 'Ensimmäinen',
+            lastPageTitle: 'Viimeinen',
+            showTotal: true,
+            totalSize: tarvikkeet.length,
+            paginationTotalRenderer: customTotal,
+            sizePerPageList: [{
+                text: '2', value: 2
+            }, {
+                text: '5', value: 5
+            }, {
+                text: '10', value: 10
+            }, {
+                text: 'All', value: tarvikkeet.length
+            }] // A numeric array is also available. the purpose of above example is custom the text
+        };
+*/
 
 const mapStateToProps = state => ({
     tarvike: state.tarvike,

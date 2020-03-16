@@ -25,7 +25,8 @@
     "express-async-errors": "^3.1.1",
     "express-log-mongo": "^1.1.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.11"
+    "mongoose": "^5.8.11",
+    "react-sidebar": "^3.0.2"
   },
   "devDependencies": {
     "concurrently": "^5.1.0",
