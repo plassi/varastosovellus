@@ -67,6 +67,8 @@ class LoginForm extends Component {
     this.props.login(user);
   };
 
+  
+
   render() {
     if (this.props.isAuthenticated) {
       return (
