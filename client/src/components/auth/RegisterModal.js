@@ -19,8 +19,9 @@ import { clearErrors } from '../../actions/errorActions';
 class RegisterModal extends Component {
   state = {
     modal: false,
+    ryhma: '',
+    opettaja: '',
     name: '',
-    email: '',
     password: '',
     msg: null
   };
@@ -79,11 +80,14 @@ class RegisterModal extends Component {
     this.props.register(newUser);
   };
 
+
+  
+
   render() {
     return (
       <div>
         <NavLink onClick={this.toggle} href='#'>
-          Rekisteröidy
+          Lisää käyttäjä
         </NavLink>
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
@@ -94,22 +98,21 @@ class RegisterModal extends Component {
             ) : null}
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
+              <Label check>
+            <Input type="radio" name="opettaja" />{' '}
+            Opettaja
+          </Label>
+         <Label check>
+            <Input type="radio" name="ryhma" />{' '}
+            Ryhmä
+          </Label>
+
                 <Label for='name'>Nimi</Label>
                 <Input
                   type='text'
                   name='name'
                   id='name'
                   placeholder='Nimi'
-                  className='mb-3'
-                  onChange={this.onChange}
-                />
-
-                <Label for='email'>Sähköposti</Label>
-                <Input
-                  type='email'
-                  name='email'
-                  id='email'
-                  placeholder='Sähköposti'
                   className='mb-3'
                   onChange={this.onChange}
                 />
@@ -124,7 +127,7 @@ class RegisterModal extends Component {
                   onChange={this.onChange}
                 />
                 <Button color='dark' style={{ marginTop: '2rem' }} block>
-                  Rekisteröidy
+                  Lisää
                 </Button>
               </FormGroup>
             </Form>
