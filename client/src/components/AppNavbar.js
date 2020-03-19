@@ -34,35 +34,46 @@ class AppNavbar extends Component {
     });
   };
 
+  componentDidMount() {
+    const { isAuthenticated, user } = this.props.auth
+  }
+
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
     const authLinks = (
       <Fragment>
         <NavItem>
-          <span className='navbar-text mr-3'>
-            <strong>{user ? `Tervetuloa ${user.kayttajatunnus}` : ''}</strong>
-          </span>
+          <NavLink href="varasto">Varasto</NavLink>
         </NavItem>
         <NavItem>
-          <Logout />
+          <NavLink href="ostoslista">Ostoslista</NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink href="kayttajat">Käyttäjät</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="loki" style={{marginRight:'3vw'}}>Loki</NavLink>
+        </NavItem>
+
         <UncontrolledDropdown nav inNavbar>
           <DropdownToggle nav caret>
-            Asetukset
-              </DropdownToggle>
+          
+              {user ? `Kirjautunut ${user.kayttajatunnus}` : ''}
+              
+          </DropdownToggle>
           <DropdownMenu className="asetukset-dropdown">
-            <DropdownItem  >
-              Omat tiedot
+            <DropdownItem>
+              Käyttäjäprofiili
                 </DropdownItem>
             <DropdownItem>
-              Sivu
-                </DropdownItem>
+              <Logout />
+            </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </Fragment>
     )
-    
+
     const guestLinks = (
       // <Fragment>
       //   <NavItem>
@@ -74,7 +85,7 @@ class AppNavbar extends Component {
       // </Fragment>
       <></>
     );
-   
+
     return (
       <div>
         <Navbar className='navbar' color='dark' dark expand='sm'>
