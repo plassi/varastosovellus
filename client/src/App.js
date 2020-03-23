@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import LoginForm from './components/auth/LoginForm'
 import AppNavbar from './components/AppNavbar'
-import Sidebar from './components/Sidebar'
 import TarvikeView from './components/tarvike/TarvikeView'
 import KayttajaView from './components/kayttaja/KayttajaView'
 import { Container } from 'reactstrap'

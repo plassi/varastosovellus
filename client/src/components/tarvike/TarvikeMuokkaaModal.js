@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import {  deleteTarvike, updateTarvike } from '../../actions/tarvikeActions';
 import PropTypes from 'prop-types';
 import "../componentStyles.css"
-import { FaRegEdit } from "react-icons/fa";
+import { FaRegEdit } from 'react-icons/fa'
 
 class TarvikeMuokkaaModal extends Component {
   state = {
@@ -49,12 +49,9 @@ class TarvikeMuokkaaModal extends Component {
       avainsanat: this.state.avainsanat,
       kuva: this.state.kuva
     }
-    console.log('newTarvike', newTarvike)
-
-   
     
   // Put item via putItem action
-    this.props.updateTarvike(this.newTarvike);
+    this.props.updateTarvike(newTarvike);
     
 
     // Close modal

@@ -47,13 +47,13 @@ export const deleteTarvike = id => (dispatch, getState) => {
     );
 };
 
-export const updateTarvike = id => (dispatch, getState) => {
+export const updateTarvike = tarvike => (dispatch, getState) => {
   axios
-    .put(`/api/tarvikkeet/${id}`, tokenConfig(getState))
+    .put(`/api/tarvikkeet/${tarvike.id}`, tarvike, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: UPDATE_TARVIKE,
-        payload: res.data     
+        payload: res.data 
       })}
     )
     .catch(err =>
