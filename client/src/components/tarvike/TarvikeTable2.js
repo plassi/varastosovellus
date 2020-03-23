@@ -1,4 +1,4 @@
-import React, { Component, Code } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getTarvikkeet } from '../../actions/tarvikeActions'
 import PropTypes from 'prop-types';
@@ -7,7 +7,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import { Button, Container, Row, Col } from 'reactstrap'
+import { TiPlus, TiMinus, TiShoppingCart } from "react-icons/ti";
+import TarvikeMuokkaaModal from './TarvikeMuokkaaModal'
 
 class TarvikeTable2 extends Component {
     state = {
@@ -64,21 +66,48 @@ class TarvikeTable2 extends Component {
         const expandRow = {
             onlyOneExpanding: true,
             renderer: row => (
-                <div className='grid-container'>
-                    <div className='grid-item'>
-                        <h6>Kuvaus</h6>
-                        <p>{row.kuvaus} </p>
-                    </div>
-                    <div className='grid-item'>
-                        <h6>Kuva</h6>
-                        <picture>
-                            <img src={row.kuva} />
-                        </picture>
-                    </div>
-                </div>
+                <Container>
+                    <Row>
+                        <Col>
+                            <h6>Kuvaus</h6>
+                            <p>{row.kuvaus} </p>
+                        </Col>
+                        <Col >
+                            <h6>Kuva</h6>
+                            <picture>
+                                <img src={row.kuva} />
+                            </picture>
+                        </Col>
+                       
+                        <Col style={{textAlign: 'right'}}> 
+                        <Row>   
+                            <Button color='dark' style={{ marginRight: '0.5rem'}}><TiShoppingCart /></Button>
+                            <TarvikeMuokkaaModal row={row} />
+                            </Row>
+                        </Col>
+                       
+                    </Row>
+                </Container>
             ),
             showExpandColumn: true,
-            expandColumnPosition: 'right'
+            expandColumnPosition: 'right',
+            expandHeaderColumnRenderer: ({ isAnyExpands }) => {
+                if (isAnyExpands) {
+                    return <b><TiMinus/></b>;
+                }
+                return <b><TiPlus/></b>;
+            },
+            expandColumnRenderer: ({ expanded }) => {
+                if (expanded) {
+                    return (
+                        <b><TiMinus/></b>
+                    );
+                }
+                return (
+                    <b><TiPlus/></b>
+                );
+            }
+
         };
 
         const customTotal = (from, to, size) => (
@@ -108,93 +137,38 @@ class TarvikeTable2 extends Component {
                 text: '10', value: 10
             }, {
                 text: 'All', value: tarvikkeet.length
-            }] // A numeric array is also available. the purpose of above example is custom the text
+            }] 
         };
 
         return (
-<div>
-            <ToolkitProvider
-                keyField="id"
-                data={tarvikkeet}
-                columns={this.state.columns}
-                search
-            >
-                {
-                    props => (
-                        <div>
-                            <SearchBar className='search' placeholder='Hae' {...props.searchProps} />
-                            <BootstrapTable
-                                hover
-                                {...props.baseProps}
-                                bordered={false}
-                                expandRow={expandRow}
-                                pagination={paginationFactory(options)}
-                                noDataIndication="No Data Is Available"
-                            />
-                        </div>
+            <div>
+                <ToolkitProvider
+                    keyField="id"
+                    data={tarvikkeet}
+                    columns={this.state.columns}
+                    search
+                >
+                    {
+                        props => (
+                            <div>
+                                <SearchBar className='search' placeholder="Hae" {...props.searchProps} />
+                                <BootstrapTable
+                                    hover
+                                    {...props.baseProps}
+                                    bordered={false}
+                                    expandRow={expandRow}
+                                    pagination={paginationFactory(options)}
+                                    noDataIndication="No Data Is Available"
+                                />
+                            </div>
 
-                    )
-                }
-            </ToolkitProvider>
+                        )
+                    }
+                </ToolkitProvider>
             </div>
         );
     }
 }
-/*
- <div>
-            <ToolkitProvider
-                keyField="id"
-                data={tarvikkeet}
-                columns={this.state.columns}
-                search
-            >
-                {
-                    props => (
-                        <div>
-                            <SearchBar className='search' placeholder='Hae' {...props.searchProps} />
-                            <BootstrapTable
-                                hover
-                                {...props.baseProps}
-                                bordered={false}
-                                expandRow={expandRow}
-                                pagination={paginationFactory(options)}
-                                noDataIndication="No Data Is Available"
-                            />
-                        </div>
-
-                    )
-                }
-            </ToolkitProvider>
-            </div>
-*/
-
-/*
-const options = {
-            custom: true,
-            paginationSize: 4,
-            pageStartIndex: 1,
-            firstPageText: 'Alkuun',
-            prePageText: '<<',
-            nextPageText: '>>',
-            lastPageText: 'Loppuun',
-            nextPageTitle: 'Seuraava',
-            prePageTitle: 'Edellinen',
-            firstPageTitle: 'Ensimmäinen',
-            lastPageTitle: 'Viimeinen',
-            showTotal: true,
-            totalSize: tarvikkeet.length,
-            paginationTotalRenderer: customTotal,
-            sizePerPageList: [{
-                text: '2', value: 2
-            }, {
-                text: '5', value: 5
-            }, {
-                text: '10', value: 10
-            }, {
-                text: 'All', value: tarvikkeet.length
-            }] // A numeric array is also available. the purpose of above example is custom the text
-        };
-*/
 
 const mapStateToProps = state => ({
     tarvike: state.tarvike,

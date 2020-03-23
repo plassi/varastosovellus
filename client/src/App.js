@@ -9,7 +9,7 @@ import store from './store';
 import { loadUser } from './actions/authActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import ReactSidebar from './components/ReactSidebar'
+//import ReactSidebar from './components/ReactSidebar'
 
 class App extends Component {
 
@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className='App'>        
-        <ReactSidebar />            
+                  
           <AppNavbar />          
           <Container>          
             <TarvikeView />
