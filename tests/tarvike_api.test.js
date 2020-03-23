@@ -94,6 +94,31 @@ describe('Admin kirjautunut', () => {
     expect(tarvikkeetAtEnd.length).toBe(helper.initialTarvikkeet.length)
   })
 
+  test('tarviketta voidaan muokata', async () => {
+    const tarvikkeetAtStart = await helper.tarvikkeetInDb()
+    
+    const tarvikeToUpdate = {
+      ...tarvikkeetAtStart[0],
+      nimi: "paivitettyTarvike"
+    } 
+
+    await api
+      .put(`/api/tarvikkeet/${tarvikeToUpdate.id}`)
+      .set('x-auth-token', token)
+      .send(tarvikeToUpdate)
+      .expect(200)
+
+    const tarvikkeetAtEnd = await helper.tarvikkeetInDb()
+    
+    expect(tarvikkeetAtEnd.length).toBe(
+      helper.initialTarvikkeet.length
+    )
+
+    const nimet = tarvikkeetAtEnd.map(r => r.nimi)
+
+    expect(nimet).toContain(tarvikeToUpdate.nimi)
+  })
+
   test('tarvike voidaan poistaa', async () => {
     const tarvikkeetAtStart = await helper.tarvikkeetInDb()
     const tarvikeToDelete = tarvikkeetAtStart[0]
@@ -146,7 +171,31 @@ describe('käyttäjä ei kirjautunut', () => {
       .expect(401)
   })
 
-  test('tarvikkeen poisto aiheuttaa virheen 401 unauthorized', async () => {
+  test('tarvikkeen muokkaus palauttaa virheen 401 unauthorized', async () => {
+    const tarvikkeetAtStart = await helper.tarvikkeetInDb()
+    
+    const tarvikeToUpdate = {
+      ...tarvikkeetAtStart[0],
+      nimi: "paivitettyTarvike"
+    } 
+
+    await api
+      .put(`/api/tarvikkeet/${tarvikeToUpdate.id}`)
+      .send(tarvikeToUpdate)
+      .expect(401)
+
+    const tarvikkeetAtEnd = await helper.tarvikkeetInDb()
+    
+    expect(tarvikkeetAtEnd.length).toBe(
+      helper.initialTarvikkeet.length
+    )
+
+    const nimet = tarvikkeetAtEnd.map(r => r.nimi)
+
+    expect(nimet).not.toContain(tarvikeToUpdate.nimi)
+  })
+
+  test('tarvikkeen poisto palauttaa virheen 401 unauthorized', async () => {
     const tarvikkeetAtStart = await helper.tarvikkeetInDb()
     const tarvikeToDelete = tarvikkeetAtStart[0]
 
