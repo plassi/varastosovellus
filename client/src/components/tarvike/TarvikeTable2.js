@@ -1,22 +1,19 @@
 import React, { Component } from 'react'
-import { Container } from 'reactstrap'
 import { connect } from 'react-redux'
 import { getTarvikkeet } from '../../actions/tarvikeActions'
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import paginationFactory from 'react-bootstrap-table2-paginator';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import { Button, Container, Row, Col } from 'reactstrap'
+import { TiPlus, TiMinus, TiShoppingCart } from "react-icons/ti";
+import TarvikeMuokkaaModal from './TarvikeMuokkaaModal'
 
 class TarvikeTable2 extends Component {
     state = {
         columns: [{
-            dataField: 'kategoria',
-            text: 'Kategoria',
-            sort: true
-        },
-        {
             dataField: 'nimi',
             text: 'Nimi',
             sort: true
@@ -28,7 +25,11 @@ class TarvikeTable2 extends Component {
             dataField: 'sijainti',
             text: 'Sijainti',
             sort: true
-        }
+        }, {
+            dataField: 'kategoria',
+            text: 'Kategoria',
+            sort: true
+        },
         ],
     }
 
@@ -65,44 +66,67 @@ class TarvikeTable2 extends Component {
         const expandRow = {
             onlyOneExpanding: true,
             renderer: row => (
-                <div className='grid-container'>
-                    <div className='grid-item'>
-                        <h6>Kuvaus</h6>
-                        <p>{row.kuvaus} </p>
-                    </div>
-                    <div className='grid-item'>
-                        <h6>Kuva</h6>
-                        <picture>
-                            <img src={row.kuva} />
-                        </picture>
-                    </div>
-                </div>
+                <Container>
+                    <Row>
+                        <Col>
+                            <h6>Kuvaus</h6>
+                            <p>{row.kuvaus} </p>
+                        </Col>
+                        <Col >
+                            <h6>Kuva</h6>
+                            <picture>
+                                <img src={row.kuva} />
+                            </picture>
+                        </Col>
+                       
+                        <Col style={{textAlign: 'right'}}> 
+                        <Row>   
+                            <Button color='dark' style={{ marginRight: '0.5rem'}}><TiShoppingCart /></Button>
+                            <TarvikeMuokkaaModal row={row} />
+                            </Row>
+                        </Col>
+                       
+                    </Row>
+                </Container>
             ),
             showExpandColumn: true,
-            expandColumnPosition: 'right'
+            expandColumnPosition: 'right',
+            expandHeaderColumnRenderer: ({ isAnyExpands }) => {
+                if (isAnyExpands) {
+                    return <b><TiMinus/></b>;
+                }
+                return <b><TiPlus/></b>;
+            },
+            expandColumnRenderer: ({ expanded }) => {
+                if (expanded) {
+                    return (
+                        <b><TiMinus/></b>
+                    );
+                }
+                return (
+                    <b><TiPlus/></b>
+                );
+            }
+
         };
 
         const customTotal = (from, to, size) => (
-            <span className="react-bootstrap-table-pagination-total">
+            <span className="react-bootstrap-table-pagination-total pagination pagination-sm">
                 Näytetään {from} - {to} / {size} tarviketta
             </span>
         );
 
         const options = {
-            paginationSize: 5,
+            paginationSize: 4,
             pageStartIndex: 1,
-            // alwaysShowAllBtns: true, // Always show next and previous button
-            // withFirstAndLast: false, // Hide the going to First and Last page button
-            // hideSizePerPage: true, // Hide the sizePerPage dropdown always
-            //hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
-            firstPageText: 'First',
-            prePageText: 'Edellinen',
-            nextPageText: 'Seuraava',
-            lastPageText: 'Last',
-            nextPageTitle: 'First page',
-            prePageTitle: 'Pre page',
-            firstPageTitle: 'Next page',
-            lastPageTitle: 'Last page',
+            firstPageText: 'Alkuun',
+            prePageText: '<<',
+            nextPageText: '>>',
+            lastPageText: 'Loppuun',
+            nextPageTitle: 'Seuraava',
+            prePageTitle: 'Edellinen',
+            firstPageTitle: 'Ensimmäinen',
+            lastPageTitle: 'Viimeinen',
             showTotal: true,
             paginationTotalRenderer: customTotal,
             sizePerPageList: [{
@@ -113,11 +137,11 @@ class TarvikeTable2 extends Component {
                 text: '10', value: 10
             }, {
                 text: 'All', value: tarvikkeet.length
-            }] // A numeric array is also available. the purpose of above example is custom the text
+            }] 
         };
 
         return (
-            
+            <div>
                 <ToolkitProvider
                     keyField="id"
                     data={tarvikkeet}
@@ -126,21 +150,22 @@ class TarvikeTable2 extends Component {
                 >
                     {
                         props => (
-                            <Container>
-                            <SearchBar className='search' placeholder='Hae' {...props.searchProps}/>
-                            <BootstrapTable
-                                hover
-                                { ...props.baseProps }
-                                bordered={false}
-                                expandRow={expandRow}
-                                pagination={paginationFactory(options)}
-                            />
-                            </Container>
-                            
-                )
+                            <div>
+                                <SearchBar className='search' placeholder="Hae" {...props.searchProps} />
+                                <BootstrapTable
+                                    hover
+                                    {...props.baseProps}
+                                    bordered={false}
+                                    expandRow={expandRow}
+                                    pagination={paginationFactory(options)}
+                                    noDataIndication="No Data Is Available"
+                                />
+                            </div>
+
+                        )
                     }
                 </ToolkitProvider>
-            
+            </div>
         );
     }
 }

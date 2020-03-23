@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import {
   Button,
   Modal,
@@ -7,15 +7,15 @@ import {
   Form,
   FormGroup,
   Label,
-  Input,
-  Col
+  Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addTarvike } from '../../actions/tarvikeActions';
+import {  deleteTarvike, updateTarvike } from '../../actions/tarvikeActions';
 import PropTypes from 'prop-types';
 import "../componentStyles.css"
+import { FaRegEdit } from "react-icons/fa";
 
-class TarvikeModal extends Component {
+class TarvikeMuokkaaModal extends Component {
   state = {
     modal: false,
     nimi: ''
@@ -31,7 +31,6 @@ class TarvikeModal extends Component {
     });
   };
 
-
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -40,6 +39,7 @@ class TarvikeModal extends Component {
     e.preventDefault();
 
     const newTarvike = {
+      id: this.props.row.id,
       nimi: this.state.nimi,
       kategoria: this.state.kategoria,
       kuvaus: this.state.kuvaus,
@@ -48,11 +48,21 @@ class TarvikeModal extends Component {
       sijainti: this.state.sijainti,
       avainsanat: this.state.avainsanat,
       kuva: this.state.kuva
-    };
-    
-    // Add item via addItem action
-    this.props.addTarvike(newTarvike);
+    }
+    console.log('newTarvike', newTarvike)
 
+   
+    
+  // Put item via putItem action
+    this.props.updateTarvike(this.newTarvike);
+    
+
+    // Close modal
+    this.toggle();
+  };
+
+  onDeleteClick = id => {
+    this.props.deleteTarvike(id);
     // Close modal
     this.toggle();
   };
@@ -61,13 +71,11 @@ class TarvikeModal extends Component {
     return (
       <div>
         {this.props.isAuthenticated ? (
-          <Col>
-            <Button
-              color='dark'
-              style={{ marginTop: '2rem'}}
-              onClick={this.toggle}
-            > Lisää tarvike</Button>
-          </Col>
+          
+           <Button color='dark' onClick={this.toggle}>
+             <FaRegEdit/>
+             </Button>
+          
         ) :
 
           (
@@ -75,14 +83,15 @@ class TarvikeModal extends Component {
           )}
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Lisää tarvike</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Muokkaa</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
-              <FormGroup>
+            <FormGroup>
                 <Label for='tarvike'>Tarvike</Label>
                 <Input
                   type='text'
                   name='nimi'
+                  defaultValue={this.props.row.nimi}
                   placeholder='Nimi'
                   onChange={this.onChange}
                 />
@@ -91,6 +100,7 @@ class TarvikeModal extends Component {
                 <Input
                   type='text'
                   name='kategoria'
+                  defaultValue={this.props.row.kategoria}
                   placeholder='Kategoria'
                   onChange={this.onChange}
                 />
@@ -99,6 +109,7 @@ class TarvikeModal extends Component {
                 <Input
                   type='textarea'
                   name='kuvaus'
+                  defaultValue={this.props.row.kuvaus}
                   placeholder='Kuvaus'
                   onChange={this.onChange}
                 />
@@ -107,6 +118,7 @@ class TarvikeModal extends Component {
                 <Input
                   type='number'
                   name='maara'
+                  defaultValue={this.props.row.maara}
                   placeholder='määrä'
                   onChange={this.onChange}
                 />
@@ -115,6 +127,7 @@ class TarvikeModal extends Component {
                 <Input
                   type='text'
                   name='maarayksikko'
+                  defaultValue={this.props.row.maarayksikko}
                   placeholder='määräyksikkö'
                   onChange={this.onChange}
                 />
@@ -123,6 +136,7 @@ class TarvikeModal extends Component {
                 <Input
                   type='text'
                   name='sijainti'
+                  defaultValue={this.props.row.sijainti}
                   placeholder='sijainti'
                   onChange={this.onChange}
                 />
@@ -131,13 +145,20 @@ class TarvikeModal extends Component {
                 <Input
                   type='file'
                   name='kuva'
+                  defaultValue={this.props.row.kuva}
                   placeholder='kuva'
                   onChange={this.onChange}
                 />
               </FormGroup>
               <Button color='dark' style={{ marginTop: '2rem' }} block>
-                Lisää tarvike
+                Tallenna
                 </Button>
+                <Button
+                      color='danger' block
+                      onClick={this.onDeleteClick.bind(this, this.props.row.id)}
+                    >
+                      Poista tarvike {this.props.row.nimi}
+                    </Button>
 
             </Form>
           </ModalBody>
@@ -147,8 +168,6 @@ class TarvikeModal extends Component {
   }
 }
 
-
-
 const mapStateToProps = state => ({
   item: state.item,
   isAuthenticated: state.auth.isAuthenticated
@@ -156,5 +175,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addTarvike }
-)(TarvikeModal);
+  { deleteTarvike, updateTarvike }
+)(TarvikeMuokkaaModal);

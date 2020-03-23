@@ -27,15 +27,15 @@ class App extends Component {
             <AppNavbar />
             <Container>
               <LoginForm />
+              <Switch>
+                <Route path="/varasto">
+                  <TarvikeView />
+                </Route>
+                <Route path="/kayttajat">
+                  <KayttajaView />
+                </Route>
+              </Switch>
             </Container>
-            <Switch>
-              <Route path="/varasto">
-                <TarvikeView />
-              </Route>
-              <Route path="/kayttajat">
-                <KayttajaView />
-              </Route>
-            </Switch>
           </Router>
         </Provider>
       </div>

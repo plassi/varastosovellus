@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   Collapse,
   Navbar,
@@ -10,9 +10,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavLink,
   Container,
-  Button
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';

@@ -3,17 +3,12 @@
 }
 
 .sidebar {
-    height: 100vh;
-    padding-left: 20px;
+    margin-top: 56px;
     background-color: gray;
-    opacity: 0.8;
+    opacity: 0.9;
     color: white;
-    width: 70%;
-    max-width: 200px;
-    position: fixed;
-    z-index: 200;
-    left: -100%;
-    animation: slide-open 0.75s forwards;
+    max-width: 70%;
+    width: 200px;
 }
 
 .button {
@@ -25,11 +20,6 @@
     table-layout: fixed;
 }
 
-.sidebar-container {
-    min-height: 100vh;
-    background-color: lightgray;
-}
-
 .sidebar-link {
     padding: 10px;
     color: white;
@@ -37,36 +27,28 @@
 
 .sidebar-link:hover {    
     background-color: gainsboro;
-    color: gray;    
+    color: black;    
 }
 
-.sidebarButton {
-    margin-left: 200px;
-    animation: slide-open 0.75s forwards;
-    left: -100%;
+.sidebarOpenButton {    
     background-color: gray;
     opacity: 0.8;
     position: fixed;
-    z-index: 200;
     }
 
-.sidebarOpenButton {
-        
-    background-color: gray;
-    opacity: 0.8;
-    position: fixed;
-
-    }
-
-.grid-container {
-    display: grid;
-    grid-template-columns: 70% auto;
-    grid-gap: 10px;    
+.reactSidebarButton{
+    visibility: hidden;
 }
 
 .search {
     margin-top: 2rem;
     margin-bottom: 0.5rem;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 50% auto auto;
+    grid-gap: 10px;    
 }
 
 @keyframes slide-open {
