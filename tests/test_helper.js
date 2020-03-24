@@ -1,10 +1,20 @@
 const Tarvike = require('../models/Tarvike')
+const Ostoslista = require('../models/Ostoslista')
 
 const adminUser = {
   'kayttajatunnus': 'testi',
   'salasana': 'testi',
   'rooli': 'admin'
 }
+
+const initialOstoslistat = [
+  {
+    nimi: 'Ostoslista 1'
+  },
+  {
+    nimi: 'Ostoslista 2'
+  },
+]
 
 const initialTarvikkeet = [
   {
@@ -40,6 +50,11 @@ const tarvikkeetInDb = async () => {
   return tarvikkeet.map(tarvike => tarvike.toJSON())
 }
 
+const ostoslistatInDb = async () => {
+  const ostoslistat = await Ostoslista.find({})
+  return ostoslistat.map(ostoslista => ostoslista.toJSON())
+}
+
 module.exports = {
-  adminUser, initialTarvikkeet, nonExistingTarvikeId, tarvikkeetInDb
+  adminUser, initialTarvikkeet, initialOstoslistat, nonExistingTarvikeId, tarvikkeetInDb, ostoslistatInDb
 }
