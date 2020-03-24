@@ -46,7 +46,7 @@ describe('Admin kirjautunut', () => {
   })
 
   test('kaikki ostoslistat voidaan hakea', async () => {
-    const response = await api.get('/api/ostoslistat').set('x-auth-token', token)
+    const response = await api.get('/api/ostoslistat').set('x-auth-token', token)  
 
     expect(response.body.length).toBe(helper.initialOstoslistat.length)
   })
@@ -128,9 +128,15 @@ describe('Admin kirjautunut', () => {
     const tarvikkeetAtStart = await helper.tarvikkeetInDb()
     const tarvikeJokaLisataan = tarvikkeetAtStart[0]
 
+    
+    const lisattava = {
+      id: tarvikeJokaLisataan.id,
+      maara: 5
+    }
+    
     // lisätään tarvikkeen id ostoslistaan
-    ostoslistaJolleLisataan.tarvikkeet.push(tarvikeJokaLisataan.id)
-
+    ostoslistaJolleLisataan.tarvikkeet.push(lisattava)
+    
     await api
       .put(`/api/ostoslistat/${ostoslistaJolleLisataan.id}`)
       .set('x-auth-token', token)
@@ -144,9 +150,9 @@ describe('Admin kirjautunut', () => {
     )
 
     const muokattuLista = ostoslistatAtEnd[0]
-    const tarvikeId = muokattuLista.tarvikkeet[0]
-
-    expect(tarvikeId.toString()).toMatch(tarvikeJokaLisataan.id)
+    const lisattyTarvike = muokattuLista.tarvikkeet[0]
+    
+    expect(lisattyTarvike.id.toString()).toMatch(tarvikeJokaLisataan.id)
   })
 
   // test('Ostoslistalta voidaan poistaa tarvike', async () => {
