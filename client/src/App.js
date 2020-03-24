@@ -10,6 +10,7 @@ import store from './store'
 import { loadUser } from './actions/authActions'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
+import OstoslistaView from './components/ostoslista/OstoslistaView';
 
 class App extends Component {
 
@@ -29,6 +30,9 @@ class App extends Component {
               <Switch>
                 <Route path="/varasto">
                   <TarvikeView />
+                </Route>
+                <Route path="/ostoslista">
+                  <OstoslistaView />
                 </Route>
                 <Route path="/kayttajat">
                   <KayttajaView />
