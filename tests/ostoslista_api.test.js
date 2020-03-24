@@ -46,7 +46,7 @@ describe('Admin kirjautunut', () => {
   })
 
   test('kaikki ostoslistat voidaan hakea', async () => {
-    const response = await api.get('/api/ostoslistat').set('x-auth-token', token)  
+    const response = await api.get('/api/ostoslistat').set('x-auth-token', token)
 
     expect(response.body.length).toBe(helper.initialOstoslistat.length)
   })
@@ -92,99 +92,124 @@ describe('Admin kirjautunut', () => {
     )
   })
 
-  test('Ostoslistan nimi voidaan vaihtaa', async () => {
-    const ostoslistatAtStart = await helper.ostoslistatInDb()
+  describe('Ostoslistan tarvikelistan muokkaus', () => {
 
-    const ostoslistaToUpdate = {
-      ...ostoslistatAtStart[0],
-      nimi: "paivitettyOstoslista"
-    }
+    test('Ostoslistan nimi voidaan vaihtaa', async () => {
+      const ostoslistatAtStart = await helper.ostoslistatInDb()
 
-    await api
-      .put(`/api/ostoslistat/${ostoslistaToUpdate.id}`)
-      .set('x-auth-token', token)
-      .send(ostoslistaToUpdate)
-      .expect(200)
+      const ostoslistaToUpdate = {
+        ...ostoslistatAtStart[0],
+        nimi: "paivitettyOstoslista"
+      }
 
-    const ostoslistatAtEnd = await helper.ostoslistatInDb()
+      await api
+        .put(`/api/ostoslistat/${ostoslistaToUpdate.id}`)
+        .set('x-auth-token', token)
+        .send(ostoslistaToUpdate)
+        .expect(200)
 
-    expect(ostoslistatAtEnd.length).toBe(
-      helper.initialOstoslistat.length
-    )
+      const ostoslistatAtEnd = await helper.ostoslistatInDb()
 
-    const nimet = ostoslistatAtEnd.map(r => r.nimi)
+      expect(ostoslistatAtEnd.length).toBe(
+        helper.initialOstoslistat.length
+      )
 
-    expect(nimet).toContain(ostoslistaToUpdate.nimi)
+      const nimet = ostoslistatAtEnd.map(r => r.nimi)
+
+      expect(nimet).toContain(ostoslistaToUpdate.nimi)
+    })
+
+    test('Ostoslistalle voidaan lisätä tarvike', async () => {
+      // Alustetaan tarvikkeet tietokantaan
+      await Tarvike.deleteMany({})
+      await Tarvike.insertMany(helper.initialTarvikkeet)
+
+      const ostoslistatAtStart = await helper.ostoslistatInDb()
+      const ostoslistaJolleLisataan = ostoslistatAtStart[0]
+
+      const tarvikkeetAtStart = await helper.tarvikkeetInDb()
+      const tarvikeJokaLisataan = tarvikkeetAtStart[0]
+
+
+      const lisattavaTarvike = {
+        id: tarvikeJokaLisataan.id,
+        maara: 5
+      }
+
+      // lisätään tarvikkeen id ostoslistaan
+      ostoslistaJolleLisataan.tarvikkeet.push(lisattavaTarvike)
+
+      await api
+        .put(`/api/ostoslistat/${ostoslistaJolleLisataan.id}`)
+        .set('x-auth-token', token)
+        .send(ostoslistaJolleLisataan)
+        .expect(200)
+
+      const ostoslistatAtEnd = await helper.ostoslistatInDb()
+
+      expect(ostoslistatAtEnd.length).toBe(
+        helper.initialOstoslistat.length
+      )
+
+      const muokattuLista = ostoslistatAtEnd[0]
+      const lisattyTarvike = muokattuLista.tarvikkeet[0]
+
+      expect(lisattyTarvike.id.toString()).toMatch(tarvikeJokaLisataan.id)
+    })
+
+    test('Ostoslistalta voidaan poistaa tarvike', async () => {
+      // Alustetaan tarvikkeet tietokantaan
+      await Tarvike.deleteMany({})
+      await Tarvike.insertMany(helper.initialTarvikkeet)
+
+      const ostoslistatAtStart = await helper.ostoslistatInDb()
+      const ostoslistaJolleLisataan = ostoslistatAtStart[0]
+
+      const tarvikkeetAtStart = await helper.tarvikkeetInDb()
+      const tarvikeJokaLisataan = tarvikkeetAtStart[0]
+
+      const lisattavaTarvike = {
+        id: tarvikeJokaLisataan.id,
+        maara: 5
+      }
+
+      // lisätään tarvikkeen id ostoslistaan
+      ostoslistaJolleLisataan.tarvikkeet.push(lisattavaTarvike)
+
+      await api
+        .put(`/api/ostoslistat/${ostoslistaJolleLisataan.id}`)
+        .set('x-auth-token', token)
+        .send(ostoslistaJolleLisataan)
+
+      // haetaan tietokannasta ostoslista ja tarvike, joka poistetaan listalta
+
+      const ostoslistat = await helper.ostoslistatInDb()
+      const tarvikkeet = await helper.tarvikkeetInDb()
+
+      // poistetaan aiemmin tietokantaan lisätty tarvike ostoslistalta
+      const muokattavaOstoslista = ostoslistat[0]
+      const poistettavaTarvike = tarvikkeet[0]
+
+      const muokattuOstoslista = {
+        ...muokattavaOstoslista,
+        tarvikkeet: muokattavaOstoslista.tarvikkeet.filter(tarvike => tarvike.id.toString() !== poistettavaTarvike.id)
+      }
+
+      await api
+        .put(`/api/ostoslistat/${muokattuOstoslista.id}`)
+        .set('x-auth-token', token)
+        .send(muokattuOstoslista)
+        .expect(200)
+
+      const ostosListatAtEnd = await helper.ostoslistatInDb()
+
+      const ostosListaAtEnd = ostosListatAtEnd[0]
+
+      expect(ostosListaAtEnd.tarvikkeet).not.toContain(poistettavaTarvike)
+
+    })
   })
 
-  test('Ostoslistalle voidaan lisätä tarvike', async () => {
-    // Alustetaan tarvikkeet tietokantaan
-    await Tarvike.deleteMany({})
-    await Tarvike.insertMany(helper.initialTarvikkeet)
-
-    const ostoslistatAtStart = await helper.ostoslistatInDb()
-    const ostoslistaJolleLisataan = ostoslistatAtStart[0]
-
-    const tarvikkeetAtStart = await helper.tarvikkeetInDb()
-    const tarvikeJokaLisataan = tarvikkeetAtStart[0]
-
-    
-    const lisattava = {
-      id: tarvikeJokaLisataan.id,
-      maara: 5
-    }
-    
-    // lisätään tarvikkeen id ostoslistaan
-    ostoslistaJolleLisataan.tarvikkeet.push(lisattava)
-    
-    await api
-      .put(`/api/ostoslistat/${ostoslistaJolleLisataan.id}`)
-      .set('x-auth-token', token)
-      .send(ostoslistaJolleLisataan)
-      .expect(200)
-
-    const ostoslistatAtEnd = await helper.ostoslistatInDb()
-
-    expect(ostoslistatAtEnd.length).toBe(
-      helper.initialOstoslistat.length
-    )
-
-    const muokattuLista = ostoslistatAtEnd[0]
-    const lisattyTarvike = muokattuLista.tarvikkeet[0]
-    
-    expect(lisattyTarvike.id.toString()).toMatch(tarvikeJokaLisataan.id)
-  })
-
-  // test('Ostoslistalta voidaan poistaa tarvike', async () => {
-  //   // Alustetaan tarvikkeet tietokantaan
-  //   await Tarvike.deleteMany({})
-  //   await Tarvike.insertMany(helper.initialTarvikkeet)
-
-  //   const ostoslistatAtStart = await helper.ostoslistatInDb()
-  //   const ostoslistaJolleLisataan = ostoslistatAtStart[0]
-
-  //   const tarvikkeetAtStart = await helper.tarvikkeetInDb()
-  //   const tarvikeJokaLisataan = tarvikkeetAtStart[0]
-
-  //   // lisätään tarvikkeen id ostoslistaan
-  //   ostoslistaJolleLisataan.tarvikkeet.push(tarvikeJokaLisataan.id)
-
-  //   await api
-  //     .put(`/api/ostoslistat/${ostoslistaJolleLisataan.id}`)
-  //     .set('x-auth-token', token)
-  //     .send(ostoslistaJolleLisataan)
-
-  //   // haetaan tietokannasta ostoslista ja tarvike, joka poistetaan listalta
-
-  //   const ostoslistat = await helper.ostoslistatInDb()
-  //   const tarvikkeet = await helper.tarvikkeetInDb()
-
-  //   // poistetaan aiemmin tietokantaan lisätty tarvike ostoslistalta
-    
-    
-    
-
-  // })
 
   test('Ostoslista voidaan poistaa', async () => {
     const ostoslistatAtStart = await helper.ostoslistatInDb()
@@ -208,79 +233,56 @@ describe('Admin kirjautunut', () => {
 
 })
 
-// describe('käyttäjä ei kirjautunut', () => {
+describe('käyttäjä ei kirjautunut', () => {
 
-//   beforeEach(async () => {
-//     // Alustetaan tarvikkeet tietokantaan
-//     await Ostoslista.deleteMany({})
-//     await Ostoslista.insertMany(helper.initialOstoslistat)
-//   })
+  beforeEach(async () => {
+    // Alustetaan tarvikkeet tietokantaan
+    await Ostoslista.deleteMany({})
+    await Ostoslista.insertMany(helper.initialOstoslistat)
+  })
 
-//   test('tarvikkeiden haku palauttaa virheen 401 unauthorized', async () => {
-//     const response = await api.get('/api/ostoslistat')
-//       .expect(401)
-//   })
+  test('Ostoslistojen haku palauttaa virheen 401 unauthorized', async () => {
+    await api.get('/api/ostoslistat').expect(401)
+  })
 
-//   test('tarvikkeiden lisäys palauttaa virheen 401 unauthorized', async () => {
-//     const uusiOstoslista = {
-//       nimi: 'Ostoslista 3',
-//       kategoria: 'Tarvikkeen 3 kategoria',
-//       kuvaus: 'Tarvikkeen 3 kuvaus',
-//       maara: 30,
-//       maarayksikko: "ltr",
-//       sijainti: "C3",
-//       hinta: "30"
-//     }
+  test('Ostoslistan lisäys palauttaa virheen 401 unauthorized', async () => {
+    const uusiOstoslista = {
+      nimi: 'Ostoslista 3',
+    }
 
-//     await api
-//       .post('/api/ostoslistat')
-//       .send(uusiOstoslista)
-//       .expect(401)
-//   })
-
-//   test('tarvikkeen muokkaus palauttaa virheen 401 unauthorized', async () => {
-//     const ostoslistatAtStart = await helper.ostoslistatInDb()
-
-//     const OstoslistaToUpdate = {
-//       ...ostoslistatAtStart[0],
-//       nimi: "paivitettyOstoslista"
-//     } 
-
-//     await api
-//       .put(`/api/ostoslistat/${OstoslistaToUpdate.id}`)
-//       .send(OstoslistaToUpdate)
-//       .expect(401)
-
-//     const ostoslistatAtEnd = await helper.ostoslistatInDb()
-
-//     expect(ostoslistatAtEnd.length).toBe(
-//       helper.initialOstoslistat.length
-//     )
-
-//     const nimet = ostoslistatAtEnd.map(r => r.nimi)
-
-//     expect(nimet).not.toContain(OstoslistaToUpdate.nimi)
-//   })
-
-//   test('tarvikkeen poisto palauttaa virheen 401 unauthorized', async () => {
-//     const ostoslistatAtStart = await helper.ostoslistatInDb()
-//     const OstoslistaToDelete = ostoslistatAtStart[0]
-
-//     await api
-//       .delete(`/api/ostoslistat/${OstoslistaToDelete.id}`)
-//       .expect(401)
-
-//     const ostoslistatAtEnd = await helper.ostoslistatInDb()
-
-//     expect(ostoslistatAtEnd.length).toBe(helper.initialOstoslistat.length)
-
-//     const nimet = ostoslistatAtEnd.map(r => r.nimi)
-
-//     expect(nimet).toContain(OstoslistaToDelete.nimi)
-//   })
+    await api
+      .post('/api/ostoslistat')
+      .send(uusiOstoslista)
+      .expect(401)
+  })
 
 
-// })
+
+  test('Ostoslistan muokkaus palauttaa virheen 401 unauthorized', async () => {
+    const ostoslistatAtStart = await helper.ostoslistatInDb()
+
+    const ostoslistaToUpdate = {
+      ...ostoslistatAtStart[0],
+      nimi: "paivitettyOstoslista"
+    }
+
+    await api
+      .put(`/api/ostoslistat/${ostoslistaToUpdate.id}`)
+      .send(ostoslistaToUpdate)
+      .expect(401)
+  })
+
+
+  test('Ostoslistan poisto palauttaa virheen 401 unauthorized', async () => {
+    const ostoslistatAtStart = await helper.ostoslistatInDb()
+    const OstoslistaToDelete = ostoslistatAtStart[0]
+
+    await api
+      .delete(`/api/ostoslistat/${OstoslistaToDelete.id}`)
+      .expect(401)
+  })
+
+})
 
 afterAll(async () => {
   await mongoose.connection.close()
