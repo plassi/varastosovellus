@@ -51,7 +51,9 @@ app.use('/api/ostoslistat', require('./routes/api/ostoslistat'))
 app.use('/api/users', require('./routes/api/users'))
 app.use('/api/auth', require('./routes/api/auth'))
 
-
+app.get('*', function(req, res) {
+  res.sendFile('index.html', {root: path.join('./client/build/')});
+});
 
 
 

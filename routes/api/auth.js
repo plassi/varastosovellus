@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
     : await bcrypt.compare(body.salasana, user.salasanaHash)
 
   if (!(user && passwordCorrect)) {
-    return response.status(401).json({
+    return res.status(401).json({
       error: 'väärä käyttäjätunnus tai salasana'
     })
   }
