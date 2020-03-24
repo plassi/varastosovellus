@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import {
   Button,
   Modal,
@@ -18,7 +18,7 @@ import { FaRegEdit } from 'react-icons/fa'
 class TarvikeMuokkaaModal extends Component {
   state = {
     modal: false,
-    nimi: ''
+    
   };
 
   static propTypes = {
@@ -60,6 +60,7 @@ class TarvikeMuokkaaModal extends Component {
 
   onDeleteClick = id => {
     this.props.deleteTarvike(id);
+   
     // Close modal
     this.toggle();
   };
@@ -154,9 +155,8 @@ class TarvikeMuokkaaModal extends Component {
                       color='danger' block
                       onClick={this.onDeleteClick.bind(this, this.props.row.id)}
                     >
-                      Poista tarvike {this.props.row.nimi}
+                      Poista tarvike {this.props.row.nimi}                   
                     </Button>
-
             </Form>
           </ModalBody>
         </Modal>
