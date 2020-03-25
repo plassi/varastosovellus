@@ -87,10 +87,10 @@ class AppNavbar extends Component {
 
     return (
       <div>
-        <Navbar className='navbar' color='dark' dark expand='x-lg'>
+        <Navbar className='navbar' color='dark' dark expand='sm'>
           <Container>
             <NavbarBrand href='/'>Varastosovellus</NavbarBrand>
-            <NavbarToggler onClick={this.toggle} className='ml-auto'/>
+            <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className='ml-auto' navbar>
                 {isAuthenticated ? authLinks : guestLinks}
@@ -113,6 +113,3 @@ export default connect(
   mapStateToProps,
   null
 )(AppNavbar);
-
-
-
