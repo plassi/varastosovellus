@@ -9,7 +9,7 @@ const Ostoslista = require('../../models/Ostoslista')
 // @desc    Get All Ostoslistat
 // @access  Private
 router.get('/', auth, async (req, res) => {
-  const ostoslistat = await Ostoslista.find().populate('tarvikkeet', {nimi: 1, kategoria: 1})
+  const ostoslistat = await Ostoslista.find()
   res.json(ostoslistat.map(ostoslista => ostoslista.toJSON()))
 })
 
