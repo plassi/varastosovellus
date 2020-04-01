@@ -6,7 +6,7 @@ import { getTarvikkeet, deleteTarvike } from '../../actions/tarvikeActions'
 import PropTypes from 'prop-types'
 import {AiOutlineDelete} from 'react-icons/ai'
 
-class Ostoslista extends Component {
+class OstoslistaTable extends Component {
 
   state = {
     expandedRows: []
@@ -83,9 +83,7 @@ class Ostoslista extends Component {
 
     return (
       <Container>
-          <Col className='pb-5'>
-          <h1>Ostoslista</h1>
-          </Col>
+
         <Table className="table-hover">
           <thead>
             <tr>
@@ -115,4 +113,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getTarvikkeet, deleteTarvike }
-)(Ostoslista);
+)(OstoslistaTable);

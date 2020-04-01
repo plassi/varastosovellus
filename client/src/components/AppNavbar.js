@@ -87,7 +87,7 @@ class AppNavbar extends Component {
 
     return (
       <div>
-        <Navbar className='navbar' color='dark' dark expand='x-lg'>
+        <Navbar className='navbar' color='dark' dark expand='md'>
           <Container>
             <NavbarBrand href='/'>Varastosovellus</NavbarBrand>
             <NavbarToggler onClick={this.toggle} className='ml-auto'/>

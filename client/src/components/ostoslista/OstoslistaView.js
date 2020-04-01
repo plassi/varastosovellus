@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Ostoslista from './Ostoslista'
+import OstoslistaTable from './OstoslistaTable'
+import { Container, Col } from 'reactstrap'
 
 
 class OstoslistaView extends Component {
@@ -14,10 +15,14 @@ class OstoslistaView extends Component {
   render() {
     if (this.props.isAuthenticated) {
       return (
-        <div>
-          <Ostoslista />
+        <Container>
 
-        </div>
+<Col className='pb-5'>
+          <h1>Ostoslista</h1>
+          </Col>
+          <OstoslistaTable />
+
+        </Container>
       )
     } else {
       return (
