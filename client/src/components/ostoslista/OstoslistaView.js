@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import TarvikeModal from './TarvikeModal'
-import TarvikeTable2 from './TarvikeTable2'
+import OstoslistatTable from './OstoslistatTable'
+import { Container, Col } from 'reactstrap'
+import OstoslistaLisaaModal from './OstoslistaLisaaModal'
 
-class TarvikeView extends Component {
+
+
+class OstoslistaView extends Component {
 
   static propTypes = {
     isAuthenticated: PropTypes.bool
@@ -14,11 +17,16 @@ class TarvikeView extends Component {
   render() {
     if (this.props.isAuthenticated) {
       return (
-        <div>
-           <TarvikeModal />
-          <TarvikeTable2 />
+        <Container>
+
+          <Col className='pb-5'>
+            <h1>Ostoslistat</h1>
+          </Col>
+          <OstoslistaLisaaModal />
+         <OstoslistatTable/>
          
-        </div>
+
+        </Container>
       )
     } else {
       return (
@@ -29,11 +37,11 @@ class TarvikeView extends Component {
 }
 
 const mapStateToProps = state => ({
-  tarvike: state.tarvike,
+  ostoslista: state.ostoslista,
   isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(
   mapStateToProps,
   null
-)(TarvikeView);
+)(OstoslistaView);

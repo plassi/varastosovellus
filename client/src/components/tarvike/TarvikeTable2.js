@@ -7,9 +7,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import { Button, Container, Row, Col } from 'reactstrap'
-import { TiPlus, TiMinus, TiShoppingCart } from "react-icons/ti";
+import { Container, Row, Col } from 'reactstrap'
+import { TiPlus, TiMinus } from "react-icons/ti";
 import TarvikeMuokkaaModal from './TarvikeMuokkaaModal'
+import LisaaOstosModal from '../ostoslista/LisaaOstosModal';
 
 class TarvikeTable2 extends Component {
     state = {
@@ -44,7 +45,6 @@ class TarvikeTable2 extends Component {
     }
 
     renderItem(tarvike) {
-        console.log(tarvike);
 
         const clickCallback = () => this.handleRowClick(tarvike.id);
         const tarvikeRows = [
@@ -78,14 +78,14 @@ class TarvikeTable2 extends Component {
                                 <img src={row.kuva} />
                             </picture>
                         </Col>
-                       
-                        <Col style={{textAlign: 'right'}}> 
-                        <Row>   
-                            <Button color='dark' style={{ marginRight: '0.5rem'}}><TiShoppingCart /></Button>
-                            <TarvikeMuokkaaModal row={row} />
-                            </Row>
-                        </Col>
-                       
+                        <Row>
+                            <Col style={{paddingRight: '5px'}}>
+                               <LisaaOstosModal row={row} />
+                            </Col>
+                            <Col style={{paddingLeft: '0'}}>
+                                <TarvikeMuokkaaModal row={row} />
+                            </Col>
+                        </Row>
                     </Row>
                 </Container>
             ),
@@ -93,18 +93,18 @@ class TarvikeTable2 extends Component {
             expandColumnPosition: 'right',
             expandHeaderColumnRenderer: ({ isAnyExpands }) => {
                 if (isAnyExpands) {
-                    return <b><TiMinus/></b>;
+                    return <b><TiMinus /></b>;
                 }
-                return <b><TiPlus/></b>;
+                return <b><TiPlus /></b>;
             },
             expandColumnRenderer: ({ expanded }) => {
                 if (expanded) {
                     return (
-                        <b><TiMinus/></b>
+                        <b><TiMinus /></b>
                     );
                 }
                 return (
-                    <b><TiPlus/></b>
+                    <b><TiPlus /></b>
                 );
             }
 
@@ -130,14 +130,14 @@ class TarvikeTable2 extends Component {
             showTotal: true,
             paginationTotalRenderer: customTotal,
             sizePerPageList: [{
-                text: '2', value: 2
-            }, {
-                text: '5', value: 5
-            }, {
                 text: '10', value: 10
             }, {
+                text: '50', value: 50
+            }, {
+                text: '100', value: 100
+            }, {
                 text: 'All', value: tarvikkeet.length
-            }] 
+            }]
         };
 
         return (

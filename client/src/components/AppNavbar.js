@@ -87,10 +87,10 @@ class AppNavbar extends Component {
 
     return (
       <div>
-        <Navbar className='navbar' color='dark' dark expand='sm'>
+        <Navbar className='navbar' color='dark' dark expand='md'>
           <Container>
             <NavbarBrand href='/'>Varastosovellus</NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
+            <NavbarToggler onClick={this.toggle} className='ml-auto'/>
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className='ml-auto' navbar>
                 {isAuthenticated ? authLinks : guestLinks}
