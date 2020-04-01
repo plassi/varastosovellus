@@ -8,6 +8,8 @@ import { Container } from 'reactstrap'
 import { Provider } from 'react-redux'
 import store from './store'
 import { loadUser } from './actions/authActions'
+import { getTarvikkeet } from './actions/tarvikeActions'
+import { getOstoslistat } from './actions/ostoslistaActions'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import OstoslistaView from './components/ostoslista/OstoslistaView';
@@ -16,7 +18,12 @@ class App extends Component {
 
   componentDidMount() {
     store.dispatch(loadUser())
+    store.dispatch(getTarvikkeet())
+    store.dispatch(getOstoslistat())
+    // Logataan konsoliin jokainen redux-storen tilanmuutos
+    store.subscribe(() => console.log(store.getState()))
   }
+  
 
   render() {
 

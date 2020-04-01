@@ -3,12 +3,14 @@ import {
     ADD_OSTOSLISTA,
     DELETE_OSTOSLISTA,
     OSTOSLISTAT_LADATAAN,
-    UPDATE_OSTOSLISTA
+    UPDATE_OSTOSLISTA,
+    SELECT_OSTOSLISTA
   } from '../actions/types';
   
   const initialState = {
     ostoslistat: [],
-    ladataan: false
+    ladataan: false,
+    selected: null
   };
   
   export default function(state = initialState, action) {
@@ -42,6 +44,11 @@ import {
           ...state,
           ladataan: true
         };
+      case SELECT_OSTOSLISTA:
+        return {
+          ...state,
+          selected: action.payload
+        }
       default:
         return state;
     }

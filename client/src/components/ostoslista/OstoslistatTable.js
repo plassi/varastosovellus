@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Container, Button, Table } from 'reactstrap'
 import { connect } from 'react-redux'
-import { getOstoslistat, deleteOstoslista } from '../../actions/ostoslistaActions'
+import { deleteOstoslista, selectOstoslista } from '../../actions/ostoslistaActions'
 import PropTypes from 'prop-types'
 import { AiOutlineDelete, AiOutlineUnorderedList } from 'react-icons/ai'
-import OstoslistaTable from './OstoslistaTable'
 
 class OstoslistatTable extends Component {
 
@@ -14,43 +13,39 @@ class OstoslistatTable extends Component {
 
   static propTypes = {
     deleteOstoslista: PropTypes.func.isRequired,
-    getOstoslistat: PropTypes.func.isRequired,
+    selectOstoslista: PropTypes.func.isRequired,
     ostoslista: PropTypes.object.isRequired,
     isAuthenticated: PropTypes.bool
   }
-
-  componentDidMount() {
-    this.props.getOstoslistat()
-  }
-
 
   renderItem(ostoslista) {
 
     const onDeleteClick = (id) => this.props.deleteOstoslista(id);
     const openClick = (id) => {
-      console.log("id :",id)
+      console.log("id :", id)
+      this.props.selectOstoslista(ostoslista)
     }
 
     const ostoslistaRows = [
       <tr key={"row-data-" + ostoslista.id}>
         <td>{ostoslista.nimi}</td>
-        <td> 
-          <Button 
-          color='dark' 
-          size='sm' 
-          style={{marginRight:'8px'}}
-          onClick={openClick.bind(this, ostoslista.id)}
-          >
-            <AiOutlineUnorderedList/>
-            </Button>
+        <td>
           <Button
-          className='remove-btn'
-          color='danger'
-          size='sm'
-          onClick={onDeleteClick.bind(this, ostoslista.id)}
-        >
-          <AiOutlineDelete />
-        </Button></td>
+            color='dark'
+            size='sm'
+            style={{ marginRight: '8px' }}
+            onClick={openClick.bind(this, ostoslista.id)}
+          >
+            <AiOutlineUnorderedList />
+          </Button>
+          <Button
+            className='remove-btn'
+            color='danger'
+            size='sm'
+            onClick={onDeleteClick.bind(this, ostoslista.id)}
+          >
+            <AiOutlineDelete />
+          </Button></td>
       </tr>
     ];
 
@@ -58,13 +53,14 @@ class OstoslistatTable extends Component {
   }
 
   render() {
-    const { ostoslistat } = this.props.ostoslista
-    let allOstoslistaRows = [];
+    
+    const { ostoslistat } = this.props.ostoslista 
 
-    ostoslistat.forEach(ostoslista => {
-      const perOstoslistaRows = this.renderItem(ostoslista);
-      allOstoslistaRows = allOstoslistaRows.concat(perOstoslistaRows);
-    });
+    const allOstoslistaRows = ostoslistat.map(ostoslista => {
+      return (
+        this.renderItem(ostoslista)
+      )
+    })
 
     return (
       <Container>
@@ -79,7 +75,6 @@ class OstoslistatTable extends Component {
             {allOstoslistaRows}
           </tbody>
         </Table>
-        <OstoslistaTable/>
       </Container>
     );
   }
@@ -92,5 +87,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getOstoslistat, deleteOstoslista }
+  { deleteOstoslista, selectOstoslista }
 )(OstoslistatTable);

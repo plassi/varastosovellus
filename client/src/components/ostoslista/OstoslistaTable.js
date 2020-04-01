@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getOstoslistat } from '../../actions/ostoslistaActions'
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,20 +20,14 @@ class OstoslistaTable extends Component {
     }
 
     static propTypes = {
-        getOstoslistat: PropTypes.func.isRequired,
         ostoslista: PropTypes.object.isRequired,
         isAuthenticated: PropTypes.bool
-    }
-
-    componentDidMount() {
-        this.props.getOstoslistat()
-
     }
 
     renderItem(ostoslista) {
        
         const ostoslistaRows = [
-            <tr key={"row-data-" + ostoslista.id}>
+            <tr id={ostoslista.id} key={"row-data-" + ostoslista.id}>
                 <td>{}</td>
                 <td>{}</td>
                 <td></td>
@@ -46,20 +39,23 @@ class OstoslistaTable extends Component {
     }
 
     render() {
-        const { ostoslistat } = this.props.ostoslista
-       console.log("tarvikkeet: " , ostoslistat
 
-       )
-        return (
-            <div>
-                <h6>Ostoslista</h6>
-                <BootstrapTable
-                    keyField="id"
-                    data={ostoslistat}
-                    columns={this.state.columns}
-                />
-            </div>
-        );
+        if (this.props.ostoslista.selected === null) {
+            return (<></>)
+        } else {
+            const { ostoslistat } = this.props.ostoslista
+            return (
+                <div>
+                    <h6>Ostoslista</h6>
+                    <BootstrapTable
+                        keyField="id"
+                        data={ostoslistat}
+                        columns={this.state.columns}
+                    />
+                </div>
+            )
+        }
+
     }
 }
 
@@ -70,5 +66,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getOstoslistat }
+    null
 )(OstoslistaTable);

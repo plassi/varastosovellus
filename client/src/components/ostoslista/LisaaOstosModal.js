@@ -49,6 +49,7 @@ class LisaaOstosModal extends Component {
   };
 
   render() {
+    console.log(this.props.isAuthenticated);
     return (
       <div>
         {this.props.isAuthenticated ? (

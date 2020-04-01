@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import OstoslistatTable from './OstoslistatTable'
+import OstoslistaTable from './OstoslistaTable'
 import { Container, Col } from 'reactstrap'
 import OstoslistaLisaaModal from './OstoslistaLisaaModal'
 
@@ -23,8 +24,8 @@ class OstoslistaView extends Component {
             <h1>Ostoslistat</h1>
           </Col>
           <OstoslistaLisaaModal />
-         <OstoslistatTable/>
-         
+         <OstoslistatTable />
+         <OstoslistaTable />
 
         </Container>
       )

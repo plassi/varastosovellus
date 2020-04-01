@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getTarvikkeet } from '../../actions/tarvikeActions'
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -40,9 +39,6 @@ class TarvikeTable2 extends Component {
         isAuthenticated: PropTypes.bool
     }
 
-    componentDidMount() {
-        this.props.getTarvikkeet()
-    }
 
     renderItem(tarvike) {
 
@@ -177,5 +173,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getTarvikkeet }
+    null
 )(TarvikeTable2);

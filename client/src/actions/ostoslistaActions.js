@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_OSTOSLISTAT, ADD_OSTOSLISTA, DELETE_OSTOSLISTA, OSTOSLISTAT_LADATAAN, UPDATE_OSTOSLISTA } from './types';
+import { GET_OSTOSLISTAT, ADD_OSTOSLISTA, DELETE_OSTOSLISTA, OSTOSLISTAT_LADATAAN, UPDATE_OSTOSLISTA, SELECT_OSTOSLISTA } from './types';
 import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
 
@@ -69,4 +69,11 @@ export const setOstoslistatLadataan = () => {
         type: OSTOSLISTAT_LADATAAN
     };
 };
+
+export const selectOstoslista = ostoslista => (dispatch) => {
+    dispatch({
+        type: SELECT_OSTOSLISTA,
+        payload: ostoslista
+    })
+}
 
