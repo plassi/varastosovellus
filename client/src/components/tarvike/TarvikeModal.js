@@ -8,7 +8,6 @@ import {
   FormGroup,
   Label,
   Input,
-  Col
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addTarvike } from '../../actions/tarvikeActions';
@@ -61,13 +60,13 @@ class TarvikeModal extends Component {
     return (
       <div>
         {this.props.isAuthenticated ? (
-          <Col>
+          <div>
             <Button
               color='dark'
               style={{ marginTop: '2rem'}}
               onClick={this.toggle}
             > Lisää tarvike</Button>
-          </Col>
+          </div>
         ) :
 
           (
