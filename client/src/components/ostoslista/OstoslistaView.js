@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import OstoslistaTable from './OstoslistaTable'
+import OstoslistatTable from './OstoslistatTable'
 import { Container, Col } from 'reactstrap'
+import OstoslistaLisaaModal from './OstoslistaLisaaModal'
+
 
 
 class OstoslistaView extends Component {
@@ -17,10 +19,12 @@ class OstoslistaView extends Component {
       return (
         <Container>
 
-<Col className='pb-5'>
-          <h1>Ostoslista</h1>
+          <Col className='pb-5'>
+            <h1>Ostoslistat</h1>
           </Col>
-          <OstoslistaTable />
+          <OstoslistaLisaaModal />
+         <OstoslistatTable/>
+         
 
         </Container>
       )
@@ -33,7 +37,7 @@ class OstoslistaView extends Component {
 }
 
 const mapStateToProps = state => ({
-  tarvike: state.tarvike,
+  ostoslista: state.ostoslista,
   isAuthenticated: state.auth.isAuthenticated
 });
 

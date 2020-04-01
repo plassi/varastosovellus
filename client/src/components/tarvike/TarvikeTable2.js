@@ -10,7 +10,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import { Container, Row, Col } from 'reactstrap'
 import { TiPlus, TiMinus } from "react-icons/ti";
 import TarvikeMuokkaaModal from './TarvikeMuokkaaModal'
-import OstoslistaModal from '../ostoslista/OstoslistaModal';
+import LisaaOstosModal from '../ostoslista/LisaaOstosModal';
 
 class TarvikeTable2 extends Component {
     state = {
@@ -45,7 +45,6 @@ class TarvikeTable2 extends Component {
     }
 
     renderItem(tarvike) {
-        console.log(tarvike);
 
         const clickCallback = () => this.handleRowClick(tarvike.id);
         const tarvikeRows = [
@@ -81,7 +80,7 @@ class TarvikeTable2 extends Component {
                         </Col>
                         <Row>
                             <Col style={{paddingRight: '5px'}}>
-                               <OstoslistaModal row={row} />
+                               <LisaaOstosModal row={row} />
                             </Col>
                             <Col style={{paddingLeft: '0'}}>
                                 <TarvikeMuokkaaModal row={row} />
@@ -131,11 +130,11 @@ class TarvikeTable2 extends Component {
             showTotal: true,
             paginationTotalRenderer: customTotal,
             sizePerPageList: [{
-                text: '2', value: 2
-            }, {
-                text: '5', value: 5
-            }, {
                 text: '10', value: 10
+            }, {
+                text: '50', value: 50
+            }, {
+                text: '100', value: 100
             }, {
                 text: 'All', value: tarvikkeet.length
             }]

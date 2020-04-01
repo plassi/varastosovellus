@@ -2,7 +2,7 @@ import {
     GET_OSTOSLISTAT,
     ADD_OSTOSLISTA,
     DELETE_OSTOSLISTA,
-    TARVIKKEET_LADATAAN,
+    OSTOSLISTAT_LADATAAN,
     UPDATE_OSTOSLISTA
   } from '../actions/types';
   
@@ -16,7 +16,7 @@ import {
       case GET_OSTOSLISTAT:
         return {
           ...state,
-          tarvikkeet: action.payload,
+          ostoslistat: action.payload,
           ladataan: false
         };
       case DELETE_OSTOSLISTA:
@@ -37,7 +37,7 @@ import {
           ...state,
           ostoslistat: [action.payload, ...state.ostoslistat]
         };
-      case TARVIKKEET_LADATAAN:
+      case OSTOSLISTAT_LADATAAN:
         return {
           ...state,
           ladataan: true

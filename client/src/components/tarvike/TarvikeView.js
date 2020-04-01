@@ -15,8 +15,9 @@ class TarvikeView extends Component {
     if (this.props.isAuthenticated) {
       return (
         <div>
+           <TarvikeModal />
           <TarvikeTable2 />
-          <TarvikeModal />
+         
         </div>
       )
     } else {

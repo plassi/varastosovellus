@@ -1,116 +1,74 @@
 import React, { Component } from 'react'
-import { Container, Button, Table, Col } from 'reactstrap'
 import { connect } from 'react-redux'
-import { getTarvikkeet, deleteTarvike } from '../../actions/tarvikeActions'
-//import { getOstokset } from '../../actions/ostoksetActions'
-import PropTypes from 'prop-types'
-import {AiOutlineDelete} from 'react-icons/ai'
+import { getOstoslistat } from '../../actions/ostoslistaActions'
+import PropTypes from 'prop-types';
+import BootstrapTable from 'react-bootstrap-table-next';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
 class OstoslistaTable extends Component {
-
-  state = {
-    expandedRows: []
-  }
-
-  static propTypes = {
-    deleteTarvike: PropTypes.func.isRequired,
-    getTarvikkeet: PropTypes.func.isRequired,
-//  getOstokset: PropTypes.func.isRequired,
-    tarvike: PropTypes.object.isRequired, 
-    isAuthenticated: PropTypes.bool
-  }
-
-  componentDidMount() {
-    this.props.getTarvikkeet()
- //   this.props.getOstokset()
-  }
-
-  handleRowClick(rowId) {
-    const currentExpandedRows = this.state.expandedRows;
-    const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
-
-    const newExpandedRows = isRowCurrentlyExpanded ?
-      currentExpandedRows.filter(id => id !== rowId) :
-      currentExpandedRows.concat(rowId);
-
-    this.setState({ expandedRows: newExpandedRows });
-  }
-
-  renderItem(tarvike) {
-
-    const onDeleteClick = (id) => this.props.deleteTarvike(id);
-
-    const clickCallback = () => this.handleRowClick(tarvike.id);
-    const tarvikeRows = [
-      <tr onClick={clickCallback} key={"row-data-" + tarvike.id}>
-        <td>{tarvike.nimi}</td>
-        <td>{tarvike.maara} {tarvike.maarayksikko}</td>
-        <td>{tarvike.maara} {tarvike.maarayksikko}</td>
-        <td> <Button 
-                      className='remove-btn'
-                      color='danger'
-                      size='sm'
-                      onClick={onDeleteClick.bind(this, tarvike.id)}
-                    >
-                      <AiOutlineDelete/>
-                    </Button></td>
-      </tr>
-    ];
-
-    if (this.state.expandedRows.includes(tarvike.id)) {
-      console.log(tarvike);
-
-      tarvikeRows.push(
-        <tr key={"row-expanded-" + tarvike.id}>
-          <td>{tarvike.kuvaus}</td>
-          <td>{tarvike.kuva}</td>
-
-        </tr>
-      );
+    state = {
+        columns: [{
+            dataField: '',
+            text: 'Nimi',
+            sort: true,
+        }, {
+            dataField: '',
+            text: 'Määrä',
+            sort: true,
+        },
+        ],
     }
 
-    return tarvikeRows;
-  }
+    static propTypes = {
+        getOstoslistat: PropTypes.func.isRequired,
+        ostoslista: PropTypes.object.isRequired,
+        isAuthenticated: PropTypes.bool
+    }
 
-  render() {
-    const { tarvikkeet } = this.props.tarvike
-    let allTarvikeRows = [];
+    componentDidMount() {
+        this.props.getOstoslistat()
 
-    tarvikkeet.forEach(tarvike => {
-      const perTarvikeRows = this.renderItem(tarvike);
-      allTarvikeRows = allTarvikeRows.concat(perTarvikeRows);
-    });
+    }
 
-    return (
-      <Container>
-
-        <Table className="table-hover">
-          <thead>
-            <tr>
-              <th>Nimi</th>
-              <th>Määrä varastossa</th>
-              <th>Ostettava määrä</th>
-              <th>Poista</th>
+    renderItem(ostoslista) {
+       
+        const ostoslistaRows = [
+            <tr key={"row-data-" + ostoslista.id}>
+                <td>{}</td>
+                <td>{}</td>
+                <td></td>
+                <td></td>
             </tr>
-          </thead>
-          <tbody>
-            {allTarvikeRows}
-          </tbody>
-        </Table>
-        <Col>
-        <Button color='dark'>Tulosta</Button>
-        </Col>
-      </Container>
-    );
-  }
+        ];
+    
+        return ostoslistaRows;
+    }
+
+    render() {
+        const { ostoslistat } = this.props.ostoslista
+       console.log("tarvikkeet: " , ostoslistat
+
+       )
+        return (
+            <div>
+                <h6>Ostoslista</h6>
+                <BootstrapTable
+                    keyField="id"
+                    data={ostoslistat}
+                    columns={this.state.columns}
+                />
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = state => ({
-  tarvike: state.tarvike,
-  isAuthenticated: state.auth.isAuthenticated
+    ostoslista: state.ostoslista,
+    isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(
-  mapStateToProps,
-  { getTarvikkeet, deleteTarvike }
+    mapStateToProps,
+    { getOstoslistat }
 )(OstoslistaTable);
