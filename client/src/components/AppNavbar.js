@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from 'react'
 import {
   Collapse,
   Navbar,
@@ -12,33 +12,29 @@ import {
   DropdownItem,
   Container,
   NavLink
-} from 'reactstrap';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import Logout from './auth/Logout';
+} from 'reactstrap'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import Logout from './auth/Logout'
 
 
 class AppNavbar extends Component {
   state = {
     isOpen: false
-  };
+  }
 
   static propTypes = {
     auth: PropTypes.object.isRequired
-  };
+  }
 
   toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen
-    });
-  };
-
-  componentDidMount() {
-    const { isAuthenticated, user } = this.props.auth
+    })
   }
 
   render() {
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated, user } = this.props.auth
 
     const authLinks = (
       <Fragment>
@@ -52,19 +48,19 @@ class AppNavbar extends Component {
           <NavLink href="kayttajat">Käyttäjät</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="loki" style={{marginRight:'3vw'}}>Loki</NavLink>
+          <NavLink href="loki" style={{ marginRight:'3vw' }}>Loki</NavLink>
         </NavItem>
 
         <UncontrolledDropdown nav inNavbar>
           <DropdownToggle nav caret>
-          
-              {user ? `Kirjautunut ${user.kayttajatunnus}` : ''}
-              
+
+            {user ? `Kirjautunut ${user.kayttajatunnus}` : ''}
+
           </DropdownToggle>
           <DropdownMenu className="asetukset-dropdown">
             <DropdownItem>
               Käyttäjäprofiili
-                </DropdownItem>
+            </DropdownItem>
             <DropdownItem>
               <Logout />
             </DropdownItem>
@@ -79,11 +75,11 @@ class AppNavbar extends Component {
       //     <RegisterModal />
       //   </NavItem>
       //   <NavItem>
-      //     
+      //
       //   </NavItem>
       // </Fragment>
       <></>
-    );
+    )
 
     return (
       <div>
@@ -99,17 +95,17 @@ class AppNavbar extends Component {
           </Container>
         </Navbar>
       </div>
-    );
+    )
   }
 
 }
 
 const mapStateToProps = state => ({
   auth: state.auth
-});
+})
 
 
 export default connect(
   mapStateToProps,
   null
-)(AppNavbar);
+)(AppNavbar)

@@ -32,6 +32,4 @@ tarvikkeetSchema.set('toJSON', {
   }
 })
 
-const Ostoslista = mongoose.model('Ostoslista', ostoslistaSchema)
-
-module.exports = Ostoslista
+module.exports = mongoose.model('Ostoslista', ostoslistaSchema)

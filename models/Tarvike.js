@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 // Create Schema
 const TarvikeSchema = new Schema({
@@ -20,7 +20,7 @@ const TarvikeSchema = new Schema({
   sijainti: String,
   kuva: String,
   hinta: Number
-});
+})
 
 TarvikeSchema.set('toJSON', {
   transform: (document, returnedObject) => {
@@ -30,4 +30,4 @@ TarvikeSchema.set('toJSON', {
   }
 })
 
-module.exports = Tarvike = mongoose.model('Tarvike', TarvikeSchema);
+module.exports = mongoose.model('Tarvike', TarvikeSchema)

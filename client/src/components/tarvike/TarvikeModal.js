@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Button,
   Modal,
@@ -8,35 +8,35 @@ import {
   FormGroup,
   Label,
   Input,
-} from 'reactstrap';
-import { connect } from 'react-redux';
-import { addTarvike } from '../../actions/tarvikeActions';
-import PropTypes from 'prop-types';
-import "../componentStyles.css"
+} from 'reactstrap'
+import { connect } from 'react-redux'
+import { addTarvike } from '../../actions/tarvikeActions'
+import PropTypes from 'prop-types'
+import '../componentStyles.css'
 
 class TarvikeModal extends Component {
   state = {
     modal: false,
     nimi: ''
-  };
+  }
 
   static propTypes = {
     isAuthenticated: PropTypes.bool
-  };
+  }
 
   toggle = () => {
     this.setState({
       modal: !this.state.modal
-    });
-  };
+    })
+  }
 
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+    this.setState({ [e.target.name]: e.target.value })
+  }
 
   onSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
 
     const newTarvike = {
       nimi: this.state.nimi,
@@ -47,13 +47,13 @@ class TarvikeModal extends Component {
       sijainti: this.state.sijainti,
       avainsanat: this.state.avainsanat,
       kuva: this.state.kuva
-    };
-    
+    }
+
     // Add item via addItem action
-    this.props.addTarvike(newTarvike);
+    this.props.addTarvike(newTarvike)
 
     // Close modal
-    this.toggle();
+    this.toggle()
   };
 
   render() {
@@ -63,7 +63,7 @@ class TarvikeModal extends Component {
           <div>
             <Button
               color='dark'
-              style={{ marginTop: '2rem'}}
+              style={{ marginTop: '2rem' }}
               onClick={this.toggle}
             > Lisää tarvike</Button>
           </div>
@@ -136,13 +136,13 @@ class TarvikeModal extends Component {
               </FormGroup>
               <Button color='dark' style={{ marginTop: '2rem' }} block>
                 Lisää tarvike
-                </Button>
+              </Button>
 
             </Form>
           </ModalBody>
         </Modal>
       </div>
-    );
+    )
   }
 }
 
@@ -151,9 +151,9 @@ class TarvikeModal extends Component {
 const mapStateToProps = state => ({
   item: state.item,
   isAuthenticated: state.auth.isAuthenticated
-});
+})
 
 export default connect(
   mapStateToProps,
   { addTarvike }
-)(TarvikeModal);
+)(TarvikeModal)

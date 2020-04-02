@@ -29,7 +29,7 @@ router.post('/', auth, async (req, res) => {
 // @desc    Update An Item
 // @access  Private
 router.put('/:id', auth, async (req, res) => {
-  
+
   const ostoslista = {
     ...req.body
   }

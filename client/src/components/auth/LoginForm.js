@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Button,
   Container, Col,
@@ -8,11 +8,11 @@ import {
   Input,
   Alert,
   Card, CardBody, CardTitle
-} from 'reactstrap';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { login } from '../../actions/authActions';
-import { clearErrors } from '../../actions/errorActions';
+} from 'reactstrap'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { login } from '../../actions/authActions'
+import { clearErrors } from '../../actions/errorActions'
 
 class LoginForm extends Component {
   state = {
@@ -29,44 +29,44 @@ class LoginForm extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { error, isAuthenticated } = this.props;
+    const { error } = this.props
     if (error !== prevProps.error) {
       // Check for register error
       if (error.id === 'LOGIN_FAIL') {
-        this.setState({ msg: error.msg.msg });
+        this.setState({ msg: error.msg.msg })
       } else {
-        this.setState({ msg: null });
+        this.setState({ msg: null })
       }
     }
   }
 
   toggle = () => {
     // Clear errors
-    this.props.clearErrors();
+    this.props.clearErrors()
     this.setState({
       modal: !this.state.modal
-    });
+    })
   };
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value })
   };
 
   onSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { kayttajatunnus, salasana } = this.state;
+    const { kayttajatunnus, salasana } = this.state
 
     const user = {
       kayttajatunnus,
       salasana
-    };
+    }
 
     // Attempt to login
-    this.props.login(user);
+    this.props.login(user)
   };
 
-  
+
 
   render() {
     if (this.props.isAuthenticated) {
@@ -110,7 +110,7 @@ class LoginForm extends Component {
                     />
                     <Button color='dark' style={{ marginTop: '2rem' }} block>
                       Kirjaudu sisään
-                  </Button>
+                    </Button>
                   </FormGroup>
                 </Form>
               </CardBody>
@@ -119,7 +119,7 @@ class LoginForm extends Component {
           </Col>
         </Container>
 
-      );
+      )
     }
   }
 }
@@ -127,9 +127,9 @@ class LoginForm extends Component {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   error: state.error
-});
+})
 
 export default connect(
   mapStateToProps,
   { login, clearErrors }
-)(LoginForm);
+)(LoginForm)

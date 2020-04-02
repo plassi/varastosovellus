@@ -14,7 +14,7 @@ app.use(cors())
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'local-build') {
   // Set static folder
   console.log(process.env.NODE_ENV)
-  
+
   app.use(express.static('client/build'))
 }
 // Connect to Mongo
@@ -35,7 +35,7 @@ app.use(express.json())
 // express-log-mongo Config
 const mLogger = require('express-log-mongo')
 mLogger.token('body', (request) => {
-  return request.body;
+  return request.body
 })
 
 // express-log-mongo
@@ -52,12 +52,10 @@ app.use('/api/users', require('./routes/api/users'))
 app.use('/api/auth', require('./routes/api/auth'))
 
 app.get('*', function(req, res) {
-  res.sendFile('index.html', {root: path.join('./client/build/')});
-});
+  res.sendFile('index.html', { root: path.join('./client/build/') })
+})
 
 
-
-// 
 app.use(middleware.requestLogger)
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, Container, Row, Col } from 'reactstrap'
+import { Input, Col } from 'reactstrap'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -18,18 +18,16 @@ class TarvikeHaku extends Component {
 
   render() {
     return (
-      
-        <Col xs="3">
-          <Input
-            className="haku col-sm"
-            onChange={this.onChange}
-            type="text"
-            name='haku'
-            placeholder="Hae tarvike"
-            aria-label="Search" />
-        </Col>
 
-    
+      <Col xs="3">
+        <Input
+          className="haku col-sm"
+          onChange={this.onChange}
+          type="text"
+          name='haku'
+          placeholder="Hae tarvike"
+          aria-label="Search" />
+      </Col>
 
     )
   }
@@ -38,9 +36,9 @@ class TarvikeHaku extends Component {
 const mapStateToProps = state => ({
   item: state.item,
   isAuthenticated: state.auth.isAuthenticated
-});
+})
 
 export default connect(
   mapStateToProps,
   {}
-)(TarvikeHaku);
+)(TarvikeHaku)

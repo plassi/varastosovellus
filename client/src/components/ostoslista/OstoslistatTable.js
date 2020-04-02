@@ -20,14 +20,14 @@ class OstoslistatTable extends Component {
 
   renderItem(ostoslista) {
 
-    const onDeleteClick = (id) => this.props.deleteOstoslista(id);
+    const onDeleteClick = (id) => this.props.deleteOstoslista(id)
     const openClick = (id) => {
-      console.log("id :", id)
+      console.log('id :', id)
       this.props.selectOstoslista(ostoslista)
     }
 
     const ostoslistaRows = [
-      <tr key={"row-data-" + ostoslista.id}>
+      <tr key={'row-data-' + ostoslista.id}>
         <td>{ostoslista.nimi}</td>
         <td>
           <Button
@@ -47,14 +47,14 @@ class OstoslistatTable extends Component {
             <AiOutlineDelete />
           </Button></td>
       </tr>
-    ];
+    ]
 
-    return ostoslistaRows;
+    return ostoslistaRows
   }
 
   render() {
-    
-    const { ostoslistat } = this.props.ostoslista 
+
+    const { ostoslistat } = this.props.ostoslista
 
     const allOstoslistaRows = ostoslistat.map(ostoslista => {
       return (
@@ -64,7 +64,7 @@ class OstoslistatTable extends Component {
 
     return (
       <Container>
-        <Table size='sm' className="table-hover">
+        <Table size='sm' className='table-hover'>
           <thead>
             <tr>
               <th>Ostoslista</th>
@@ -76,16 +76,16 @@ class OstoslistatTable extends Component {
           </tbody>
         </Table>
       </Container>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => ({
   ostoslista: state.ostoslista,
   isAuthenticated: state.auth.isAuthenticated
-});
+})
 
 export default connect(
   mapStateToProps,
   { deleteOstoslista, selectOstoslista }
-)(OstoslistatTable);
+)(OstoslistatTable)

@@ -10,7 +10,7 @@ const User = require('../models/User')
 describe('Admin kirjautunut', () => {
 
   // Tunnistautumis token
-  let token = ""
+  let token = ''
 
   beforeAll(async () => {
     // Tyhjennä User tietue
@@ -57,11 +57,11 @@ describe('Admin kirjautunut', () => {
       kategoria: 'Tarvikkeen 3 kategoria',
       kuvaus: 'Tarvikkeen 3 kuvaus',
       maara: 30,
-      maarayksikko: "ltr",
-      sijainti: "C3",
-      hinta: "30"
+      maarayksikko: 'ltr',
+      sijainti: 'C3',
+      hinta: '30'
     }
-    
+
     await api
       .post('/api/tarvikkeet')
       .send(uusiTarvike)
@@ -74,13 +74,13 @@ describe('Admin kirjautunut', () => {
 
     const nimet = tarvikkeetAtEnd.map(n => n.nimi)
     expect(nimet).toContain(
-      "Tarvike 3"
+      'Tarvike 3'
     )
   })
 
   test('tarviketta ilman nimeä ei lisätä', async () => {
     const uusiTarvike = {
-      kategoria: "jotain"
+      kategoria: 'jotain'
     }
 
     await api
@@ -96,11 +96,11 @@ describe('Admin kirjautunut', () => {
 
   test('tarviketta voidaan muokata', async () => {
     const tarvikkeetAtStart = await helper.tarvikkeetInDb()
-    
+
     const tarvikeToUpdate = {
       ...tarvikkeetAtStart[0],
-      nimi: "paivitettyTarvike"
-    } 
+      nimi: 'paivitettyTarvike'
+    }
 
     await api
       .put(`/api/tarvikkeet/${tarvikeToUpdate.id}`)
@@ -109,7 +109,7 @@ describe('Admin kirjautunut', () => {
       .expect(200)
 
     const tarvikkeetAtEnd = await helper.tarvikkeetInDb()
-    
+
     expect(tarvikkeetAtEnd.length).toBe(
       helper.initialTarvikkeet.length
     )
@@ -129,7 +129,7 @@ describe('Admin kirjautunut', () => {
       .expect(204)
 
     const tarvikkeetAtEnd = await helper.tarvikkeetInDb()
-    
+
     expect(tarvikkeetAtEnd.length).toBe(
       helper.initialTarvikkeet.length - 1
     )
@@ -150,7 +150,7 @@ describe('käyttäjä ei kirjautunut', () => {
   })
 
   test('tarvikkeiden haku palauttaa virheen 401 unauthorized', async () => {
-    const response = await api.get('/api/tarvikkeet')
+    await api.get('/api/tarvikkeet')
       .expect(401)
   })
 
@@ -160,11 +160,11 @@ describe('käyttäjä ei kirjautunut', () => {
       kategoria: 'Tarvikkeen 3 kategoria',
       kuvaus: 'Tarvikkeen 3 kuvaus',
       maara: 30,
-      maarayksikko: "ltr",
-      sijainti: "C3",
-      hinta: "30"
+      maarayksikko: 'ltr',
+      sijainti: 'C3',
+      hinta: '30'
     }
-    
+
     await api
       .post('/api/tarvikkeet')
       .send(uusiTarvike)
@@ -173,11 +173,11 @@ describe('käyttäjä ei kirjautunut', () => {
 
   test('tarvikkeen muokkaus palauttaa virheen 401 unauthorized', async () => {
     const tarvikkeetAtStart = await helper.tarvikkeetInDb()
-    
+
     const tarvikeToUpdate = {
       ...tarvikkeetAtStart[0],
-      nimi: "paivitettyTarvike"
-    } 
+      nimi: 'paivitettyTarvike'
+    }
 
     await api
       .put(`/api/tarvikkeet/${tarvikeToUpdate.id}`)
@@ -185,7 +185,7 @@ describe('käyttäjä ei kirjautunut', () => {
       .expect(401)
 
     const tarvikkeetAtEnd = await helper.tarvikkeetInDb()
-    
+
     expect(tarvikkeetAtEnd.length).toBe(
       helper.initialTarvikkeet.length
     )
@@ -204,7 +204,7 @@ describe('käyttäjä ei kirjautunut', () => {
       .expect(401)
 
     const tarvikkeetAtEnd = await helper.tarvikkeetInDb()
-    
+
     expect(tarvikkeetAtEnd.length).toBe(helper.initialTarvikkeet.length)
 
     const nimet = tarvikkeetAtEnd.map(r => r.nimi)

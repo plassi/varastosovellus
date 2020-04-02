@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { returnErrors } from './errorActions';
+import axios from 'axios'
+import { returnErrors } from './errorActions'
 
 import {
   USER_LOADED,
@@ -10,12 +10,12 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL
-} from './types';
+} from './types'
 
 // Check token & load user
 export const loadUser = () => (dispatch, getState) => {
   // User loading
-  dispatch({ type: USER_LOADING });
+  dispatch({ type: USER_LOADING })
 
   axios
     .get('/api/auth/user', tokenConfig(getState))
@@ -26,12 +26,12 @@ export const loadUser = () => (dispatch, getState) => {
       })
     )
     .catch(err => {
-      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(returnErrors(err.response.data, err.response.status))
       dispatch({
         type: AUTH_ERROR
-      });
-    });
-};
+      })
+    })
+}
 
 // Register User
 export const register = ({ kayttajatunnus, salasana }) => dispatch => {
@@ -40,10 +40,10 @@ export const register = ({ kayttajatunnus, salasana }) => dispatch => {
     headers: {
       'Content-Type': 'application/json'
     }
-  };
+  }
 
   // Request body
-  const body = JSON.stringify({ kayttajatunnus, salasana });
+  const body = JSON.stringify({ kayttajatunnus, salasana })
 
   axios
     .post('/api/users', body, config)
@@ -56,12 +56,12 @@ export const register = ({ kayttajatunnus, salasana }) => dispatch => {
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
-      );
+      )
       dispatch({
         type: REGISTER_FAIL
-      });
-    });
-};
+      })
+    })
+}
 
 // Login User
 export const login = ({ kayttajatunnus, salasana }) => dispatch => {
@@ -70,10 +70,10 @@ export const login = ({ kayttajatunnus, salasana }) => dispatch => {
     headers: {
       'Content-Type': 'application/json'
     }
-  };
+  }
 
   // Request body
-  const body = JSON.stringify({ kayttajatunnus, salasana });
+  const body = JSON.stringify({ kayttajatunnus, salasana })
 
   axios
     .post('/api/auth', body, config)
@@ -86,36 +86,36 @@ export const login = ({ kayttajatunnus, salasana }) => dispatch => {
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL')
-      );
+      )
       dispatch({
         type: LOGIN_FAIL
-      });
-    });
-};
+      })
+    })
+}
 
 // Logout User
 export const logout = () => {
   return {
     type: LOGOUT_SUCCESS
-  };
-};
+  }
+}
 
 // Setup config/headers and token
 export const tokenConfig = getState => {
   // Get token from localstorage
-  const token = getState().auth.token;
+  const token = getState().auth.token
 
   // Headers
   const config = {
     headers: {
       'Content-type': 'application/json'
     }
-  };
+  }
 
   // If token, add to headers
   if (token) {
-    config.headers['x-auth-token'] = token;
+    config.headers['x-auth-token'] = token
   }
 
-  return config;
-};
+  return config
+}

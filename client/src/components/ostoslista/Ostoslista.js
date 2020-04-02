@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getTarvikkeet, deleteTarvike } from '../../actions/tarvikeActions'
 //import { getOstokset } from '../../actions/ostoksetActions'
 import PropTypes from 'prop-types'
-import {AiOutlineDelete} from 'react-icons/ai'
+import { AiOutlineDelete } from 'react-icons/ai'
 
 class Ostoslista extends Component {
 
@@ -15,77 +15,77 @@ class Ostoslista extends Component {
   static propTypes = {
     deleteTarvike: PropTypes.func.isRequired,
     getTarvikkeet: PropTypes.func.isRequired,
-//  getOstokset: PropTypes.func.isRequired,
-    tarvike: PropTypes.object.isRequired, 
+    // getOstokset: PropTypes.func.isRequired,
+    tarvike: PropTypes.object.isRequired,
     isAuthenticated: PropTypes.bool
   }
 
   componentDidMount() {
     this.props.getTarvikkeet()
- //   this.props.getOstokset()
+    // this.props.getOstokset()
   }
 
   handleRowClick(rowId) {
-    const currentExpandedRows = this.state.expandedRows;
-    const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
+    const currentExpandedRows = this.state.expandedRows
+    const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId)
 
     const newExpandedRows = isRowCurrentlyExpanded ?
       currentExpandedRows.filter(id => id !== rowId) :
-      currentExpandedRows.concat(rowId);
+      currentExpandedRows.concat(rowId)
 
-    this.setState({ expandedRows: newExpandedRows });
+    this.setState({ expandedRows: newExpandedRows })
   }
 
   renderItem(tarvike) {
 
-    const onDeleteClick = (id) => this.props.deleteTarvike(id);
+    const onDeleteClick = (id) => this.props.deleteTarvike(id)
 
-    const clickCallback = () => this.handleRowClick(tarvike.id);
+    const clickCallback = () => this.handleRowClick(tarvike.id)
     const tarvikeRows = [
-      <tr onClick={clickCallback} key={"row-data-" + tarvike.id}>
+      <tr onClick={clickCallback} key={'row-data-' + tarvike.id}>
         <td>{tarvike.nimi}</td>
         <td>{tarvike.maara} {tarvike.maarayksikko}</td>
         <td>{tarvike.maara} {tarvike.maarayksikko}</td>
-        <td> <Button 
-                      className='remove-btn'
-                      color='danger'
-                      size='sm'
-                      onClick={onDeleteClick.bind(this, tarvike.id)}
-                    >
-                      <AiOutlineDelete/>
-                    </Button></td>
+        <td> <Button
+          className='remove-btn'
+          color='danger'
+          size='sm'
+          onClick={onDeleteClick.bind(this, tarvike.id)}
+        >
+          <AiOutlineDelete />
+        </Button></td>
       </tr>
-    ];
+    ]
 
     if (this.state.expandedRows.includes(tarvike.id)) {
-      console.log(tarvike);
+      console.log(tarvike)
 
       tarvikeRows.push(
-        <tr key={"row-expanded-" + tarvike.id}>
+        <tr key={'row-expanded-' + tarvike.id}>
           <td>{tarvike.kuvaus}</td>
           <td>{tarvike.kuva}</td>
 
         </tr>
-      );
+      )
     }
 
-    return tarvikeRows;
+    return tarvikeRows
   }
 
   render() {
     const { tarvikkeet } = this.props.tarvike
-    let allTarvikeRows = [];
+    let allTarvikeRows = []
 
     tarvikkeet.forEach(tarvike => {
-      const perTarvikeRows = this.renderItem(tarvike);
-      allTarvikeRows = allTarvikeRows.concat(perTarvikeRows);
-    });
+      const perTarvikeRows = this.renderItem(tarvike)
+      allTarvikeRows = allTarvikeRows.concat(perTarvikeRows)
+    })
 
     return (
       <Container>
-          <Col className='pb-5'>
+        <Col className='pb-5'>
           <h1>Ostoslista</h1>
-          </Col>
+        </Col>
         <Table className="table-hover">
           <thead>
             <tr>
@@ -100,19 +100,19 @@ class Ostoslista extends Component {
           </tbody>
         </Table>
         <Col>
-        <Button color='dark'>Tulosta</Button>
+          <Button color='dark'>Tulosta</Button>
         </Col>
       </Container>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => ({
   tarvike: state.tarvike,
   isAuthenticated: state.auth.isAuthenticated
-});
+})
 
 export default connect(
   mapStateToProps,
   { getTarvikkeet, deleteTarvike }
-)(Ostoslista);
+)(Ostoslista)

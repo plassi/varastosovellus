@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import LoginForm from './components/auth/LoginForm'
 import AppNavbar from './components/AppNavbar'
@@ -12,7 +12,7 @@ import { getTarvikkeet } from './actions/tarvikeActions'
 import { getOstoslistat } from './actions/ostoslistaActions'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-import OstoslistaView from './components/ostoslista/OstoslistaView';
+import OstoslistaView from './components/ostoslista/OstoslistaView'
 
 class App extends Component {
 
@@ -23,7 +23,7 @@ class App extends Component {
     // Logataan konsoliin jokainen redux-storen tilanmuutos
     store.subscribe(() => console.log(store.getState()))
   }
-  
+
 
   render() {
 

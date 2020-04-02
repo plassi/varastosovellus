@@ -15,9 +15,8 @@ class TarvikeView extends Component {
     if (this.props.isAuthenticated) {
       return (
         <div>
-           <TarvikeModal />
+          <TarvikeModal />
           <TarvikeTable2 />
-         
         </div>
       )
     } else {
@@ -31,9 +30,9 @@ class TarvikeView extends Component {
 const mapStateToProps = state => ({
   tarvike: state.tarvike,
   isAuthenticated: state.auth.isAuthenticated
-});
+})
 
 export default connect(
   mapStateToProps,
   null
-)(TarvikeView);
+)(TarvikeView)

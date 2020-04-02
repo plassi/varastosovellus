@@ -11,7 +11,7 @@ const User = require('../models/User')
 describe('Admin kirjautunut', () => {
 
   // Tunnistautumis token
-  let token = ""
+  let token = ''
 
   beforeAll(async () => {
     // Tyhjennä User tietue
@@ -68,7 +68,7 @@ describe('Admin kirjautunut', () => {
 
     const nimet = ostoslistatAtEnd.map(n => n.nimi)
     expect(nimet).toContain(
-      "Ostoslista 3"
+      'Ostoslista 3'
     )
   })
 
@@ -88,7 +88,7 @@ describe('Admin kirjautunut', () => {
     const nimet = ostoslistatAtEnd.map(n => n.nimi)
 
     expect(nimet).toContain(
-      "nimeton"
+      'nimeton'
     )
   })
 
@@ -99,7 +99,7 @@ describe('Admin kirjautunut', () => {
 
       const ostoslistaToUpdate = {
         ...ostoslistatAtStart[0],
-        nimi: "paivitettyOstoslista"
+        nimi: 'paivitettyOstoslista'
       }
 
       await api
@@ -263,7 +263,7 @@ describe('käyttäjä ei kirjautunut', () => {
 
     const ostoslistaToUpdate = {
       ...ostoslistatAtStart[0],
-      nimi: "paivitettyOstoslista"
+      nimi: 'paivitettyOstoslista'
     }
 
     await api

@@ -24,8 +24,8 @@ class OstoslistaView extends Component {
             <h1>Ostoslistat</h1>
           </Col>
           <OstoslistaLisaaModal />
-         <OstoslistatTable />
-         <OstoslistaTable />
+          <OstoslistatTable />
+          <OstoslistaTable />
 
         </Container>
       )
@@ -40,9 +40,9 @@ class OstoslistaView extends Component {
 const mapStateToProps = state => ({
   ostoslista: state.ostoslista,
   isAuthenticated: state.auth.isAuthenticated
-});
+})
 
 export default connect(
   mapStateToProps,
   null
-)(OstoslistaView);
+)(OstoslistaView)

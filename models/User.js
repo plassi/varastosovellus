@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 // Create Schema
 const UserSchema = new Schema({
@@ -19,7 +19,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-});
+})
 
 UserSchema.set('toJSON', {
   transform: (document, returnedObject) => {
@@ -31,4 +31,4 @@ UserSchema.set('toJSON', {
   }
 })
 
-module.exports = User = mongoose.model('user', UserSchema);
+module.exports = mongoose.model('User', UserSchema)

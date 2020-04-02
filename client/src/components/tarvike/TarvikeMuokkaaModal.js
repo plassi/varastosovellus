@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Button,
   Modal,
@@ -8,35 +8,35 @@ import {
   FormGroup,
   Label,
   Input
-} from 'reactstrap';
-import { connect } from 'react-redux';
-import {  deleteTarvike, updateTarvike } from '../../actions/tarvikeActions';
-import PropTypes from 'prop-types';
-import "../componentStyles.css"
+} from 'reactstrap'
+import { connect } from 'react-redux'
+import { deleteTarvike, updateTarvike } from '../../actions/tarvikeActions'
+import PropTypes from 'prop-types'
+import '../componentStyles.css'
 import { FaRegEdit } from 'react-icons/fa'
 
 class TarvikeMuokkaaModal extends Component {
   state = {
     modal: false,
-    
+
   };
 
   static propTypes = {
     isAuthenticated: PropTypes.bool
-  };
+  }
 
   toggle = () => {
     this.setState({
       modal: !this.state.modal
-    });
-  };
+    })
+  }
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+    this.setState({ [e.target.name]: e.target.value })
+  }
 
   onSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
 
     const newTarvike = {
       id: this.props.row.id,
@@ -49,42 +49,39 @@ class TarvikeMuokkaaModal extends Component {
       avainsanat: this.state.avainsanat,
       kuva: this.state.kuva
     }
-    
-  // Put item via putItem action
-    this.props.updateTarvike(newTarvike);
-    
+
+    // Put item via putItem action
+    this.props.updateTarvike(newTarvike)
 
     // Close modal
-    this.toggle();
-  };
+    this.toggle()
+  }
 
   onDeleteClick = id => {
-    this.props.deleteTarvike(id);
-   
+    this.props.deleteTarvike(id)
+
     // Close modal
-    this.toggle();
-  };
+    this.toggle()
+  }
 
   render() {
     return (
       <div>
-        {this.props.isAuthenticated ? (
-          
-           <Button color='dark' onClick={this.toggle}>
-             <FaRegEdit/>
-             </Button>
-          
-        ) :
+        {this.props.isAuthenticated
+          ? (
 
-          (
-            <></>
-          )}
+            <Button color='dark' onClick={this.toggle}>
+              <FaRegEdit />
+            </Button>
+
+          ) : ( <></> )
+        }
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Muokkaa</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
-            <FormGroup>
+              <FormGroup>
                 <Label for='tarvike'>Tarvike</Label>
                 <Input
                   type='text'
@@ -150,27 +147,27 @@ class TarvikeMuokkaaModal extends Component {
               </FormGroup>
               <Button color='dark' style={{ marginTop: '2rem' }} block>
                 Tallenna
-                </Button>
-                <Button
-                      color='danger' block
-                      onClick={this.onDeleteClick.bind(this, this.props.row.id)}
-                    >
-                      Poista tarvike {this.props.row.nimi}                   
-                    </Button>
+              </Button>
+              <Button
+                color='danger' block
+                onClick={this.onDeleteClick.bind(this, this.props.row.id)}
+              >
+                Poista tarvike {this.props.row.nimi}
+              </Button>
             </Form>
           </ModalBody>
         </Modal>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => ({
   item: state.item,
   isAuthenticated: state.auth.isAuthenticated
-});
+})
 
 export default connect(
   mapStateToProps,
   { deleteTarvike, updateTarvike }
-)(TarvikeMuokkaaModal);
+)(TarvikeMuokkaaModal)

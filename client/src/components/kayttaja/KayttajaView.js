@@ -9,7 +9,7 @@ class KayttajaView extends Component {
   }
 
   render() {
-    
+
     if (this.props.isAuthenticated) {
       return (
         <div>
@@ -27,9 +27,9 @@ class KayttajaView extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
-});
+})
 
 export default connect(
   mapStateToProps,
   null
-)(KayttajaView);
+)(KayttajaView)
