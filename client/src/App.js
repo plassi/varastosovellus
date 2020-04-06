@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import LoginForm from './components/auth/LoginForm'
 import AppNavbar from './components/AppNavbar'
 import TarvikeView from './components/tarvike/TarvikeView'
@@ -16,14 +16,19 @@ import OstoslistaView from './components/ostoslista/OstoslistaView'
 
 class App extends Component {
 
+  constructor(props) {
+    super(props)
+    // Logataan konsoliin jokainen redux-storen tilanmuutos
+    store.subscribe(() => {
+      console.log(store.getState())
+    })
+  }
+  
   componentDidMount() {
     store.dispatch(loadUser())
     store.dispatch(getTarvikkeet())
     store.dispatch(getOstoslistat())
-    // Logataan konsoliin jokainen redux-storen tilanmuutos
-    store.subscribe(() => console.log(store.getState()))
   }
-
 
   render() {
 
@@ -33,7 +38,6 @@ class App extends Component {
           <Router>
             <AppNavbar />
             <Container>
-              <LoginForm />
               <Switch>
                 <Route path="/varasto">
                   <TarvikeView />
@@ -43,6 +47,9 @@ class App extends Component {
                 </Route>
                 <Route path="/kayttajat">
                   <KayttajaView />
+                </Route>
+                <Route path="/">
+                  <LoginForm />
                 </Route>
               </Switch>
             </Container>

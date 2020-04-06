@@ -47,9 +47,9 @@ class AppNavbar extends Component {
         <NavItem>
           <NavLink href="kayttajat">Käyttäjät</NavLink>
         </NavItem>
-        <NavItem>
+        {/* <NavItem>
           <NavLink href="loki" style={{ marginRight:'3vw' }}>Loki</NavLink>
-        </NavItem>
+        </NavItem> */}
 
         <UncontrolledDropdown nav inNavbar>
           <DropdownToggle nav caret>
