@@ -63,7 +63,7 @@ class OstoslistatTable extends Component {
     })
 
     return (
-      <Container>
+      <>
         <Table size='sm' className='table-hover'>
           <thead>
             <tr>
@@ -75,7 +75,7 @@ class OstoslistatTable extends Component {
             {allOstoslistaRows}
           </tbody>
         </Table>
-      </Container>
+      </>
     )
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { Col } from 'reactstrap'
 
 class KayttajaView extends Component {
 
@@ -12,10 +13,10 @@ class KayttajaView extends Component {
 
     if (this.props.isAuthenticated) {
       return (
-        <div>
+        <Col>
           {/* Tänne tulee kirjautuneelle käyttäjälle rendattava sisältö */}
           <h1>Käyttäjät</h1>
-        </div>
+        </Col>
       )
     } else {
       return (

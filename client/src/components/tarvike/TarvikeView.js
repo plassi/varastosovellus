@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Col } from 'reactstrap'
 import PropTypes from 'prop-types'
 import TarvikeModal from './TarvikeModal'
 import TarvikeTable2 from './TarvikeTable2'
@@ -10,9 +11,8 @@ class TarvikeView extends Component {
 
   constructor(props) {
     super(props)
-    this.props.loadUser()
     this.props.getTarvikkeet()
-    
+
   }
 
   static propTypes = {
@@ -22,14 +22,18 @@ class TarvikeView extends Component {
   }
 
   componentDidUpdate() {
+    this.props.loadUser()
   }
 
   render() {
     return (
-      <div>
+      <Col>
+        <div>
+          <h1>Varasto</h1>
+        </div>
         <TarvikeModal />
         <TarvikeTable2 />
-      </div>
+      </Col>
     )
 
   }

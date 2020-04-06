@@ -42,7 +42,7 @@ class AppNavbar extends Component {
           <NavLink href="varasto">Varasto</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="ostoslista">Ostoslista</NavLink>
+          <NavLink href="ostoslista">Ostoslistat</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="kayttajat">Käyttäjät</NavLink>

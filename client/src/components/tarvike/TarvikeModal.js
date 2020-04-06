@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  Col,
   Button,
   Modal,
   ModalHeader,
@@ -60,13 +61,12 @@ class TarvikeModal extends Component {
     return (
       <div>
         {this.props.isAuthenticated ? (
-          <div>
+          <Col>
             <Button
               color='dark'
-              style={{ marginTop: '2rem' }}
               onClick={this.toggle}
             > Lisää tarvike</Button>
-          </div>
+          </Col>
         ) :
 
           (

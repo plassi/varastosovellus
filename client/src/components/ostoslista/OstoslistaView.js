@@ -27,16 +27,16 @@ class OstoslistaView extends Component {
   render() {
     if (this.props.isAuthenticated) {
       return (
-        <Container>
+        <Col>
 
-          <Col className='pb-5'>
+          <div>
             <h1>Ostoslistat</h1>
-          </Col>
+          </div>
           <OstoslistaLisaaModal />
           <OstoslistatTable />
           <OstoslistaTable />
 
-        </Container>
+        </Col>
       )
     } else {
       return (
