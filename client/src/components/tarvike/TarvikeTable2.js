@@ -167,8 +167,7 @@ class TarvikeTable2 extends Component {
 }
 
 const mapStateToProps = state => ({
-  tarvike: state.tarvike,
-  isAuthenticated: state.auth.isAuthenticated
+  tarvike: state.tarvike
 })
 
 export default connect(

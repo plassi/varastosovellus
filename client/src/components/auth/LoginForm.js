@@ -13,7 +13,6 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { login } from '../../actions/authActions'
 import { clearErrors } from '../../actions/errorActions'
-import { Redirect } from 'react-router-dom'
 
 class LoginForm extends Component {
   state = {
@@ -23,7 +22,6 @@ class LoginForm extends Component {
   };
 
   static propTypes = {
-    isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     login: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
@@ -70,63 +68,57 @@ class LoginForm extends Component {
 
 
   render() {
-    if (this.props.isAuthenticated) {
-      return (
-        <Redirect to="/varasto" />
-      )
-    } else {
 
-      return (
-        <Container>
-          <Col sm="12" md={{ size: 6, offset: 3 }}>
-            <p>
+    return (
+      <Container>
+        <Col sm="12" md={{ size: 6, offset: 3 }}>
+          <p>
 
-            </p>
-            <Card>
-              <CardBody>
-                <CardTitle><h4>Kirjaudu sisään</h4></CardTitle>
-                {this.state.msg ? (
-                  <Alert color='danger'>{this.state.msg}</Alert>
-                ) : null}
-                <Form onSubmit={this.onSubmit}>
-                  <FormGroup>
-                    <Label for='kayttajatunnus'>Käyttäjätunnus</Label>
-                    <Input
-                      type='kayttajatunnus'
-                      name='kayttajatunnus'
-                      id='kayttajatunnus'
-                      placeholder='Käyttäjätunnus'
-                      className='mb-3'
-                      onChange={this.onChange}
-                    />
+          </p>
+          <Card>
+            <CardBody>
+              <CardTitle><h4>Kirjaudu sisään</h4></CardTitle>
+              {this.state.msg ? (
+                <Alert color='danger'>{this.state.msg}</Alert>
+              ) : null}
+              <Form onSubmit={this.onSubmit}>
+                <FormGroup>
+                  <Label for='kayttajatunnus'>Käyttäjätunnus</Label>
+                  <Input
+                    type='kayttajatunnus'
+                    name='kayttajatunnus'
+                    id='kayttajatunnus'
+                    placeholder='Käyttäjätunnus'
+                    className='mb-3'
+                    onChange={this.onChange}
+                  />
 
-                    <Label for='salasana'>Salasana</Label>
-                    <Input
-                      type='password'
-                      name='salasana'
-                      id='salasana'
-                      placeholder='Salasana'
-                      className='mb-3'
-                      onChange={this.onChange}
-                    />
-                    <Button color='dark' style={{ marginTop: '2rem' }} block>
-                      Kirjaudu sisään
-                    </Button>
-                  </FormGroup>
-                </Form>
-              </CardBody>
+                  <Label for='salasana'>Salasana</Label>
+                  <Input
+                    type='password'
+                    name='salasana'
+                    id='salasana'
+                    placeholder='Salasana'
+                    className='mb-3'
+                    onChange={this.onChange}
+                  />
+                  <Button color='dark' style={{ marginTop: '2rem' }} block>
+                    Kirjaudu sisään
+                  </Button>
+                </FormGroup>
+              </Form>
+            </CardBody>
 
-            </Card>
-          </Col>
-        </Container>
+          </Card>
+        </Col>
+      </Container>
 
-      )
-    }
+    )
   }
 }
 
+
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
   error: state.error
 })
 

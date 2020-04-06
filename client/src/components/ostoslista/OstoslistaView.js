@@ -5,13 +5,22 @@ import OstoslistatTable from './OstoslistatTable'
 import OstoslistaTable from './OstoslistaTable'
 import { Container, Col } from 'reactstrap'
 import OstoslistaLisaaModal from './OstoslistaLisaaModal'
+import { getOstoslistat } from '../../actions/ostoslistaActions'
 
 
 
 class OstoslistaView extends Component {
 
+  constructor(props) {
+    super(props)
+    this.props.getOstoslistat()
+    
+  }
+
   static propTypes = {
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    ostoslista: PropTypes.object,
+    getOstoslistat: PropTypes.func.isRequired
   }
 
 
@@ -44,5 +53,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null
+  { getOstoslistat }
 )(OstoslistaView)

@@ -1,55 +1,52 @@
 import React, { Component } from 'react'
+import { connect, Provider } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import LoginForm from './components/auth/LoginForm'
+import { Container } from 'reactstrap'
+import PropTypes from 'prop-types'
 import AppNavbar from './components/AppNavbar'
+import LoginForm from './components/auth/LoginForm'
 import TarvikeView from './components/tarvike/TarvikeView'
 import KayttajaView from './components/kayttaja/KayttajaView'
-import { Container } from 'reactstrap'
-import { Provider } from 'react-redux'
-import store from './store'
+import OstoslistaView from './components/ostoslista/OstoslistaView'
 import { loadUser } from './actions/authActions'
-import { getTarvikkeet } from './actions/tarvikeActions'
-import { getOstoslistat } from './actions/ostoslistaActions'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-import OstoslistaView from './components/ostoslista/OstoslistaView'
 
 class App extends Component {
 
   constructor(props) {
     super(props)
-    // Logataan konsoliin jokainen redux-storen tilanmuutos
-    store.subscribe(() => {
-      console.log(store.getState())
-    })
+    this.props.loadUser()
+    console.log('taalla')
   }
-  
-  componentDidMount() {
-    store.dispatch(loadUser())
-    store.dispatch(getTarvikkeet())
-    store.dispatch(getOstoslistat())
+
+  static propTypes = {
+    store: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    loadUser: PropTypes.func.isRequired
   }
 
   render() {
-
     return (
       <div className='App'>
-        <Provider store={store}>
+        <Provider store={this.props.store}>
+
+          <AppNavbar />
           <Router>
-            <AppNavbar />
             <Container>
               <Switch>
-                <Route path="/varasto">
-                  <TarvikeView />
+                <Route path="/varasto" >
+                  {localStorage.getItem('token') ? <TarvikeView /> : <Redirect to="/" />}
                 </Route>
-                <Route path="/ostoslista">
-                  <OstoslistaView />
+                <Route path="/ostoslista" >
+                  {localStorage.getItem('token') ? <OstoslistaView /> : <Redirect to="/" />}
                 </Route>
-                <Route path="/kayttajat">
-                  <KayttajaView />
+                <Route path="/kayttajat" >
+                  {localStorage.getItem('token') ? <KayttajaView /> : <Redirect to="/" />}
                 </Route>
+
                 <Route path="/">
-                  <LoginForm />
+                  {localStorage.getItem('token') ? <Redirect to="/varasto" /> : <LoginForm />}
                 </Route>
               </Switch>
             </Container>
@@ -61,4 +58,11 @@ class App extends Component {
 }
 
 
-export default App
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(
+  mapStateToProps,
+  { loadUser }
+)(App)
