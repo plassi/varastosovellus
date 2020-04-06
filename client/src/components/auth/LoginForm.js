@@ -13,6 +13,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { login } from '../../actions/authActions'
 import { clearErrors } from '../../actions/errorActions'
+import { Redirect } from 'react-router-dom'
 
 class LoginForm extends Component {
   state = {
@@ -71,7 +72,7 @@ class LoginForm extends Component {
   render() {
     if (this.props.isAuthenticated) {
       return (
-        <></>
+        <Redirect to="/varasto" />
       )
     } else {
 
