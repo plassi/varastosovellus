@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Ryhmataulu from '../ryhma/Ryhmataulu'
+import Ryhmataulu from './Ryhmataulu'
 import RegisterModal from '../auth/RegisterModal'
-import { NavItem } from 'reactstrap'
+
 
 
 class KayttajaView extends Component {

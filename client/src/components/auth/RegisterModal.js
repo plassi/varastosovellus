@@ -8,6 +8,7 @@ import {
   FormGroup,
   Label,
   Input,
+  Col,
   NavLink,
   Alert
 } from 'reactstrap';
@@ -18,7 +19,7 @@ import { clearErrors } from '../../actions/errorActions';
 
 class RegisterModal extends Component {
   state = {
-    modal: false,
+    modal: true,
     ryhma: '',
     opettaja: '',
     name: '',
@@ -67,12 +68,11 @@ class RegisterModal extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { name, email, password } = this.state;
+    const { name,  password } = this.state;
 
     // Create user object
     const newUser = {
       name,
-      email,
       password
     };
 
@@ -86,27 +86,30 @@ class RegisterModal extends Component {
   render() {
     return (
       <div>
-        <NavLink onClick={this.toggle} href='#'>
+        <Col xs="auto">
+        <Button color = "dark" onClick={this.toggle}>
           Lisää käyttäjä
-        </NavLink>
-
+        </Button>
+        </Col>
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Rekisteröidy</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Lisää uusi ryhmä tai opettaja</ModalHeader>
           <ModalBody>
             {this.state.msg ? (
               <Alert color='danger'>{this.state.msg}</Alert>
             ) : null}
             <Form onSubmit={this.onSubmit}>
-              <FormGroup>
+              <FormGroup check>
               <Label check>
-            <Input type="radio" name="opettaja" />{' '}
+            <Input type="radio" name="opettaja"  />{' '}
             Opettaja
           </Label>
+          </FormGroup>
+          <FormGroup check>
          <Label check>
             <Input type="radio" name="ryhma" />{' '}
             Ryhmä
           </Label>
-
+          </FormGroup>
                 <Label for='name'>Nimi</Label>
                 <Input
                   type='text'
@@ -126,6 +129,14 @@ class RegisterModal extends Component {
                   className='mb-3'
                   onChange={this.onChange}
                 />
+                 
+                <Input
+                  type='textarea'
+                  name='lisatieto'
+                  placeholder='Lisätietoja'
+                  onChange={this.onChange}
+                />
+              <FormGroup>
                 <Button color='dark' style={{ marginTop: '2rem' }} block>
                   Lisää
                 </Button>
