@@ -13,6 +13,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import '../componentStyles.css'
 import { TiShoppingCart } from 'react-icons/ti'
+import { updateOstoslista, selectOstoslista } from '../../actions/ostoslistaActions'
 
 class LisaaOstosModal extends Component {
   state = {
@@ -20,8 +21,11 @@ class LisaaOstosModal extends Component {
   }
 
   static propTypes = {
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    ostoslista: PropTypes.object.isRequired,
+    selectOstoslista: PropTypes.func.isRequired,
   }
+
 
   toggle = () => {
     this.setState({
@@ -36,18 +40,30 @@ class LisaaOstosModal extends Component {
   onSubmit = e => {
     e.preventDefault()
 
-    // const newOstos = {
-    //   id: this.props.row.id,
-    //   nimi: this.state.nimi,
-    //   maara: this.state.maara,
-    //   maarayksikko: this.state.maarayksikko
-    // }
+    const newOstos = {
+      id: this.props.row.id,
+      maara: this.state.maara
+    }
+
+    // Add item via addItem action
+    this.props.updateOstoslista(newOstos)
 
     // Close modal
     this.toggle()
+    
   }
 
+
   render() {
+
+    
+    console.log('ostoslista: ', this.props.ostoslista.ostoslistat)
+    const allOstoslistaRows = this.props.ostoslista.ostoslistat.map(ostoslista => {
+      return (
+        <option key={'row-data-' + ostoslista.id} value={ostoslista.id}>{ostoslista.nimi}</option>
+      )
+    })
+
 
     return (
       <div>
@@ -67,6 +83,12 @@ class LisaaOstosModal extends Component {
           <ModalHeader toggle={this.toggle}>Lisää ostoslistalle</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
+              <FormGroup>
+                <Label for="exampleSelect"><h6>Valitse lista</h6></Label>
+                <Input type="select" name="select" onChange={(e) => selectOstoslista({ostoslista: e.target.value})}> 
+                {allOstoslistaRows}    
+                </Input>
+              </FormGroup>
               <FormGroup>
                 <Label for='tarvike'><h6>Tarvike: </h6></Label><br />
                 <Label>
@@ -103,10 +125,11 @@ class LisaaOstosModal extends Component {
 
 const mapStateToProps = state => ({
   item: state.item,
+  ostoslista: state.ostoslista,
   isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(
   mapStateToProps,
-  {}
+  { updateOstoslista, selectOstoslista }
 )(LisaaOstosModal)
