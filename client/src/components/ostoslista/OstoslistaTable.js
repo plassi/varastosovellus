@@ -30,10 +30,7 @@ class OstoslistaTable extends Component {
 
     const ostoslistaRows = [
       <tr id={ostoslista.id} key={'row-data-' + ostoslista.id}>
-        <td>{}</td>
-        <td>{}</td>
-        <td></td>
-        <td></td>
+       
       </tr>
     ]
 
@@ -46,9 +43,10 @@ class OstoslistaTable extends Component {
       return (<></>)
     } else {
       const { ostoslistat } = this.props.ostoslista
+      console.log('ostoslistat: ', ostoslistat)
       return (
         <div>
-          <h6>Ostoslista</h6>
+          <h6>{ostoslistat.nimi}</h6>
           <BootstrapTable
             keyField='id'
             data={ostoslistat}
