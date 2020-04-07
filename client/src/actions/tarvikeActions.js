@@ -4,7 +4,6 @@ import { tokenConfig } from './authActions'
 import { returnErrors } from './errorActions'
 
 export const getTarvikkeet = () => (dispatch, getState) => {
-  console.log('taalla')
   dispatch(setTarvikkeetLadataan())
   axios
     .get('/api/tarvikkeet', tokenConfig(getState))

@@ -17,7 +17,6 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.props.loadUser()
-    console.log('taalla')
   }
 
   static propTypes = {

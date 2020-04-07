@@ -52,7 +52,7 @@ class AppNavbar extends Component {
         </NavItem> */}
 
         <UncontrolledDropdown nav inNavbar>
-          <DropdownToggle nav caret>
+          <DropdownToggle nav caret id='valikko-alas'>
 
             {user ? `Kirjautunut ${user.kayttajatunnus}` : ''}
 

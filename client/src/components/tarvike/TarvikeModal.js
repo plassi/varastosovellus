@@ -63,6 +63,7 @@ class TarvikeModal extends Component {
         {this.props.isAuthenticated ? (
           <Col>
             <Button
+              id='lisaa-tarvike-button'
               color='dark'
               onClick={this.toggle}
             > Lisää tarvike</Button>
@@ -80,6 +81,7 @@ class TarvikeModal extends Component {
               <FormGroup>
                 <Label for='tarvike'>Tarvike</Label>
                 <Input
+                  id='nimi'
                   type='text'
                   name='nimi'
                   placeholder='Nimi'
@@ -88,6 +90,7 @@ class TarvikeModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
+                  id='kategoria'
                   type='text'
                   name='kategoria'
                   placeholder='Kategoria'
@@ -96,6 +99,7 @@ class TarvikeModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
+                  id='kuvaus'
                   type='textarea'
                   name='kuvaus'
                   placeholder='Kuvaus'
@@ -104,6 +108,7 @@ class TarvikeModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
+                  id='maara'
                   type='number'
                   name='maara'
                   placeholder='määrä'
@@ -112,6 +117,7 @@ class TarvikeModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
+                  id='maarayksikko'
                   type='text'
                   name='maarayksikko'
                   placeholder='määräyksikkö'
@@ -120,21 +126,15 @@ class TarvikeModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
+                  id='sijainti'
                   type='text'
                   name='sijainti'
                   placeholder='sijainti'
                   onChange={this.onChange}
                 />
               </FormGroup>
-              <FormGroup>
-                <Input
-                  type='file'
-                  name='kuva'
-                  placeholder='kuva'
-                  onChange={this.onChange}
-                />
-              </FormGroup>
-              <Button color='dark' style={{ marginTop: '2rem' }} block>
+              
+              <Button id='modal-lisaa-tarvike-button' color='dark' style={{ marginTop: '2rem' }} block>
                 Lisää tarvike
               </Button>
 

@@ -10,7 +10,7 @@ export class Logout extends Component {
 
   render() {
     return (
-      <div onClick={this.props.logout} href='#'>
+      <div id='kirjaudu-ulos' onClick={this.props.logout} href='#'>
         Kirjaudu ulos
       </div>
     )

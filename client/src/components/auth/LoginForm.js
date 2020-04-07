@@ -102,7 +102,7 @@ class LoginForm extends Component {
                     className='mb-3'
                     onChange={this.onChange}
                   />
-                  <Button color='dark' style={{ marginTop: '2rem' }} block>
+                  <Button id='kirjautumisnappi' color='dark' style={{ marginTop: '2rem' }} block>
                     Kirjaudu sisään
                   </Button>
                 </FormGroup>

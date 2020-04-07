@@ -70,7 +70,7 @@ class TarvikeMuokkaaModal extends Component {
         {this.props.isAuthenticated
           ? (
 
-            <Button color='dark' onClick={this.toggle}>
+            <Button id='tarvike-muokkaa-button'color='dark' onClick={this.toggle}>
               <FaRegEdit />
             </Button>
 
@@ -149,6 +149,7 @@ class TarvikeMuokkaaModal extends Component {
                 Tallenna
               </Button>
               <Button
+                id='tarvike-poista-button'
                 color='danger' block
                 onClick={this.onDeleteClick.bind(this, this.props.row.id)}
               >

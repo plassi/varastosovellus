@@ -1,0 +1,93 @@
+[
+  {
+    "id": "5e445ecfb845b000178b4ad4",
+    "nimi": "Teräsnaula 30X3 karkaistu",
+    "kategoria": "Naulat",
+    "kuvaus": "Listojen ja lautojen kiinnittämiseen betoniin ja tiileen. Myös taulut yms.",
+    "maara": 5,
+    "maarayksikko": "ltk",
+    "sijainti": "A1",
+    "kuva": "C:\\fakepath\\6417215402101.jpeg",
+    "__v": 0
+  },
+  {
+    "id": "5e4c161c79e22d001704c7a0",
+    "nimi": "Kumivasara",
+    "kategoria": "Vasarat",
+    "kuvaus": "Kuminen vasara",
+    "maara": 3,
+    "maarayksikko": "kpl",
+    "sijainti": "C4",
+    "__v": 0
+  },
+  {
+    "id": "5e67dd93f37ea4001e0a408e",
+    "nimi": "Salaisuus",
+    "kategoria": "Salainen",
+    "kuvaus": "Hyvä yritys",
+    "maara": 123456789,
+    "maarayksikko": "Voi olla mitä vaan ",
+    "sijainti": "Jossakin",
+    "__v": 0
+  },
+  {
+    "id": "5e67e10c6f2934001e2a270b",
+    "nimi": "Levyruuvi",
+    "kategoria": "Ruuvit",
+    "kuvaus": "Uppokanta 3x16 A2 25kpl",
+    "maara": 1,
+    "maarayksikko": "Pkt",
+    "sijainti": "H2",
+    "__v": 0
+  },
+  {
+    "id": "5e67e3fb6f2934001e2a270c",
+    "nimi": "Vanerilevy 9X2400X1200 ",
+    "kategoria": "Vanerit",
+    "kuvaus": "Yleiskäyttöön sopiva pinnoittamaton havuvaneri on luja ja jäykkä, mutta kevyt rakennuslevy. Havuvaneri sopii sekä sisä- että ulkotiloihin. Levy toimii sekä kantavana että jäykistävänä levynä. Vaneri on valmistettu pitkästä suorasyisestä havupuusta.",
+    "maara": 5,
+    "maarayksikko": "Kpl",
+    "sijainti": "A15",
+    "__v": 0
+  },
+  {
+    "id": "5e67e4b16f2934001e2a270d",
+    "nimi": "Vanerilevy 15X2400X1200 ",
+    "kategoria": "Vanerit",
+    "kuvaus": "Havuvaneri on yleiskäyttöön sopiva rakennuslevy. Vaneri sopii esimerkiksi rakentamiseen sekä sisä- että ulkotiloissa sekä moniin muihin käyttökohteisiin.",
+    "maara": 3,
+    "maarayksikko": "Kpl",
+    "sijainti": "A14",
+    "__v": 0
+  },
+  {
+    "id": "5e67e5846f2934001e2a270e",
+    "nimi": "Eri keeper plus",
+    "kategoria": "Liimat",
+    "kuvaus": "Vahva, täyttävä ja kuivuttuaan väritön puuliima. Liima on vesiohenteinen ja täyttää D3-luokan kosteusvaatimuksen. Soveltuu myös lattialämmityskohteisiin.",
+    "maara": 1,
+    "maarayksikko": "Kpl",
+    "sijainti": "B3",
+    "__v": 0
+  },
+  {
+    "id": "5e85df00fcd115001e108e39",
+    "nimi": "Puuhöylä",
+    "kategoria": "Höylät",
+    "kuvaus": "Höyläämiseen",
+    "maara": 20,
+    "maarayksikko": "Kpl",
+    "sijainti": "B1",
+    "__v": 0
+  },
+  {
+    "id": "5e884efdd6cc84001ebbc7dc",
+    "nimi": "Punainen puukko",
+    "kategoria": "Puukot",
+    "kuvaus": "Mitä puukolla nyt yleensä tehdään",
+    "maara": 25,
+    "maarayksikko": "kpl",
+    "sijainti": "U7",
+    "__v": 0
+  }
+]
