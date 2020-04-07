@@ -1,7 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Col } from 'reactstrap'
+import Ryhmataulu from './Ryhmataulu'
+import RegisterModal from '../auth/RegisterModal'
+
+
 
 class KayttajaView extends Component {
 
@@ -14,9 +18,14 @@ class KayttajaView extends Component {
     if (this.props.isAuthenticated) {
       return (
         <Col>
-          {/* Tänne tulee kirjautuneelle käyttäjälle rendattava sisältö */}
+
           <h1>Käyttäjät</h1>
+          <Ryhmataulu />
+
+          <RegisterModal />
+
         </Col>
+        
       )
     } else {
       return (
