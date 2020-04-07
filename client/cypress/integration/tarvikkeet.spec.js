@@ -14,7 +14,9 @@ describe('Tarvikkeet kirjautuneelle käyttäjälle', function () {
     // Kirjaudutaan sisään backendissä
     cy.kirjaudu({ kayttajatunnus: user.kayttajatunnus, salasana: user.salasana })
 
-    const tarvikkeet = require('./tarvikes.json')
+    const tarvikkeet = require('../fixtures/tarvikes.json')
+    console.log(tarvikkeet);
+    
 
     cy.lisaaTarvikkeet(tarvikkeet)
 
@@ -52,12 +54,23 @@ describe('Tarvikkeet kirjautuneelle käyttäjälle', function () {
     cy.contains('Kakkosnelonen')
   })
 
-  it.only('Käyttäjä voi poistaa tarvikkeen', function () {
+  it('Käyttäjä voi poistaa tarvikkeen', function () {
     cy.contains('Kumivasara').click()
     cy.get('#tarvike-muokkaa-button').click()
     cy.get('#tarvike-poista-button').click()
     
     cy.get('html').should('not.contain', 'Kumivasara')
+  })
+
+  it('Käyttäjä voi muokata tarviketta', function () {
+    cy.contains('Kumivasara').click()
+    cy.get('#tarvike-muokkaa-button').click()
+    cy.get('#nimi').clear().type('Vamikusara')
+    cy.get('#kuvaus').clear().type('Vaminen kusara')
+    cy.get('#tarvike-tallenna-button').click()
+    
+    cy.get('html').should('not.contain', 'Kumivasara')
+    cy.get('html').should('contain', 'Vamikusara')
   })
 
 })

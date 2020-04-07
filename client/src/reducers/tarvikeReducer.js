@@ -22,7 +22,7 @@ export default function(state = initialState, action) {
     case DELETE_TARVIKE:
       return {
         ...state,
-        tarvikkeet: state.tarvikkeet.filter(tarvike => tarvike._id !== action.payload)
+        tarvikkeet: state.tarvikkeet.filter(tarvike => tarvike.id !== action.payload)
       }
     case UPDATE_TARVIKE:
       console.log(state)

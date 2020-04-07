@@ -70,11 +70,11 @@ class TarvikeMuokkaaModal extends Component {
         {this.props.isAuthenticated
           ? (
 
-            <Button id='tarvike-muokkaa-button'color='dark' onClick={this.toggle}>
+            <Button id='tarvike-muokkaa-button' color='dark' onClick={this.toggle}>
               <FaRegEdit />
             </Button>
 
-          ) : ( <></> )
+          ) : (<></>)
         }
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
@@ -84,6 +84,7 @@ class TarvikeMuokkaaModal extends Component {
               <FormGroup>
                 <Label for='tarvike'>Tarvike</Label>
                 <Input
+                  id='nimi'
                   type='text'
                   name='nimi'
                   defaultValue={this.props.row.nimi}
@@ -93,6 +94,7 @@ class TarvikeMuokkaaModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
+                  id='kategoria'
                   type='text'
                   name='kategoria'
                   defaultValue={this.props.row.kategoria}
@@ -102,6 +104,7 @@ class TarvikeMuokkaaModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
+                  id='kuvaus'
                   type='textarea'
                   name='kuvaus'
                   defaultValue={this.props.row.kuvaus}
@@ -111,6 +114,7 @@ class TarvikeMuokkaaModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
+                  id='maara'
                   type='number'
                   name='maara'
                   defaultValue={this.props.row.maara}
@@ -120,6 +124,7 @@ class TarvikeMuokkaaModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
+                  id='maarayksikko'
                   type='text'
                   name='maarayksikko'
                   defaultValue={this.props.row.maarayksikko}
@@ -129,6 +134,7 @@ class TarvikeMuokkaaModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
+                  id='sijainti'
                   type='text'
                   name='sijainti'
                   defaultValue={this.props.row.sijainti}
@@ -136,16 +142,7 @@ class TarvikeMuokkaaModal extends Component {
                   onChange={this.onChange}
                 />
               </FormGroup>
-              <FormGroup>
-                <Input
-                  type='file'
-                  name='kuva'
-                  defaultValue={this.props.row.kuva}
-                  placeholder='kuva'
-                  onChange={this.onChange}
-                />
-              </FormGroup>
-              <Button color='dark' style={{ marginTop: '2rem' }} block>
+              <Button id='tarvike-tallenna-button' color='dark' style={{ marginTop: '2rem' }} block>
                 Tallenna
               </Button>
               <Button
