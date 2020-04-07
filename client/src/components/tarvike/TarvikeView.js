@@ -29,7 +29,7 @@ class TarvikeView extends Component {
     return (
       <Col>
         <div>
-          <h1>Varasto</h1>
+          <h1>Tarvikkeet</h1>
         </div>
         <TarvikeModal />
         <TarvikeTable2 />

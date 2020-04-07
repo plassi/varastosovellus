@@ -39,10 +39,10 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <NavItem>
-          <NavLink href="varasto">Varasto</NavLink>
+          <NavLink href="tarvikkeet">Tarvikkeet</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="ostoslista">Ostoslistat</NavLink>
+          <NavLink href="ostoslistat">Ostoslistat</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="kayttajat">Käyttäjät</NavLink>
