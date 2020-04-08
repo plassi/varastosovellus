@@ -33,11 +33,12 @@ export default function (state = initialState, action) {
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
       localStorage.setItem('loggedVarastoappUser', action.payload.token)
+      
       return {
         ...state,
         ...action.payload,
         isAuthenticated: true,
-        isLoading: false
+        isLoading: false,
       }
     case AUTH_ERROR:
     case LOGIN_FAIL:

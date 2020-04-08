@@ -28,7 +28,7 @@ Cypress.Commands.add('kirjaudu', ({ kayttajatunnus, salasana }) => {
   cy.request('POST', 'http://localhost:5000/api/auth', {
     kayttajatunnus, salasana
   }).then(({ body }) => {
-    localStorage.setItem('loggedVarastoappUser', JSON.stringify(body.token).replace('"', ''))
+    localStorage.setItem('loggedVarastoappUser', body.token)
   })
 })
 

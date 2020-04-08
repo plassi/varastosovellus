@@ -6,23 +6,23 @@ import OstoslistaTable from './OstoslistaTable'
 import { Container, Col } from 'reactstrap'
 import OstoslistaLisaaModal from './OstoslistaLisaaModal'
 import { getOstoslistat } from '../../actions/ostoslistaActions'
+import { loadUser } from '../../actions/authActions'
 
 
 
 class OstoslistaView extends Component {
 
-  constructor(props) {
-    super(props)
-    this.props.getOstoslistat()
-    
-  }
-
+  
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     ostoslista: PropTypes.object,
     getOstoslistat: PropTypes.func.isRequired
   }
-
+  
+  componentDidMount() {
+    this.props.loadUser()
+    this.props.getOstoslistat()
+  }
 
   render() {
     if (this.props.isAuthenticated) {
@@ -53,5 +53,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getOstoslistat }
+  { getOstoslistat, loadUser }
 )(OstoslistaView)

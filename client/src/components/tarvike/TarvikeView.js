@@ -8,20 +8,15 @@ import { loadUser } from '../../actions/authActions'
 import { getTarvikkeet } from '../../actions/tarvikeActions'
 
 class TarvikeView extends Component {
-
-  constructor(props) {
-    super(props)
-    this.props.getTarvikkeet()
-
-  }
-
+  
   static propTypes = {
     loadUser: PropTypes.func,
     tarvike: PropTypes.object,
     getTarvikkeet: PropTypes.func.isRequired
   }
-
-  componentDidUpdate() {
+  
+  componentDidMount() {
+    this.props.getTarvikkeet()
     this.props.loadUser()
   }
 

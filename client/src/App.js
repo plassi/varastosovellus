@@ -13,16 +13,15 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 class App extends Component {
-
-  constructor(props) {
-    super(props)
-    this.props.loadUser()
-  }
-
+  
   static propTypes = {
     store: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     loadUser: PropTypes.func.isRequired
+  }
+  
+  componentDidMount() {
+    this.props.loadUser()  
   }
 
   render() {

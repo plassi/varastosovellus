@@ -26,9 +26,8 @@ describe('Tarvikkeet kirjautuneelle käyttäjälle', function () {
     cy.contains('Tarvikkeet')
   })
 
-  it.only('käyttäjä voi lisätä tarvikkeen', function () {
+  it('käyttäjä voi lisätä tarvikkeen', function () {
 
-    // cy.debug()
     const uusiTarvike = {
       nimi: 'Kakkosnelonen',
       kategoria: 'Puutavara',
