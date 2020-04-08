@@ -13,26 +13,22 @@ describe('Tarvikkeet kirjautuneelle käyttäjälle', function () {
 
     // Kirjaudutaan sisään backendissä
     cy.kirjaudu({ kayttajatunnus: user.kayttajatunnus, salasana: user.salasana })
-
+    // Lisätään esimerkkitarvikkeet tietokantaan
     const tarvikkeet = require('../fixtures/tarvikes.json')
-    console.log(tarvikkeet);
-    
-
     cy.lisaaTarvikkeet(tarvikkeet)
 
-    // Mennään etusivulle ja kirjaudutaan sisään
-    cy.visit('http://localhost:3000')
+    // Mennään etusivulle
+    cy.visit('http://localhost:3000/tarvikkeet')
 
-    cy.get('#kayttajatunnus').type(user.kayttajatunnus)
-    cy.get('#salasana').type(user.salasana)
-    cy.get('#kirjautumisnappi').click()
   })
 
   it('Kirjautuneelle käyttäjälle avautuu Tarvikenäkymä', function () {
     cy.contains('Tarvikkeet')
   })
 
-  it('käyttäjä voi lisätä tarvikkeen', function () {
+  it.only('käyttäjä voi lisätä tarvikkeen', function () {
+
+    // cy.debug()
     const uusiTarvike = {
       nimi: 'Kakkosnelonen',
       kategoria: 'Puutavara',

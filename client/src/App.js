@@ -35,17 +35,17 @@ class App extends Component {
             <Container>
               <Switch>
                 <Route path="/tarvikkeet" >
-                  {localStorage.getItem('token') ? <TarvikeView /> : <Redirect to="/" />}
+                  {localStorage.getItem('loggedVarastoappUser') ? <TarvikeView /> : <Redirect to="/" />}
                 </Route>
                 <Route path="/ostoslistat" >
-                  {localStorage.getItem('token') ? <OstoslistaView /> : <Redirect to="/" />}
+                  {localStorage.getItem('loggedVarastoappUser') ? <OstoslistaView /> : <Redirect to="/" />}
                 </Route>
                 <Route path="/kayttajat" >
-                  {localStorage.getItem('token') ? <KayttajaView /> : <Redirect to="/" />}
+                  {localStorage.getItem('loggedVarastoappUser') ? <KayttajaView /> : <Redirect to="/" />}
                 </Route>
 
                 <Route path="/">
-                  {localStorage.getItem('token') ? <Redirect to="/tarvikkeet" /> : <LoginForm />}
+                  {localStorage.getItem('loggedVarastoappUser') ? <Redirect to="/tarvikkeet" /> : <LoginForm />}
                 </Route>
               </Switch>
             </Container>
