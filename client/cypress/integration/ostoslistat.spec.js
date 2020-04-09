@@ -15,10 +15,10 @@ describe('Ostoslistat kirjautuneelle käyttäjälle', function () {
     cy.kirjaudu({ kayttajatunnus: user.kayttajatunnus, salasana: user.salasana })
 
     // Lisätään tarvikkeet tietokantaan
-    const tarvikkeet = require('../fixtures/tarvikes.json')
-    cy.lisaaTarvikkeet(tarvikkeet)
+    // const tarvikkeet = require('../fixtures/tarvikes.json')
+    // cy.lisaaTarvikkeet(tarvikkeet)
 
-    // Mennään etusivulle ja kirjaudutaan sisään
+    // Mennään ostoslistasivulle
     cy.visit('http://localhost:3000/ostoslistat')
 
   })
@@ -28,15 +28,38 @@ describe('Ostoslistat kirjautuneelle käyttäjälle', function () {
   })
 
   it('käyttäjä voi lisätä ostoslistan', function () {
-    
+    cy.get('#ostoslista-lisaa-button').click()
+    cy.get('input[name="nimi"]').type('Uusi ostoslista')
+    cy.get('#lisaa-ostoslista-modal-button').click()
   })
 
-  it('Käyttäjä voi poistaa ostoslistan', function () {
-    
-  })
+  describe('Ostoslistoja on valmiina', function () {
+    beforeEach(function () {
+      const ostoslistat = [
+        {
+          nimi: 'Ostoslista 1'
+        },
+        {
+          nimi: 'Ostoslista 2'
+        },
+        {
+          nimi: 'Ostoslista 3'
+        },
+      ]
+      cy.lisaaOstoslistat(ostoslistat)
+      // Mennään ostoslistasivulle
+      cy.visit('http://localhost:3000/ostoslistat')
+    })
 
-  it('Käyttäjä voi lisätä tarvikkeen ostoslistalle', function () {
-    
+    it('Käyttäjä voi poistaa ostoslistan', function () {
+      cy.get('.remove-btn:first').click()
+      cy.get('html').should('not.contain', 'Ostoslista 1')
+    })
+
+    // it('Käyttäjä voi lisätä tarvikkeen ostoslistalle', function () {
+
+    // })
+
   })
 
 })

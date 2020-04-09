@@ -42,3 +42,14 @@ Cypress.Commands.add('lisaaTarvikkeet', (lista) => {
     }
   })
 })
+
+Cypress.Commands.add('lisaaOstoslistat', (lista) => {
+  cy.request({
+    url: 'http://localhost:5000/api/testing/lisaa-ostoslistat',
+    method: 'POST',
+    body: lista,
+    headers: {
+      'x-auth-token': localStorage.getItem('loggedVarastoappUser')
+    }
+  })
+})

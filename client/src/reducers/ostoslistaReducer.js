@@ -24,7 +24,7 @@ export default function (state = initialState, action) {
     case DELETE_OSTOSLISTA:
       return {
         ...state,
-        ostoslistat: state.ostoslistat.filter(ostoslista => ostoslista._id !== action.payload)
+        ostoslistat: state.ostoslistat.filter(ostoslista => ostoslista.id !== action.payload)
       }
     case UPDATE_OSTOSLISTA:
       console.log(state)
