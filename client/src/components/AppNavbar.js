@@ -1,17 +1,18 @@
 import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
+  NavLink,
   NavItem,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Container,
-  NavLink
+  Container
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -39,13 +40,14 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <NavItem>
-          <NavLink href="tarvikkeet">Tarvikkeet</NavLink>
+          
+            <Link className='nav-link' to="/tarvikkeet">Tarvikkeet</Link>
+          
         </NavItem>
         <NavItem>
-          <NavLink href="ostoslistat">Ostoslistat</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink href="kayttajat">Käyttäjät</NavLink>
+          
+            <Link className='nav-link' to="/ostoslistat" style={{ marginRight: '3vw' }}>Ostoslistat</Link>
+          
         </NavItem>
         {/* <NavItem>
           <NavLink href="loki" style={{ marginRight:'3vw' }}>Loki</NavLink>
@@ -59,14 +61,17 @@ class AppNavbar extends Component {
           </DropdownToggle>
           <DropdownMenu className="asetukset-dropdown">
             <DropdownItem>
-              Käyttäjäprofiili
+              Profiili
+            </DropdownItem>
+            <DropdownItem>
+              <Link style={{color: '#212529'}}to="/kayttajat">Käyttäjien hallinta</Link>
             </DropdownItem>
             <DropdownItem>
               <Logout />
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
-      </Fragment>
+      </Fragment >
     )
 
     const guestLinks = (
@@ -85,8 +90,8 @@ class AppNavbar extends Component {
       <div>
         <Navbar className='navbar' color='dark' dark expand='md'>
           <Container>
-            <NavbarBrand href='/'>Varastosovellus</NavbarBrand>
-            <NavbarToggler onClick={this.toggle} className='ml-auto'/>
+            <Link className='navbar-brand' to='/'>Varastosovellus</Link>
+            <NavbarToggler onClick={this.toggle} className='ml-auto' />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className='ml-auto' navbar>
                 {isAuthenticated ? authLinks : guestLinks}

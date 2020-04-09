@@ -10,6 +10,7 @@ import { getTarvikkeet } from '../../actions/tarvikeActions'
 class TarvikeView extends Component {
   
   static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
     loadUser: PropTypes.func,
     tarvike: PropTypes.object,
     getTarvikkeet: PropTypes.func.isRequired
@@ -21,6 +22,7 @@ class TarvikeView extends Component {
   }
 
   render() {
+    
     return (
       <Col>
         <div>
@@ -36,6 +38,7 @@ class TarvikeView extends Component {
 
 const mapStateToProps = state => ({
   tarvike: state.tarvike,
+  isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { connect, Provider } from 'react-redux'
+import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import { Container } from 'reactstrap'
 import PropTypes from 'prop-types'
@@ -13,45 +13,64 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 class App extends Component {
-  
+
   static propTypes = {
-    store: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     loadUser: PropTypes.func.isRequired
   }
-  
+
   componentDidMount() {
-    this.props.loadUser()  
+    console.log(this.props);
+    
+    this.props.loadUser()
   }
 
   render() {
-    return (
-      <div className='App'>
-        <Provider store={this.props.store}>
+    const { isAuthenticated, user } = this.props.auth
+    console.log(isAuthenticated);
 
-          <AppNavbar />
+    if (isAuthenticated) {
+      return (
+        <div className='App'>
           <Router>
+            <AppNavbar />
             <Container>
               <Switch>
                 <Route path="/tarvikkeet" >
-                  {localStorage.getItem('loggedVarastoappUser') ? <TarvikeView /> : <Redirect to="/" />}
+                  <TarvikeView />
                 </Route>
                 <Route path="/ostoslistat" >
-                  {localStorage.getItem('loggedVarastoappUser') ? <OstoslistaView /> : <Redirect to="/" />}
+                  <OstoslistaView />
                 </Route>
                 <Route path="/kayttajat" >
-                  {localStorage.getItem('loggedVarastoappUser') ? <KayttajaView /> : <Redirect to="/" />}
+                  <KayttajaView />
                 </Route>
-
                 <Route path="/">
-                  {localStorage.getItem('loggedVarastoappUser') ? <Redirect to="/tarvikkeet" /> : <LoginForm />}
+                  <TarvikeView />
                 </Route>
               </Switch>
             </Container>
           </Router>
-        </Provider>
-      </div>
-    )
+        </div>
+      )
+    } else {
+      return (
+        <div className='App'>
+          <Router>
+            <AppNavbar />
+            <Container>
+              <Switch>
+                <Route path="/">
+                  <LoginForm />
+                </Route>
+              </Switch>
+            </Container>
+          </Router>
+        </div>
+      )
+    }
+    
+
   }
 }
 

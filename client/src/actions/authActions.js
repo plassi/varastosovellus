@@ -16,7 +16,7 @@ import {
 export const loadUser = () => (dispatch, getState) => {
   // User loading
   dispatch({ type: USER_LOADING })
-
+  login('starting to load user')
   axios
     .get('/api/auth/user', tokenConfig(getState))
     .then(res =>
