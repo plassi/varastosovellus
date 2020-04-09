@@ -22,8 +22,7 @@ class OstoslistaTable extends Component {
   }
 
   static propTypes = {
-    ostoslista: PropTypes.object.isRequired,
-    isAuthenticated: PropTypes.bool
+    ostoslista: PropTypes.object.isRequired
   }
 
   renderItem(ostoslista) {
@@ -42,14 +41,15 @@ class OstoslistaTable extends Component {
     if (this.props.ostoslista.selected === null) {
       return (<></>)
     } else {
-      const { ostoslistat } = this.props.ostoslista
-      console.log('ostoslistat: ', ostoslistat)
+      const { selected } = this.props.ostoslista
+      console.log(selected);
+      
       return (
         <div>
-          <h6>{ostoslistat.nimi}</h6>
+          <h6>{selected.nimi}</h6>
           <BootstrapTable
             keyField='id'
-            data={ostoslistat}
+            data={selected.tarvikkeet}
             columns={this.state.columns}
           />
         </div>
@@ -59,8 +59,7 @@ class OstoslistaTable extends Component {
 }
 
 const mapStateToProps = state => ({
-  ostoslista: state.ostoslista,
-  isAuthenticated: state.auth.isAuthenticated
+  ostoslista: state.ostoslista
 })
 
 export default connect(

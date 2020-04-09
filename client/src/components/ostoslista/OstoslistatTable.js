@@ -31,6 +31,7 @@ class OstoslistatTable extends Component {
         <td>{ostoslista.nimi}</td>
         <td>
           <Button
+            id='ostoslista-avaa-button'
             color='dark'
             size='sm'
             style={{ marginRight: '8px' }}

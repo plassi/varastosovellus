@@ -27,7 +27,7 @@ class App extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth
-    console.log(isAuthenticated);
+    console.log('isAuhenticated', isAuthenticated);
 
     if (isAuthenticated) {
       return (
