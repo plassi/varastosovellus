@@ -18,7 +18,6 @@ class TarvikeView extends Component {
   
   componentDidMount() {
     this.props.loadUser()
-    this.props.getTarvikkeet()
   }
 
   render() {

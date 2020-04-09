@@ -16,17 +16,16 @@ const ostoslistaSchema = mongoose.Schema({
   tarvikkeet: [ tarvikkeetSchema ]
 })
 
-
-ostoslistaSchema.set('toJSON', {
+tarvikkeetSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
   }
 })
 
-tarvikkeetSchema.set('toJSON', {
+ostoslistaSchema.set('toJSON', {
   transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
   }

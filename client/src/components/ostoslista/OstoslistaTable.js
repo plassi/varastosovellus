@@ -42,7 +42,7 @@ class OstoslistaTable extends Component {
       return (<></>)
     } else {
       const { selected } = this.props.ostoslista
-      console.log(selected);
+      console.log('ostoslista.selected', selected);
       
       return (
         <div>

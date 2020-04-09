@@ -18,12 +18,16 @@ import { updateOstoslista, selectOstoslista } from '../../actions/ostoslistaActi
 class LisaaOstosModal extends Component {
   state = {
     modal: false,
+    ostoslista: null,
+    tarvike: this.props.row,
+    maara: 1
   }
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     ostoslista: PropTypes.object.isRequired,
     selectOstoslista: PropTypes.func.isRequired,
+    updateOstoslista: PropTypes.func.isRequired
   }
 
 
@@ -35,29 +39,36 @@ class LisaaOstosModal extends Component {
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value })
+    console.log('LisaaOstosModal state:', this.state);
   }
 
   onSubmit = e => {
     e.preventDefault()
 
-    const newOstos = {
-      id: this.props.row.id,
-      maara: this.state.maara
+    const vanhatTarvikkeet = this.props.ostoslista.ostoslistat.find(ostoslista => ostoslista.id === this.state.ostoslista)
+    
+    const newOstoslista = {
+      id: this.state.ostoslista,
+      tarvikkeet: [ ...vanhatTarvikkeet.tarvikkeet,
+        {id:this.state.tarvike.id, maara: this.state.maara}]
     }
 
     // Add item via addItem action
-    this.props.updateOstoslista(newOstos)
+    this.props.updateOstoslista(newOstoslista)
 
     // Close modal
     this.toggle()
     
   }
 
+  valitseOstoslista(e) {
+    e.preventDefault()
+    selectOstoslista({ostoslista: e.target.value})
+    this.state.ostoslista = e.target.value
+  }
+
 
   render() {
-
-    
-    console.log('ostoslista: ', this.props.ostoslista.ostoslistat)
     const allOstoslistaRows = this.props.ostoslista.ostoslistat.map(ostoslista => {
       return (
         <option key={'row-data-' + ostoslista.id} value={ostoslista.id}>{ostoslista.nimi}</option>
@@ -69,7 +80,7 @@ class LisaaOstosModal extends Component {
       <div>
         {this.props.isAuthenticated ? (
 
-          <Button color='dark' onClick={this.toggle}>
+          <Button id='tarvike-lisaa-ostoslistalle-button' color='dark' onClick={this.toggle}>
             <TiShoppingCart />
           </Button>
 
@@ -85,7 +96,7 @@ class LisaaOstosModal extends Component {
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
                 <Label for="exampleSelect"><h6>Valitse lista</h6></Label>
-                <Input type="select" name="select" onChange={(e) => selectOstoslista({ostoslista: e.target.value})}> 
+                <Input type="select" name="select" onChange={(e) => this.valitseOstoslista(e)}> 
                 {allOstoslistaRows}    
                 </Input>
               </FormGroup>
@@ -112,7 +123,7 @@ class LisaaOstosModal extends Component {
                   style={{ weight: '50px' }}
                 />
               </FormGroup>
-              <Button color='dark' style={{ marginTop: '2rem' }} block>
+              <Button id='lisaa-ostoslistalle-modal-button' color='dark' style={{ marginTop: '2rem' }} block>
                 Lisää
               </Button>
             </Form>

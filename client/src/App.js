@@ -9,6 +9,8 @@ import TarvikeView from './components/tarvike/TarvikeView'
 import KayttajaView from './components/kayttaja/KayttajaView'
 import OstoslistaView from './components/ostoslista/OstoslistaView'
 import { loadUser } from './actions/authActions'
+import { getTarvikkeet } from './actions/tarvikeActions'
+import { getOstoslistat } from './actions/ostoslistaActions'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
@@ -16,18 +18,21 @@ class App extends Component {
 
   static propTypes = {
     auth: PropTypes.object.isRequired,
-    loadUser: PropTypes.func.isRequired
+    loadUser: PropTypes.func.isRequired,
+    getTarvikkeet: PropTypes.func.isRequired,
+    getOstoslistat: PropTypes.func.isRequired
   }
 
   componentDidMount() {
-    console.log(this.props);
-    
+    // console.log(this.props);
     this.props.loadUser()
+    this.props.getTarvikkeet()
+    this.props.getOstoslistat()
   }
 
   render() {
     const { isAuthenticated, user } = this.props.auth
-    console.log('isAuhenticated', isAuthenticated);
+    // console.log('isAuhenticated', isAuthenticated);
 
     if (isAuthenticated) {
       return (
@@ -81,5 +86,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loadUser }
+  { loadUser, getTarvikkeet, getOstoslistat }
 )(App)

@@ -32,7 +32,7 @@ export default function (state = initialState, action) {
 
       return {
         ...state,
-        ostoslistat: [...state.ostoslistat.map(ostoslista => ostoslista.id === action.payload.id ? ostoslista = action.payload : ostoslista)]
+        ostoslistat: [...state.ostoslistat.map(ostoslista => ostoslista.id === action.payload.id ? action.payload : ostoslista)]
       }
     case ADD_OSTOSLISTA:
       return {

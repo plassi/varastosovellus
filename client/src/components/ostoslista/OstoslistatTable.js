@@ -22,7 +22,6 @@ class OstoslistatTable extends Component {
 
     const onDeleteClick = (id) => this.props.deleteOstoslista(id)
     const openClick = (id) => {
-      console.log('id :', id)
       this.props.selectOstoslista(ostoslista)
     }
 

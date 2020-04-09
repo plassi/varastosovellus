@@ -63,11 +63,27 @@ describe('Ostoslistat kirjautuneelle käyttäjälle', function () {
 
   })
 
+
   describe('Ostoslistoja ja tarvikkeita on valmiina', function () {
     beforeEach(function () {
+      
+      // Lisätään tarvikkeet tietokantaan
+      const tarvikkeet = require('../fixtures/tarvikes.json')
+      cy.lisaaTarvikkeet(tarvikkeet)
+
       const ostoslistat = [
         {
-          nimi: 'Ostoslista 1'
+          nimi: 'Ostoslista 1',
+          tarvikkeet: [
+            {
+              id: tarvikkeet[0].id,
+              maara: 5
+            },
+            {
+              id: tarvikkeet[1].id,
+              maara: 10
+            }
+          ]
         },
         {
           nimi: 'Ostoslista 2'
@@ -78,27 +94,30 @@ describe('Ostoslistat kirjautuneelle käyttäjälle', function () {
       ]
       // Lisätään ostoslistat tietokantaan
       cy.lisaaOstoslistat(ostoslistat)
-      // Lisätään tarvikkeet tietokantaan
-      const tarvikkeet = require('../fixtures/tarvikes.json')
-      cy.lisaaTarvikkeet(tarvikkeet)
-      // Mennään ostoslistasivulle
-      cy.visit('http://localhost:3000/ostoslistat')
     })
 
     it('Käyttäjä voi valita ostoslistan', function () {
       // Mennään ostoslistasivulle
       cy.visit('http://localhost:3000/ostoslistat')
-      cy.get('#ostoslista-avaa-button').click()
+      cy.get('td').contains('Ostoslista 1').next().find('#ostoslista-avaa-button').click()
     })
 
-    // Käyttäjä voi lisätä tarvikkeen ostoslistalle
+    it.only('Käyttäjä voi lisätä tarvikkeen ostoslistalle', function () {
+      // Mennään tarvikenäkymäsivulle
+      cy.visit('http://localhost:3000/tarvikkeet')
 
-    // Jos ostoslistalla on jo tarvikkeita
+      cy.contains('Kumivasara').click()
+      cy.get('#tarvike-lisaa-ostoslistalle-button').click()
+
+      cy.get('select').select('Ostoslista 3')
+
+      cy.get('#lisaa-ostoslistalle-modal-button').click()
+    })
+
 
     // // Käyttäjä voi poistaa tarvikkeen ostoslistalta
 
     // // Käyttäjä voi muokata ostoslistalla olevien tarvikkeiden määriä
 
   })
-
 })
