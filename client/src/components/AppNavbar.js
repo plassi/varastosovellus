@@ -40,14 +40,14 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <NavItem>
-          
-            <Link className='nav-link' to="/tarvikkeet">Tarvikkeet</Link>
-          
+
+          <Link className='nav-link' to="/tarvikkeet">Tarvikkeet</Link>
+
         </NavItem>
         <NavItem>
-          
-            <Link className='nav-link' to="/ostoslistat" style={{ marginRight: '3vw' }}>Ostoslistat</Link>
-          
+
+          <Link className='nav-link' to="/ostoslistat" style={{ marginRight: '3vw' }}>Ostoslistat</Link>
+
         </NavItem>
         {/* <NavItem>
           <NavLink href="loki" style={{ marginRight:'3vw' }}>Loki</NavLink>
@@ -63,9 +63,11 @@ class AppNavbar extends Component {
             <DropdownItem>
               Profiili
             </DropdownItem>
-            <DropdownItem>
-              <Link style={{color: '#212529'}}to="/kayttajat">Käyttäjien hallinta</Link>
+            <Link to="/kayttajat">
+              <DropdownItem>
+                Käyttäjien hallinta
             </DropdownItem>
+            </Link>
             <DropdownItem>
               <Logout />
             </DropdownItem>

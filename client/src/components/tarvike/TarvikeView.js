@@ -7,25 +7,28 @@ import TarvikeTable2 from './TarvikeTable2'
 import { loadUser } from '../../actions/authActions'
 import { getTarvikkeet } from '../../actions/tarvikeActions'
 import { getOstoslistat } from '../../actions/ostoslistaActions'
+import { returnMessages } from '../../actions/messageActions'
 
 class TarvikeView extends Component {
-  
+
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
     loadUser: PropTypes.func,
     tarvike: PropTypes.object,
     getTarvikkeet: PropTypes.func.isRequired,
-    getOstoslistat: PropTypes.func.isRequired
+    getOstoslistat: PropTypes.func.isRequired,
+    returnMessages: PropTypes.func.isRequired
   }
-  
+
   componentDidMount() {
-    this.props.loadUser()
+    console.log('tarvikeView didMount')
+    this.props.returnMessages()
     this.props.getTarvikkeet()
     this.props.getOstoslistat()
   }
 
   render() {
-    
+
     return (
       <Col>
         <div>
@@ -46,5 +49,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getTarvikkeet, getOstoslistat, loadUser }
+  { getTarvikkeet, getOstoslistat, loadUser, returnMessages }
 )(TarvikeView)

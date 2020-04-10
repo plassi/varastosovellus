@@ -2,6 +2,7 @@ import axios from 'axios'
 import { GET_TARVIKKEET, ADD_TARVIKE, DELETE_TARVIKE, TARVIKKEET_LADATAAN, UPDATE_TARVIKE } from './types'
 import { tokenConfig } from './authActions'
 import { returnErrors } from './errorActions'
+import { returnMessages, clearMessages } from './messageActions'
 
 export const getTarvikkeet = () => (dispatch, getState) => {
   dispatch(setTarvikkeetLadataan())
@@ -26,7 +27,13 @@ export const addTarvike = tarvike => (dispatch, getState) => {
       dispatch({
         type: ADD_TARVIKE,
         payload: res.data
-      })}
+      })
+
+      dispatch(returnMessages(`Tarvike ${res.data.nimi} lisätty`))
+      setTimeout(() => {
+        dispatch(clearMessages())
+      }, 7000)
+    }
     )
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -40,7 +47,12 @@ export const deleteTarvike = id => (dispatch, getState) => {
       dispatch({
         type: DELETE_TARVIKE,
         payload: id
-      })}
+      })
+      dispatch(returnMessages(`Tarvike poistettu`))
+      setTimeout(() => {
+        dispatch(clearMessages())
+      }, 7000)
+    }
     )
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -54,7 +66,12 @@ export const updateTarvike = tarvike => (dispatch, getState) => {
       dispatch({
         type: UPDATE_TARVIKE,
         payload: res.data
-      })}
+      })
+      dispatch(returnMessages(`Tarvike ${res.data.nimi} päivitetty`))
+      setTimeout(() => {
+        dispatch(clearMessages())
+      }, 7000)
+    }
     )
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
