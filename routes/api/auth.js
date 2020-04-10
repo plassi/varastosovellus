@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 
   if (!(user && passwordCorrect)) {
     return res.status(401).json({
-      error: 'väärä käyttäjätunnus tai salasana'
+      msg: 'Väärä käyttäjätunnus tai salasana'
     })
   }
 

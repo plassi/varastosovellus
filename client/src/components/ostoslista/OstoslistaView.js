@@ -5,6 +5,7 @@ import OstoslistatTable from './OstoslistatTable'
 import OstoslistaTable from './OstoslistaTable'
 import { Container, Col } from 'reactstrap'
 import OstoslistaLisaaModal from './OstoslistaLisaaModal'
+import { getTarvikkeet } from '../../actions/tarvikeActions'
 import { getOstoslistat } from '../../actions/ostoslistaActions'
 import { loadUser } from '../../actions/authActions'
 
@@ -21,6 +22,7 @@ class OstoslistaView extends Component {
   
   componentDidMount() {
     this.props.loadUser()
+    this.props.getTarvikkeet()
     this.props.getOstoslistat()
   }
 
@@ -53,5 +55,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getOstoslistat, loadUser }
+  { getTarvikkeet, getOstoslistat, loadUser }
 )(OstoslistaView)

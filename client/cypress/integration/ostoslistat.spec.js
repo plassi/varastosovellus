@@ -102,7 +102,7 @@ describe('Ostoslistat kirjautuneelle käyttäjälle', function () {
       cy.get('td').contains('Ostoslista 1').next().find('#ostoslista-avaa-button').click()
     })
 
-    it.only('Käyttäjä voi lisätä tarvikkeen ostoslistalle', function () {
+    it('Käyttäjä voi lisätä tarvikkeen ostoslistalle', function () {
       // Mennään tarvikenäkymäsivulle
       cy.visit('http://localhost:3000/tarvikkeet')
 
