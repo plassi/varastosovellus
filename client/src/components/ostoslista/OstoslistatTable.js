@@ -22,7 +22,6 @@ class OstoslistatTable extends Component {
 
     const onDeleteClick = (id) => this.props.deleteOstoslista(id)
     const openClick = (id) => {
-      console.log('id :', id)
       this.props.selectOstoslista(ostoslista)
     }
 
@@ -31,6 +30,7 @@ class OstoslistatTable extends Component {
         <td>{ostoslista.nimi}</td>
         <td>
           <Button
+            id='ostoslista-avaa-button'
             color='dark'
             size='sm'
             style={{ marginRight: '8px' }}

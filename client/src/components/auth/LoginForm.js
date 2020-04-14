@@ -25,31 +25,28 @@ class LoginForm extends Component {
     error: PropTypes.object.isRequired,
     login: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
-  };
+  }
 
   componentDidUpdate(prevProps) {
     const { error } = this.props
+    
+    
     if (error !== prevProps.error) {
       // Check for register error
       if (error.id === 'LOGIN_FAIL') {
-        this.setState({ msg: error.msg.msg })
+        if (error.msg.msg) {
+          this.setState({ msg: error.msg.msg })
+        }
       } else {
         this.setState({ msg: null })
       }
+      
     }
   }
 
-  toggle = () => {
-    // Clear errors
-    this.props.clearErrors()
-    this.setState({
-      modal: !this.state.modal
-    })
-  };
-
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value })
-  };
+  }
 
   onSubmit = e => {
     e.preventDefault()
@@ -63,7 +60,8 @@ class LoginForm extends Component {
 
     // Attempt to login
     this.props.login(user)
-  };
+    this.props.clearErrors()
+  }
 
 
 
@@ -72,9 +70,6 @@ class LoginForm extends Component {
     return (
       <Container>
         <Col sm="12" md={{ size: 6, offset: 3 }}>
-          <p>
-
-          </p>
           <Card>
             <CardBody>
               <CardTitle><h4>Kirjaudu sisään</h4></CardTitle>

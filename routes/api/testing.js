@@ -16,4 +16,9 @@ router.post('/lisaa-tarvikkeet', async (request, response) => {
   response.status(200).end()
 })
 
+router.post('/lisaa-ostoslistat', async (request, response) => {
+  await Ostoslista.create(request.body)
+  response.status(200).end()
+})
+
 module.exports = router

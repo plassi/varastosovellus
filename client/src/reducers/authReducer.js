@@ -10,7 +10,7 @@ import {
 } from '../actions/types'
 
 const initialState = {
-  token: localStorage.getItem('token'),
+  token: localStorage.getItem('loggedVarastoappUser'),
   isAuthenticated: null,
   isLoading: false,
   user: null
@@ -32,18 +32,19 @@ export default function (state = initialState, action) {
       }
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
-      localStorage.setItem('token', action.payload.token)
+      localStorage.setItem('loggedVarastoappUser', action.payload.token)
+      
       return {
         ...state,
         ...action.payload,
         isAuthenticated: true,
-        isLoading: false
+        isLoading: false,
       }
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT_SUCCESS:
     case REGISTER_FAIL:
-      localStorage.removeItem('token')
+      localStorage.removeItem('loggedVarastoappUser')
       return {
         ...state,
         token: null,

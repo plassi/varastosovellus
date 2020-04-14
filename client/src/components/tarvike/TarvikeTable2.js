@@ -154,7 +154,7 @@ class TarvikeTable2 extends Component {
                   bordered={false}
                   expandRow={expandRow}
                   pagination={paginationFactory(options)}
-                  noDataIndication="No Data Is Available"
+                  noDataIndication="Tietoja ei saatavilla"
                 />
               </div>
 

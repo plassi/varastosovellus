@@ -28,7 +28,7 @@ Cypress.Commands.add('kirjaudu', ({ kayttajatunnus, salasana }) => {
   cy.request('POST', 'http://localhost:5000/api/auth', {
     kayttajatunnus, salasana
   }).then(({ body }) => {
-    localStorage.setItem('loggedVarastoappUser', JSON.stringify(body))
+    localStorage.setItem('loggedVarastoappUser', body.token)
   })
 })
 
@@ -38,7 +38,18 @@ Cypress.Commands.add('lisaaTarvikkeet', (lista) => {
     method: 'POST',
     body: lista,
     headers: {
-      'x-auth-token': JSON.parse(localStorage.getItem('loggedVarastoappUser')).token
+      'x-auth-token': localStorage.getItem('loggedVarastoappUser')
+    }
+  })
+})
+
+Cypress.Commands.add('lisaaOstoslistat', (lista) => {
+  cy.request({
+    url: 'http://localhost:5000/api/testing/lisaa-ostoslistat',
+    method: 'POST',
+    body: lista,
+    headers: {
+      'x-auth-token': localStorage.getItem('loggedVarastoappUser')
     }
   })
 })

@@ -24,7 +24,7 @@ export default function (state = initialState, action) {
     case DELETE_OSTOSLISTA:
       return {
         ...state,
-        ostoslistat: state.ostoslistat.filter(ostoslista => ostoslista._id !== action.payload)
+        ostoslistat: state.ostoslistat.filter(ostoslista => ostoslista.id !== action.payload)
       }
     case UPDATE_OSTOSLISTA:
       console.log(state)
@@ -32,7 +32,7 @@ export default function (state = initialState, action) {
 
       return {
         ...state,
-        ostoslistat: [...state.ostoslistat.map(ostoslista => ostoslista.id === action.payload.id ? ostoslista = action.payload : ostoslista)]
+        ostoslistat: [...state.ostoslistat.map(ostoslista => ostoslista.id === action.payload.id ? action.payload : ostoslista)]
       }
     case ADD_OSTOSLISTA:
       return {

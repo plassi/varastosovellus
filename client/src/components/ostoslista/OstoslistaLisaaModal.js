@@ -56,6 +56,7 @@ class TarvikeModal extends Component {
         {this.props.isAuthenticated ? (
           <Col>
             <Button
+              id='ostoslista-lisaa-button'
               color='dark'
               style={{ marginBottom: '2rem' }}
               onClick={this.toggle}
@@ -81,7 +82,7 @@ class TarvikeModal extends Component {
                 />
               </FormGroup>
 
-              <Button color='dark' style={{ marginTop: '2rem' }} block>
+              <Button id='lisaa-ostoslista-modal-button' color='dark' style={{ marginTop: '2rem' }} block>
                 Lisää ostoslista
               </Button>
 
