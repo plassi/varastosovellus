@@ -64,8 +64,11 @@ class LisaaOstosModal extends Component {
     const newOstoslista = {
       id: this.state.ostoslista.id,
       tarvikkeet: [...vanhaOstoslista.tarvikkeet,
-      { id: this.state.tarvike.id, maara: this.state.maara }]
+      { id: this.state.tarvike.id, maara: this.state.maara, nimi: this.state.tarvike.nimi }]
     }
+
+    console.log('newOstoslista at LisaaOstosModal.js', newOstoslista)
+    
 
     // Add item via addItem action
     this.props.updateOstoslista(newOstoslista)
