@@ -14,11 +14,12 @@ import PropTypes from 'prop-types'
 import '../componentStyles.css'
 import { TiShoppingCart } from 'react-icons/ti'
 import { updateOstoslista, selectOstoslista } from '../../actions/ostoslistaActions'
+import { returnErrors, clearErrors } from '../../actions/errorActions'
 
 class LisaaOstosModal extends Component {
   state = {
     modal: false,
-    ostoslista: null,
+    ostoslista: this.props.ostoslista.selected,
     tarvike: this.props.row,
     maara: 1
   }
@@ -30,11 +31,23 @@ class LisaaOstosModal extends Component {
     updateOstoslista: PropTypes.func.isRequired
   }
 
+  componentDidMount() {
+    console.log(this.state)
+
+  }
 
   toggle = () => {
-    this.setState({
-      modal: !this.state.modal
-    })
+    if (this.props.ostoslista.ostoslistat.length === 0) {
+      this.props.returnErrors('Ostoslistaa ei ole vielä luotu. Luo uusi ostoslista Ostoslistat näkymästä.')
+      setTimeout(() => {
+        this.props.clearErrors()
+      }, 7000)
+    } else {
+
+      this.setState({
+        modal: !this.state.modal
+      })
+    }
   }
 
   onChange = e => {
@@ -44,13 +57,14 @@ class LisaaOstosModal extends Component {
 
   onSubmit = e => {
     e.preventDefault()
+    console.log(this.state)
 
-    const vanhatTarvikkeet = this.props.ostoslista.ostoslistat.find(ostoslista => ostoslista.id === this.state.ostoslista)
-    
+    const vanhaOstoslista = this.props.ostoslista.ostoslistat.find(ostoslista => ostoslista.id === this.state.ostoslista.id)
+
     const newOstoslista = {
-      id: this.state.ostoslista,
-      tarvikkeet: [ ...vanhatTarvikkeet.tarvikkeet,
-        {id:this.state.tarvike.id, maara: this.state.maara}]
+      id: this.state.ostoslista.id,
+      tarvikkeet: [...vanhaOstoslista.tarvikkeet,
+      { id: this.state.tarvike.id, maara: this.state.maara }]
     }
 
     // Add item via addItem action
@@ -58,13 +72,15 @@ class LisaaOstosModal extends Component {
 
     // Close modal
     this.toggle()
-    
+
   }
 
   valitseOstoslista(e) {
+    console.log(e.target.value)
+
     e.preventDefault()
-    selectOstoslista({ostoslista: e.target.value})
-    this.state.ostoslista = e.target.value
+    this.props.selectOstoslista(this.props.ostoslista.ostoslistat.find(ostoslista => ostoslista.id === e.target.value))
+    this.setState({ ostoslista: this.props.ostoslista.selected })
   }
 
 
@@ -96,8 +112,8 @@ class LisaaOstosModal extends Component {
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
                 <Label for="exampleSelect"><h6>Valitse lista</h6></Label>
-                <Input type="select" name="select" onChange={(e) => this.valitseOstoslista(e)}> 
-                {allOstoslistaRows}    
+                <Input type="select" name="select" defaultValue={this.state.ostoslista ? this.state.ostoslista.id : null} onChange={(e) => this.valitseOstoslista(e)}>
+                  {allOstoslistaRows}
                 </Input>
               </FormGroup>
               <FormGroup>
@@ -142,5 +158,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateOstoslista, selectOstoslista }
+  { updateOstoslista, selectOstoslista, returnErrors, clearErrors }
 )(LisaaOstosModal)

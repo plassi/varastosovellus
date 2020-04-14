@@ -45,7 +45,6 @@ class TarvikeModal extends Component {
 
     // Add item via addItem action
     this.props.addOstoslista(newOstoslista)
-
     // Close modal
     this.toggle()
   };

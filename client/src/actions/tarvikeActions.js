@@ -67,7 +67,7 @@ export const updateTarvike = tarvike => (dispatch, getState) => {
         type: UPDATE_TARVIKE,
         payload: res.data
       })
-      dispatch(returnMessages(`Tarvike ${res.data.nimi} päivitetty`))
+      dispatch(returnMessages(`Tarviketta ${res.data.nimi} muokattu`))
       setTimeout(() => {
         dispatch(clearMessages())
       }, 7000)

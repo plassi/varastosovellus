@@ -27,6 +27,11 @@ export const addOstoslista = ostoslista => (dispatch, getState) => {
         type: ADD_OSTOSLISTA,
         payload: res.data
       })
+
+      dispatch({
+        type: SELECT_OSTOSLISTA,
+        payload: res.data
+      })
     }
     )
     .catch(err =>
