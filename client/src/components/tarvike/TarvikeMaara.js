@@ -50,7 +50,7 @@ class TarvikeMaara extends Component {
 }
 
 const mapStateToProps = state => ({
-	isAuthenticated: state.auth.isAuthenticated
+	
 })
 
 export default connect(
