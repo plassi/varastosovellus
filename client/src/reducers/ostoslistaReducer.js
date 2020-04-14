@@ -35,12 +35,14 @@ export default function (state = initialState, action) {
         ostoslistat: state.ostoslistat.filter(ostoslista => ostoslista.id !== action.payload)
       }
     case UPDATE_OSTOSLISTA:
-      console.log(state)
-      console.log(action.payload)
+      console.log('State on UPDATE_OSTOSLISTA', state)
+      console.log('action.payload on UPDATE_OSTOSLISTA', action.payload)
 
       return {
         ...state,
-        ostoslistat: [...state.ostoslistat.map(ostoslista => ostoslista.id === action.payload.id ? action.payload : ostoslista)]
+        ostoslistat: [...state.ostoslistat.map(ostoslista => ostoslista.id === action.payload.id ? action.payload : ostoslista)],
+        selected: action.payload
+
       }
     case ADD_OSTOSLISTA:
       return {

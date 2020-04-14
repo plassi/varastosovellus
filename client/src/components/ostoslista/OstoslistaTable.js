@@ -9,12 +9,12 @@ class OstoslistaTable extends Component {
   state = {
     columns: [
       {
-        dataField: '',
+        dataField: 'nimi',
         text: 'Nimi',
         sort: true,
       },
       {
-        dataField: '',
+        dataField: 'maara',
         text: 'Määrä',
         sort: true,
       },
@@ -25,34 +25,23 @@ class OstoslistaTable extends Component {
     ostoslista: PropTypes.object.isRequired
   }
 
-  renderItem(ostoslista) {
-
-    const ostoslistaRows = [
-      <tr id={ostoslista.id} key={'row-data-' + ostoslista.id}>
-       
-      </tr>
-    ]
-
-    return ostoslistaRows
-  }
-
   render() {
 
     if (this.props.ostoslista.selected === null) {
       return (<></>)
     } else {
       const { selected } = this.props.ostoslista
-      console.log('ostoslista.selected', selected);
+      console.log('ostoslista.selected on OstoslistaTable.js', selected);
       
       return (
-        <div>
+        <>
           <h6>{selected.nimi}</h6>
           <BootstrapTable
-            keyField='id'
+            keyField="id"
             data={selected.tarvikkeet}
             columns={this.state.columns}
           />
-        </div>
+        </>
       )
     }
   }
