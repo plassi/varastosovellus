@@ -58,6 +58,7 @@ class TarvikeModal extends Component {
   };
 
   render() {
+
     return (
       <div>
         {this.props.isAuthenticated ? (
@@ -95,7 +96,8 @@ class TarvikeModal extends Component {
                   name='kategoria'
                   placeholder='Kategoria'
                   onChange={this.onChange}
-                />
+                >
+                </Input>
               </FormGroup>
               <FormGroup>
                 <Input
@@ -111,7 +113,7 @@ class TarvikeModal extends Component {
                   id='maara'
                   type='number'
                   name='maara'
-                  placeholder='määrä'
+                  placeholder='Määrä'
                   onChange={this.onChange}
                 />
               </FormGroup>
@@ -120,7 +122,7 @@ class TarvikeModal extends Component {
                   id='maarayksikko'
                   type='text'
                   name='maarayksikko'
-                  placeholder='määräyksikkö'
+                  placeholder='Määräyksikkö'
                   onChange={this.onChange}
                 />
               </FormGroup>
@@ -129,7 +131,7 @@ class TarvikeModal extends Component {
                   id='sijainti'
                   type='text'
                   name='sijainti'
-                  placeholder='sijainti'
+                  placeholder='Sijainti'
                   onChange={this.onChange}
                 />
               </FormGroup>
@@ -150,7 +152,7 @@ class TarvikeModal extends Component {
 
 const mapStateToProps = state => ({
   item: state.item,
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
 })
 
 export default connect(

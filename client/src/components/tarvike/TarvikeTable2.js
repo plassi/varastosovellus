@@ -6,10 +6,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit'
 import paginationFactory from 'react-bootstrap-table2-paginator'
-import { Container, Row, Col } from 'reactstrap'
+import { Container, Row, Col, InputGroup, InputGroupAddon, Button, Input } from 'reactstrap'
 import { TiPlus, TiMinus } from 'react-icons/ti'
 import TarvikeMuokkaaModal from './TarvikeMuokkaaModal'
 import LisaaOstosModal from '../ostoslista/LisaaOstosModal'
+import TarvikeMaara from './TarvikeMaara'
 
 class TarvikeTable2 extends Component {
   state = {
@@ -61,27 +62,40 @@ class TarvikeTable2 extends Component {
 
     const expandRow = {
       onlyOneExpanding: true,
+      background: 'black',
       renderer: row => (
         <Container>
-          <Row>
-            <Col>
+          <Row style={{paddingBottom: '5'}}>
+            <Col xs="3">
               <h6>Kuvaus</h6>
               <p>{row.kuvaus} </p>
             </Col>
-            <Col >
-              <h6>Kuva</h6>
-              <picture>
-                <img src={row.kuva} />
-              </picture>
+            <Col xs="3">
+              <h6>Muokkaa määrää</h6>
+              <TarvikeMaara row={row} />
             </Col>
-            <Row>
-              <Col style={{ paddingRight: '5px' }}>
-                <LisaaOstosModal row={row} />
-              </Col>
-              <Col style={{ paddingLeft: '0' }}>
-                <TarvikeMuokkaaModal row={row} />
-              </Col>
-            </Row>
+            <Col xs="3" style={{ paddingLeft: '0', paddingRight: '0', textAlign:'right' }}>
+              <h6>Muokkaa</h6>
+              <TarvikeMuokkaaModal row={row} />
+            </Col>
+            <Col xs="3" style={{ paddingRight: '5px' }}>
+              <h6>Lisää ostoslistalle</h6>
+              <LisaaOstosModal row={row} />
+            </Col>
+          </Row>
+          <Row>
+          <Col>
+            <h6>Hinta</h6>
+            </Col>
+            <Col>
+            <h6>Yksikkö</h6>
+            {row.maarayksikko}
+            </Col>
+            <Col>
+            <h6>Hankintapaikka</h6>
+            </Col>
+
+            <Col></Col>
           </Row>
         </Container>
       ),
@@ -155,6 +169,7 @@ class TarvikeTable2 extends Component {
                   expandRow={expandRow}
                   pagination={paginationFactory(options)}
                   noDataIndication="Tietoja ei saatavilla"
+                  rowStyle={ { backgroundColor: 'whitesmoke' } }
                 />
               </div>
 
