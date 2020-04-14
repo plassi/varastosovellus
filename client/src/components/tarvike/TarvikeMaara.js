@@ -12,7 +12,6 @@ class TarvikeMaara extends Component {
 		updateTarvike: PropTypes.func.isRequired
 	}
 
-
 	buttonPlusClick = () => {
 		const newTarvike = {
 			...this.props.row,
