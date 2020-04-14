@@ -22,6 +22,14 @@ export default function (state = initialState, action) {
         ladataan: false
       }
     case DELETE_OSTOSLISTA:
+      // Jos poistettava ostoslista on sama, kuin selected ostoslista, poistetaan myös selected.
+      if (action.payload === state.selected.id) {
+        return {
+          ...state,
+          ostoslistat: state.ostoslistat.filter(ostoslista => ostoslista.id !== action.payload),
+          selected: null
+        }
+      }
       return {
         ...state,
         ostoslistat: state.ostoslistat.filter(ostoslista => ostoslista.id !== action.payload)
@@ -37,7 +45,7 @@ export default function (state = initialState, action) {
     case ADD_OSTOSLISTA:
       return {
         ...state,
-        ostoslistat: [action.payload, ...state.ostoslistat]
+        ostoslistat: [...state.ostoslistat, action.payload]
       }
     case OSTOSLISTAT_LADATAAN:
       return {

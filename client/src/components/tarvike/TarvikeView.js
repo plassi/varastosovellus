@@ -22,6 +22,7 @@ class TarvikeView extends Component {
 
   componentDidMount() {
     console.log('tarvikeView didMount')
+    this.props.loadUser()
     this.props.returnMessages()
     this.props.getTarvikkeet()
     this.props.getOstoslistat()
@@ -31,6 +32,7 @@ class TarvikeView extends Component {
 
     return (
       <Col>
+        
         <div>
           <h1>Tarvikkeet</h1>
         </div>
