@@ -62,6 +62,7 @@ class TarvikeTable2 extends Component {
 
     const expandRow = {
       onlyOneExpanding: true,
+      background: 'black',
       renderer: row => (
         <Container>
           <Row>
@@ -69,19 +70,21 @@ class TarvikeTable2 extends Component {
               <h6>Kuvaus</h6>
               <p>{row.kuvaus} </p>
             </Col>
-            <Col>
-            <h6>Muokkaa määrää</h6>
-            <TarvikeMaara row={row} />
-
+            <Col >
+              <h6>Muokkaa määrää</h6>
+              <TarvikeMaara row={row} />
             </Col>
-            <Row>
-              <Col style={{ paddingRight: '5px' }}>
-                <LisaaOstosModal row={row} />
-              </Col>
-              <Col style={{ paddingLeft: '0' }}>
-                <TarvikeMuokkaaModal row={row} />
-              </Col>
-            </Row>
+
+            <Col style={{ paddingLeft: '0', textAlign:'right' }}>
+              <h6>Muokkaa</h6>
+              <TarvikeMuokkaaModal row={row} />
+            </Col>
+
+            <Col style={{ paddingRight: '5px' }}>
+              <h6>Lisää ostoslistalle</h6>
+              <LisaaOstosModal row={row} />
+            </Col>
+
           </Row>
         </Container>
       ),
@@ -155,6 +158,7 @@ class TarvikeTable2 extends Component {
                   expandRow={expandRow}
                   pagination={paginationFactory(options)}
                   noDataIndication="Tietoja ei saatavilla"
+                  rowStyle={ { backgroundColor: 'whitesmoke' } }
                 />
               </div>
 
