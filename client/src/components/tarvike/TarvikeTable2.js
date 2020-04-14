@@ -65,26 +65,37 @@ class TarvikeTable2 extends Component {
       background: 'black',
       renderer: row => (
         <Container>
-          <Row>
-            <Col>
+          <Row style={{paddingBottom: '5'}}>
+            <Col xs="3">
               <h6>Kuvaus</h6>
               <p>{row.kuvaus} </p>
             </Col>
-            <Col >
+            <Col xs="3">
               <h6>Muokkaa määrää</h6>
               <TarvikeMaara row={row} />
             </Col>
-
-            <Col style={{ paddingLeft: '0', textAlign:'right' }}>
+            <Col xs="3" style={{ paddingLeft: '0', paddingRight: '0', textAlign:'right' }}>
               <h6>Muokkaa</h6>
               <TarvikeMuokkaaModal row={row} />
             </Col>
-
-            <Col style={{ paddingRight: '5px' }}>
+            <Col xs="3" style={{ paddingRight: '5px' }}>
               <h6>Lisää ostoslistalle</h6>
               <LisaaOstosModal row={row} />
             </Col>
+          </Row>
+          <Row>
+          <Col>
+            <h6>Hinta</h6>
+            </Col>
+            <Col>
+            <h6>Yksikkö</h6>
+            {row.maarayksikko}
+            </Col>
+            <Col>
+            <h6>Hankintapaikka</h6>
+            </Col>
 
+            <Col></Col>
           </Row>
         </Container>
       ),
