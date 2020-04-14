@@ -22,7 +22,8 @@ class OstoslistaTable extends Component {
   }
 
   static propTypes = {
-    ostoslista: PropTypes.object.isRequired
+    ostoslista: PropTypes.object.isRequired,
+    tarvikkeet: PropTypes.object.isRequired
   }
 
   render() {
@@ -31,14 +32,30 @@ class OstoslistaTable extends Component {
       return (<></>)
     } else {
       const { selected } = this.props.ostoslista
-      console.log('ostoslista.selected on OstoslistaTable.js', selected);
+      console.log('ostoslista.selected on OstoslistaTable.js', selected)
+
+      const data = selected.tarvikkeet.map(tarvike => {
+        const suodatin = this.props.tarvikkeet.filter(muuTarvike => muuTarvike.id === tarvike.id)
+
+        const kokoTarvike = suodatin[0]
+        
+        
+        return (
+          {
+            ...tarvike,
+            nimi: kokoTarvike.nimi
+          }
+        )
+      })
+      
+      console.log(data)
       
       return (
         <>
           <h6>{selected.nimi}</h6>
           <BootstrapTable
             keyField="id"
-            data={selected.tarvikkeet}
+            data={data}
             columns={this.state.columns}
           />
         </>
@@ -48,7 +65,8 @@ class OstoslistaTable extends Component {
 }
 
 const mapStateToProps = state => ({
-  ostoslista: state.ostoslista
+  ostoslista: state.ostoslista,
+  tarvikkeet: state.tarvike.tarvikkeet
 })
 
 export default connect(

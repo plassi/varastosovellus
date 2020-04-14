@@ -1,9 +1,6 @@
 const mongoose = require('mongoose')
 
 const tarvikkeetSchema = new mongoose.Schema({
-  nimi: {
-    type: String
-  },
   maara: Number,
   id: {
     type: mongoose.Schema.Types.ObjectId,
