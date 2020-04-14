@@ -6,10 +6,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit'
 import paginationFactory from 'react-bootstrap-table2-paginator'
-import { Container, Row, Col } from 'reactstrap'
+import { Container, Row, Col, InputGroup, InputGroupAddon, Button, Input } from 'reactstrap'
 import { TiPlus, TiMinus } from 'react-icons/ti'
 import TarvikeMuokkaaModal from './TarvikeMuokkaaModal'
 import LisaaOstosModal from '../ostoslista/LisaaOstosModal'
+import TarvikeMaara from './TarvikeMaara'
 
 class TarvikeTable2 extends Component {
   state = {
@@ -68,11 +69,10 @@ class TarvikeTable2 extends Component {
               <h6>Kuvaus</h6>
               <p>{row.kuvaus} </p>
             </Col>
-            <Col >
-              <h6>Kuva</h6>
-              <picture>
-                <img src={row.kuva} />
-              </picture>
+            <Col>
+            <h6>Muokkaa määrää</h6>
+            <TarvikeMaara row={row} />
+
             </Col>
             <Row>
               <Col style={{ paddingRight: '5px' }}>
