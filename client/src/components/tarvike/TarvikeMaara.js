@@ -7,12 +7,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 class TarvikeMaara extends Component {
-	state = {
-		maara: this.props.row.maara,
-	};
 
 	static propTypes = {
-		isAuthenticated: PropTypes.bool
+		updateTarvike: PropTypes.func.isRequired
 	}
 
 
@@ -37,7 +34,6 @@ class TarvikeMaara extends Component {
 	}
 
 	render() {
-		console.log('row props: ', this.props.row)
 
 		return (
 			<InputGroup>
