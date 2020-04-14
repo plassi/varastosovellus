@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import { Container, Alert } from 'reactstrap'
+import { Container, Alert, Col } from 'reactstrap'
 import PropTypes from 'prop-types'
 import AppNavbar from './components/AppNavbar'
 import LoginForm from './components/auth/LoginForm'
@@ -34,7 +34,7 @@ class App extends Component {
 
   componentDidUpdate(prevProps) {
     // Jos ostoslistaa ei ole valittu ja ostoslistoja on olemassa, valitaan viimeisin ostoslista
-    
+
     if (this.props.ostoslista.selected === null && this.props.ostoslista.ostoslistat.length > 0) {
       this.props.selectOstoslista(this.props.ostoslista.ostoslistat[this.props.ostoslista.ostoslistat.length - 1])
     }
@@ -53,10 +53,14 @@ class App extends Component {
             <AppNavbar />
             <Container>
               {this.props.message.msg ? (
-                <Alert color='success'>{this.props.message.msg}</Alert>
+                <Col>
+                  <Alert color='success'>{this.props.message.msg}</Alert>
+                </Col>
               ) : null}
               {this.props.error.msg ? (
-                <Alert color='danger'>{this.props.error.msg}</Alert>
+                <Col>
+                  <Alert color='danger'>{this.props.error.msg}</Alert>
+                </Col>
               ) : null}
               <Switch>
                 <Route path="/tarvikkeet" >
