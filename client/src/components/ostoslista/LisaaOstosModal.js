@@ -70,6 +70,9 @@ class LisaaOstosModal extends Component {
     // Add item via addItem action
     this.props.updateOstoslista(newOstoslista)
 
+    // muuta alkutilan määrä yhteen
+    this.setState({ maara: 1 })
+
     // Close modal
     this.toggle()
 
