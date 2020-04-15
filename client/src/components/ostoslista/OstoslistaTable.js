@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import BootstrapTable from 'react-bootstrap-table-next'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
+import { Button } from 'reactstrap'
 
 class OstoslistaTable extends Component {
   state = {
@@ -25,7 +26,12 @@ class OstoslistaTable extends Component {
       },
       {
         dataField: 'hinta',
-        text: 'Hinta',
+        text: 'Hinta €',
+        sort: true,
+      },
+      {
+        dataField: 'hankintapaikka',
+        text: 'Hankintapaikka',
         sort: true,
       },
 
@@ -49,28 +55,32 @@ class OstoslistaTable extends Component {
         const suodatin = this.props.tarvikkeet.filter(muuTarvike => muuTarvike.id === tarvike.id)
 
         const kokoTarvike = suodatin[0]
-        
-        
+
+
         return (
           {
             ...tarvike,
             nimi: kokoTarvike.nimi,
             maarayksikko: kokoTarvike.maarayksikko,
-            hinta: kokoTarvike.hinta
+            hinta: kokoTarvike.hinta,
+            hankintapaikka: kokoTarvike.hankintapaikka
           }
         )
       })
-      
+
       console.log(data)
-      
+
       return (
         <>
-          <h6>{selected.nimi}</h6>
+          <h5>{selected.nimi}</h5>
           <BootstrapTable
             keyField="id"
             data={data}
             columns={this.state.columns}
           />
+          <Button
+            color='dark'
+            style={{ marginBottom: '2rem' }}>Tulosta</Button>
         </>
       )
     }

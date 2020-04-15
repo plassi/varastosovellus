@@ -24,7 +24,9 @@ router.post('/', auth, async (req, res) => {
     maara: req.body.maara,
     maarayksikko: req.body.maarayksikko,
     sijainti: req.body.sijainti,
-    kuva: req.body.kuva
+    kuva: req.body.kuva,
+    hinta: req.body.hinta,
+    hankintapaikka: req.body.hankintapaikka,
   })
 
   await newTarvike.save()

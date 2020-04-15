@@ -47,7 +47,9 @@ class TarvikeModal extends Component {
       maarayksikko: this.state.maarayksikko,
       sijainti: this.state.sijainti,
       avainsanat: this.state.avainsanat,
-      kuva: this.state.kuva
+      kuva: this.state.kuva,
+      hinta: this.state.hinta,
+      hankintapaikka: this.state.hankintapaikka,
     }
 
     // Add item via addItem action
@@ -132,6 +134,24 @@ class TarvikeModal extends Component {
                   type='text'
                   name='sijainti'
                   placeholder='Sijainti'
+                  onChange={this.onChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  id='hinta'
+                  type='text'
+                  name='hinta'
+                  placeholder='Hinta'
+                  onChange={this.onChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  id='hankintapaikka'
+                  type='text'
+                  name='hankintapaikka'
+                  placeholder='Hankintapaikka'
                   onChange={this.onChange}
                 />
               </FormGroup>

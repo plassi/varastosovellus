@@ -19,7 +19,8 @@ const TarvikeSchema = new Schema({
   },
   sijainti: String,
   kuva: String,
-  hinta: Number
+  hinta: Number,
+  hankintapaikka: String,
 })
 
 TarvikeSchema.set('toJSON', {
