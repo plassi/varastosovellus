@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
-import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap'
+import { InputGroup, InputGroupAddon, Button } from 'reactstrap'
 import { updateTarvike } from '../../actions/tarvikeActions'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'

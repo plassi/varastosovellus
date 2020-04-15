@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { Container, Alert, Col } from 'reactstrap'
 import PropTypes from 'prop-types'
 import AppNavbar from './components/AppNavbar'

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Button, Table } from 'reactstrap'
+import { Button, Table } from 'reactstrap'
 import { connect } from 'react-redux'
 import { deleteOstoslista, selectOstoslista } from '../../actions/ostoslistaActions'
 import PropTypes from 'prop-types'

@@ -18,6 +18,17 @@ class OstoslistaTable extends Component {
         text: 'Määrä',
         sort: true,
       },
+      {
+        dataField: 'maarayksikko',
+        text: 'Yksikkö',
+        sort: true,
+      },
+      {
+        dataField: 'hinta',
+        text: 'Hinta',
+        sort: true,
+      },
+
     ],
   }
 
@@ -43,7 +54,9 @@ class OstoslistaTable extends Component {
         return (
           {
             ...tarvike,
-            nimi: kokoTarvike.nimi
+            nimi: kokoTarvike.nimi,
+            maarayksikko: kokoTarvike.maarayksikko,
+            hinta: kokoTarvike.hinta
           }
         )
       })
