@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Container, Button, Table } from 'reactstrap'
 import { connect } from 'react-redux'
-import { deleteOstoslista, selectOstoslista } from '../../actions/ostoslistaActions'
 import PropTypes from 'prop-types'
 import { AiOutlineDelete, AiOutlineUnorderedList } from 'react-icons/ai'
+
+import { deleteOstoslista, selectOstoslista } from '../../actions/ostoslistaActions'
+import { returnMessages, clearMessages } from '../../actions/messageActions'
 
 class OstoslistatTable extends Component {
 
@@ -14,15 +16,24 @@ class OstoslistatTable extends Component {
   static propTypes = {
     deleteOstoslista: PropTypes.func.isRequired,
     selectOstoslista: PropTypes.func.isRequired,
+    returnMessages: PropTypes.func.isRequired,
+    clearMessages: PropTypes.func.isRequired,
     ostoslista: PropTypes.object.isRequired,
     isAuthenticated: PropTypes.bool
   }
 
   renderItem(ostoslista) {
 
-    const onDeleteClick = (id) => this.props.deleteOstoslista(id)
-    const openClick = (id) => {
+    const onDeleteClick = (id) => {
+      this.props.deleteOstoslista(id)
+      this.props.returnMessages('ostoslista poistettu')
+      setTimeout(() => this.props.clearMessages(), 5000)
+    }
+
+    const openClick = () => {
       this.props.selectOstoslista(ostoslista)
+      this.props.returnMessages(`ostoslista ${ostoslista.nimi} avattu`)
+      setTimeout(() => this.props.clearMessages(), 5000)
     }
 
     const ostoslistaRows = [
@@ -87,5 +98,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deleteOstoslista, selectOstoslista }
+  { deleteOstoslista, selectOstoslista, returnMessages, clearMessages }
 )(OstoslistatTable)

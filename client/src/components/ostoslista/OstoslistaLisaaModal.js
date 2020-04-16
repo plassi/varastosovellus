@@ -12,6 +12,8 @@ import {
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import { addOstoslista } from '../../actions/ostoslistaActions'
+import { returnMessages, clearMessages } from '../../actions/messageActions'
+
 import PropTypes from 'prop-types'
 import '../componentStyles.css'
 
@@ -22,7 +24,9 @@ class TarvikeModal extends Component {
   }
 
   static propTypes = {
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    returnMessages: PropTypes.func.isRequired,
+    clearMessages: PropTypes.func.isRequired
   }
 
   toggle = () => {
@@ -45,6 +49,10 @@ class TarvikeModal extends Component {
 
     // Add item via addItem action
     this.props.addOstoslista(newOstoslista)
+
+    this.props.returnMessages(`ostoslista ${newOstoslista.nimi} lisätty ja avattu`)
+    setTimeout(() => this.props.clearMessages(), 7000)
+
     // Close modal
     this.toggle()
   };
@@ -100,5 +108,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addOstoslista }
+  { addOstoslista, returnMessages, clearMessages }
 )(TarvikeModal)

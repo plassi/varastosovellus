@@ -15,8 +15,10 @@ class OstoslistaView extends Component {
 
   
   static propTypes = {
-    isAuthenticated: PropTypes.bool,
-    ostoslista: PropTypes.object,
+    isAuthenticated: PropTypes.bool.isRequired,
+    ostoslista: PropTypes.object.isRequired,
+    tarvike: PropTypes.object.isRequired,
+    getTarvikkeet: PropTypes.func.isRequired,
     getOstoslistat: PropTypes.func.isRequired
   }
   
@@ -50,6 +52,7 @@ class OstoslistaView extends Component {
 
 const mapStateToProps = state => ({
   ostoslista: state.ostoslista,
+  tarvike: state.tarvike,
   isAuthenticated: state.auth.isAuthenticated
 })
 

@@ -76,11 +76,11 @@ describe('Ostoslistat kirjautuneelle käyttäjälle', function () {
           nimi: 'Ostoslista 1',
           tarvikkeet: [
             {
-              id: tarvikkeet[0].id,
+              id: tarvikkeet[0]._id,
               maara: 5
             },
             {
-              id: tarvikkeet[1].id,
+              id: tarvikkeet[1]._id,
               maara: 10
             }
           ]

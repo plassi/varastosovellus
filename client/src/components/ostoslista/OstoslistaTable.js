@@ -23,22 +23,22 @@ class OstoslistaTable extends Component {
 
   static propTypes = {
     ostoslista: PropTypes.object.isRequired,
-    tarvikkeet: PropTypes.object.isRequired
+    tarvikkeet: PropTypes.array.isRequired
   }
 
   render() {
 
+    
+    
     if (this.props.ostoslista.selected === null) {
       return (<></>)
     } else {
       const { selected } = this.props.ostoslista
-      console.log('ostoslista.selected on OstoslistaTable.js', selected)
-
+      
       const data = selected.tarvikkeet.map(tarvike => {
         const suodatin = this.props.tarvikkeet.filter(muuTarvike => muuTarvike.id === tarvike.id)
 
         const kokoTarvike = suodatin[0]
-        
         
         return (
           {
@@ -47,9 +47,7 @@ class OstoslistaTable extends Component {
           }
         )
       })
-      
-      console.log(data)
-      
+            
       return (
         <>
           <h6>{selected.nimi}</h6>
@@ -71,5 +69,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null
+  {}
 )(OstoslistaTable)
