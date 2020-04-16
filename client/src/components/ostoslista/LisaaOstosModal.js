@@ -15,6 +15,7 @@ import '../componentStyles.css'
 import { TiShoppingCart } from 'react-icons/ti'
 import { updateOstoslista, selectOstoslista } from '../../actions/ostoslistaActions'
 import { returnErrors, clearErrors } from '../../actions/errorActions'
+import { returnMessages, clearMessages } from '../../actions/messageActions'
 
 class LisaaOstosModal extends Component {
   state = {
@@ -28,12 +29,9 @@ class LisaaOstosModal extends Component {
     isAuthenticated: PropTypes.bool,
     ostoslista: PropTypes.object.isRequired,
     selectOstoslista: PropTypes.func.isRequired,
-    updateOstoslista: PropTypes.func.isRequired
-  }
-
-  componentDidMount() {
-    console.log(this.state)
-
+    updateOstoslista: PropTypes.func.isRequired,
+    returnMessages: PropTypes.func.isRequired,
+    clearMessages: PropTypes.func.isRequired
   }
 
   toggle = () => {
@@ -52,12 +50,10 @@ class LisaaOstosModal extends Component {
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value })
-    console.log('LisaaOstosModal state:', this.state);
   }
 
   onSubmit = e => {
     e.preventDefault()
-    console.log(this.state)
 
     const vanhaOstoslista = this.props.ostoslista.ostoslistat.find(ostoslista => ostoslista.id === this.state.ostoslista.id)
 
@@ -66,15 +62,17 @@ class LisaaOstosModal extends Component {
       tarvikkeet: [...vanhaOstoslista.tarvikkeet,
       { id: this.state.tarvike.id, maara: this.state.maara, nimi: this.state.tarvike.nimi }]
     }
-
-    console.log('newOstoslista at LisaaOstosModal.js', newOstoslista)
     
-
     // Add item via addItem action
     this.props.updateOstoslista(newOstoslista)
 
     // muuta alkutilan määrä yhteen
     this.setState({ maara: 1 })
+
+    // Lähetetään viesti onnistuneesta lisäyksestä
+
+    this.props.returnMessages(`tarvike ${this.state.tarvike.nimi} lisätty ostoslistalle ${this.state.ostoslista.nimi}`)
+    setTimeout(() => this.props.clearMessages(), 7000)
 
     // Close modal
     this.toggle()
@@ -164,5 +162,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateOstoslista, selectOstoslista, returnErrors, clearErrors }
+  { updateOstoslista, selectOstoslista, returnErrors, clearErrors, returnMessages, clearMessages }
 )(LisaaOstosModal)
