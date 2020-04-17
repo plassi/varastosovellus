@@ -5,16 +5,13 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  Form,
-  FormGroup,
   Label,
-  Input,
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import { addTarvike } from '../../actions/tarvikeActions'
 import PropTypes from 'prop-types'
 import '../componentStyles.css'
-import { AvForm, AvField, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio, AvCheckboxGroup, AvCheckbox } from 'availity-reactstrap-validation';
+import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 
 class TarvikeModal extends Component {
   state = {
@@ -83,15 +80,12 @@ class TarvikeModal extends Component {
           <ModalBody>
             <AvForm onSubmit={this.onSubmit}>
               <AvGroup>
-                <Label for='tarvike'>Tarvike</Label>
-                <AvInput
-                  id='nimi'
-                  type='text'
-                  name='nimi'
-                  placeholder='Nimi'
-                  onChange={this.onChange}
-                  required
-                />
+              <AvField name="nimi" label="Name" type="text" errorMessage="Invalid name" onChange={this.onChange} placeholder='Nimi' validate={{
+            required: {value: true},
+            pattern: {value: '^[A-Za-z0-9]+$'},
+            minLength: {value: 6},
+            maxLength: {value: 16},
+          }} />
                 <AvFeedback>Syötä nimi!</AvFeedback>
               </AvGroup>
               <AvGroup>
