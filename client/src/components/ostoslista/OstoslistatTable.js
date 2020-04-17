@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Button, Table } from 'reactstrap'
+import { Button, Table } from 'reactstrap'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { AiOutlineDelete, AiOutlineUnorderedList } from 'react-icons/ai'
@@ -37,7 +37,7 @@ class OstoslistatTable extends Component {
     }
 
     const ostoslistaRows = [
-      <tr key={'row-data-' + ostoslista.id}>
+      <tr id="hiddenRow" key={'row-data-' + ostoslista.id}>
         <td>{ostoslista.nimi}</td>
         <td>
           <Button

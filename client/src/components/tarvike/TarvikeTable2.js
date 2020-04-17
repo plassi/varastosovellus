@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit'
 import paginationFactory from 'react-bootstrap-table2-paginator'
-import { Container, Row, Col, InputGroup, InputGroupAddon, Button, Input } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 import { TiPlus, TiMinus } from 'react-icons/ti'
 import TarvikeMuokkaaModal from './TarvikeMuokkaaModal'
 import LisaaOstosModal from '../ostoslista/LisaaOstosModal'
@@ -40,59 +40,44 @@ class TarvikeTable2 extends Component {
     isAuthenticated: PropTypes.bool
   }
 
-
-  renderItem(tarvike) {
-
-    const clickCallback = () => this.handleRowClick(tarvike.id)
-    const tarvikeRows = [
-      <tr onClick={clickCallback} key={'row-data-' + tarvike.id}>
-        <td>{tarvike.kategoria}</td>
-        <td>{tarvike.nimi}</td>
-        <td>{tarvike.maara} {tarvike.maarayksikko}</td>
-        <td>{tarvike.sijainti}</td>
-      </tr>
-    ]
-
-    return tarvikeRows
-  }
-
   render() {
     const { tarvikkeet } = this.props.tarvike
     const { SearchBar } = Search
 
     const expandRow = {
       onlyOneExpanding: true,
-      background: 'black',
       renderer: row => (
         <Container>
-          <Row style={{paddingBottom: '5'}}>
-            <Col xs="3">
+          <Row style={{ paddingBottom: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>
+            <Col xs='6'>
               <h6>Kuvaus</h6>
               <p>{row.kuvaus} </p>
             </Col>
-            <Col xs="3">
-              <h6>Muokkaa määrää</h6>
+            <Col >
+              <h6>Muokkaa</h6>
               <TarvikeMaara row={row} />
             </Col>
-            <Col xs="3" style={{ paddingLeft: '0', paddingRight: '0', textAlign:'right' }}>
-              <h6>Muokkaa</h6>
-              <TarvikeMuokkaaModal row={row} />
-            </Col>
-            <Col xs="3" style={{ paddingRight: '5px' }}>
-              <h6>Lisää ostoslistalle</h6>
-              <LisaaOstosModal row={row} />
+            <Col >
+              <Row >
+                <Col style={{ paddingLeft: '0', paddingRight: '0', textAlign: 'right' }}>
+                  <h6>Muokkaa</h6>
+                  <TarvikeMuokkaaModal row={row} />
+                </Col>
+                <Col style={{ paddingRight: '5px' }}>
+                  <h6>Lisää</h6>
+                  <LisaaOstosModal row={row} />
+                </Col>
+              </Row>
             </Col>
           </Row>
-          <Row>
-          <Col>
-            <h6>Hinta</h6>
+          <Row style={{ paddingTop: '5px' }}>
+            <Col>
+              <h6>Hinta</h6>
+              <p>{row.hinta} e/{row.maarayksikko}</p>
             </Col>
             <Col>
-            <h6>Yksikkö</h6>
-            {row.maarayksikko}
-            </Col>
-            <Col>
-            <h6>Hankintapaikka</h6>
+              <h6>Hankintapaikka</h6>
+              {row.hankintapaikka}
             </Col>
 
             <Col></Col>
@@ -169,7 +154,7 @@ class TarvikeTable2 extends Component {
                   expandRow={expandRow}
                   pagination={paginationFactory(options)}
                   noDataIndication="Tietoja ei saatavilla"
-                  rowStyle={ { backgroundColor: 'whitesmoke' } }
+                  rowStyle={{ backgroundColor: 'whitesmoke' }}
                 />
               </div>
 

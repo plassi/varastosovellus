@@ -9,7 +9,6 @@ import {
   Label,
   Input,
   Col,
-  NavLink,
   Alert
 } from 'reactstrap'
 import { connect } from 'react-redux'
