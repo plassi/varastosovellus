@@ -40,29 +40,12 @@ class TarvikeTable2 extends Component {
     isAuthenticated: PropTypes.bool
   }
 
-
-  renderItem(tarvike) {
-
-    const clickCallback = () => this.handleRowClick(tarvike.id)
-    const tarvikeRows = [
-      <tr onClick={clickCallback} key={'row-data-' + tarvike.id}>
-        <td>{tarvike.kategoria}</td>
-        <td>{tarvike.nimi}</td>
-        <td>{tarvike.maara} {tarvike.maarayksikko}</td>
-        <td>{tarvike.sijainti}</td>
-      </tr>
-    ]
-
-    return tarvikeRows
-  }
-
   render() {
     const { tarvikkeet } = this.props.tarvike
     const { SearchBar } = Search
 
     const expandRow = {
       onlyOneExpanding: true,
-      background: 'black',
       renderer: row => (
         <Container>
           <Row style={{ paddingBottom: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>

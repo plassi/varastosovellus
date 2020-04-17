@@ -47,7 +47,9 @@ class TarvikeMuokkaaModal extends Component {
       maarayksikko: this.state.maarayksikko,
       sijainti: this.state.sijainti,
       avainsanat: this.state.avainsanat,
-      kuva: this.state.kuva
+      kuva: this.state.kuva,
+      hinta: this.state.hinta,
+      hankintapaikka: this.state.hankintapaikka,
     }
 
     // Put item via putItem action
@@ -118,7 +120,7 @@ class TarvikeMuokkaaModal extends Component {
                   type='number'
                   name='maara'
                   defaultValue={this.props.row.maara}
-                  placeholder='määrä'
+                  placeholder='Määrä'
                   onChange={this.onChange}
                 />
               </FormGroup>
@@ -128,7 +130,7 @@ class TarvikeMuokkaaModal extends Component {
                   type='text'
                   name='maarayksikko'
                   defaultValue={this.props.row.maarayksikko}
-                  placeholder='määräyksikkö'
+                  placeholder='Määräyksikkö'
                   onChange={this.onChange}
                 />
               </FormGroup>
@@ -138,7 +140,27 @@ class TarvikeMuokkaaModal extends Component {
                   type='text'
                   name='sijainti'
                   defaultValue={this.props.row.sijainti}
-                  placeholder='sijainti'
+                  placeholder='Sijainti'
+                  onChange={this.onChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  id='hinta'
+                  type='text'
+                  name='hinta'
+                  defaultValue={this.props.row.hinta}
+                  placeholder='Hinta'
+                  onChange={this.onChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  id='hankintapaikka'
+                  type='text'
+                  name='hankintapaikka'
+                  defaultValue={this.props.row.hankintapaikka}
+                  placeholder='Hankintapaikka'
                   onChange={this.onChange}
                 />
               </FormGroup>
@@ -148,7 +170,7 @@ class TarvikeMuokkaaModal extends Component {
               <Button
                 id='tarvike-poista-button'
                 color='danger' block
-                onClick={this.onDeleteClick.bind(this, this.props.row.id)}
+                onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.onDeleteClick.bind(this, this.props.row.id)}}
               >
                 Poista tarvike {this.props.row.nimi}
               </Button>

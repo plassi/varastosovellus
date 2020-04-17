@@ -26,7 +26,7 @@ class OstoslistatTable extends Component {
     }
 
     const ostoslistaRows = [
-      <tr key={'row-data-' + ostoslista.id}>
+      <tr id="hiddenRow" key={'row-data-' + ostoslista.id}>
         <td>{ostoslista.nimi}</td>
         <td>
           <Button
