@@ -55,7 +55,16 @@ class TarvikeModal extends Component {
 
     // Close modal
     this.toggle()
-  };
+  }
+
+  renderLisaaButton() {
+    const disabled = this.state.nimi === ''
+    return (
+      <Button id='lisaa-ostoslista-modal-button' disabled={disabled} color='dark' style={{ marginTop: '2rem' }} block>
+        Lisää ostoslista
+      </Button>
+    )
+  }
 
   render() {
     return (
@@ -78,7 +87,7 @@ class TarvikeModal extends Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Lisää ostoslista</ModalHeader>
           <ModalBody>
-          <AvForm onSubmit={this.onSubmit}>
+            <AvForm onSubmit={this.onSubmit}>
               <AvGroup>
                 <AvInput
                   id='nimi'
@@ -90,11 +99,9 @@ class TarvikeModal extends Component {
                 />
                 <AvFeedback>Syötä nimi</AvFeedback>
               </AvGroup>
-              <Button id='lisaa-ostoslista-modal-button' color='dark' style={{ marginTop: '2rem' }} block>
-                Lisää ostoslista
-              </Button>
-              </AvForm>
-          
+              {this.renderLisaaButton()}
+            </AvForm>
+
           </ModalBody>
         </Modal>
       </div>

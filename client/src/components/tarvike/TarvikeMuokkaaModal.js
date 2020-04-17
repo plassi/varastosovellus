@@ -19,7 +19,9 @@ import { AvForm, AvGroup, AvInput, AvFeedback, AvField } from 'availity-reactstr
 class TarvikeMuokkaaModal extends Component {
   state = {
     modal: false,
-
+    nimi: this.props.row.nimi,
+    maara: this.props.row.maara,
+    maarayksikko: this.props.row.maarayksikko
   };
 
   static propTypes = {
@@ -67,7 +69,20 @@ class TarvikeMuokkaaModal extends Component {
     this.toggle()
   }
 
+  renderMuokkaaButton = () => {
+
+    const disabled = this.state.nimi === '' || this.state.maara === '' || this.state.maarayksikko === ''
+
+    return (
+      <Button id='tarvike-tallenna-button' disabled={disabled} color='dark' style={{ marginTop: '2rem' }} block>
+        Tallenna
+      </Button>
+    )
+
+  }
+
   render() {
+    console.log(this.state)
     return (
       <div>
         {this.props.isAuthenticated
@@ -169,9 +184,7 @@ class TarvikeMuokkaaModal extends Component {
                   onChange={this.onChange}
                 />
               </AvGroup>
-              <Button id='tarvike-tallenna-button' color='dark' style={{ marginTop: '2rem' }} block>
-                Tallenna
-              </Button>
+              {this.renderMuokkaaButton()}
               <Button
                 id='tarvike-poista-button'
                 color='danger' block
