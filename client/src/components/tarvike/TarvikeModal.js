@@ -19,7 +19,9 @@ import { AvForm, AvField, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio, A
 class TarvikeModal extends Component {
   state = {
     modal: false,
-    nimi: ''
+    nimi: '',
+    maara: '',
+    maarayksikko: ''
   }
 
   static propTypes = {
@@ -60,7 +62,20 @@ class TarvikeModal extends Component {
     this.toggle()
   };
 
+  renderLisaaButton = () => {
+
+    const disabled = this.state.nimi === '' || this.state.maara === '' || this.state.maarayksikko === '' 
+
+    return (
+      <Button id='modal-lisaa-tarvike-button' disabled={disabled} color='dark' style={{ marginTop: '2rem' }} block>
+        Lisää tarvike
+      </Button>
+    )
+
+  }
+
   render() {
+    console.log(this.state);
 
     return (
       <div>
@@ -81,6 +96,7 @@ class TarvikeModal extends Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Lisää tarvike</ModalHeader>
           <ModalBody>
+            <p><i>Nimi, Määrä ja Määräyksikkö ovat pakollisia kenttiä</i></p>
             <AvForm onSubmit={this.onSubmit}>
               <AvGroup>
                 <Label for='tarvike'>Tarvike</Label>
@@ -101,9 +117,9 @@ class TarvikeModal extends Component {
                   name='kategoria'
                   placeholder='Kategoria'
                   onChange={this.onChange}
-                  
+
                 />
-                
+
               </AvGroup>
               <AvGroup>
                 <AvInput
@@ -163,10 +179,8 @@ class TarvikeModal extends Component {
                   onChange={this.onChange}
                 />
               </AvGroup>
-              
-              <Button id='modal-lisaa-tarvike-button' color='dark' style={{ marginTop: '2rem' }} block>
-                Lisää tarvike
-              </Button>
+
+              {this.renderLisaaButton()}
 
             </AvForm>
           </ModalBody>
