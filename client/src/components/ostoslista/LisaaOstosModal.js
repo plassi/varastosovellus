@@ -82,14 +82,20 @@ class LisaaOstosModal extends Component {
 
   valitseOstoslista(e) {
     console.log(e.target.value)
-
+    console.log(this.props.ostoslista.ostoslistat.find(ostoslista => ostoslista.id === e.target.value))
+    
+    
     e.preventDefault()
-    this.props.selectOstoslista(this.props.ostoslista.ostoslistat.find(ostoslista => ostoslista.id === e.target.value))
-    this.setState({ ostoslista: this.props.ostoslista.selected })
+    const valittuLista = this.props.ostoslista.ostoslistat.find(ostoslista => ostoslista.id === e.target.value)
+    this.props.selectOstoslista(valittuLista)
+    this.setState({ ostoslista: valittuLista })
   }
 
 
   render() {
+
+    console.log(this.state);
+    
     const allOstoslistaRows = this.props.ostoslista.ostoslistat.map(ostoslista => {
       return (
         <option key={'row-data-' + ostoslista.id} value={ostoslista.id}>{ostoslista.nimi}</option>
