@@ -41,8 +41,6 @@ class TarvikeModal extends Component {
   }
 
   onSubmit = e => {
-    e.preventDefault()
-
     const newOstoslista = {
       nimi: this.state.nimi
     }

@@ -54,21 +54,48 @@ class LisaaOstosModal extends Component {
   }
 
   onSubmit = e => {
-    e.preventDefault()
-
+    // Haetaan vanhan ostoslistan tarvikkeet muuttujaan
     const vanhaOstoslista = this.props.ostoslista.ostoslistat.find(ostoslista => ostoslista.id === this.state.ostoslista.id)
+    
+    // jos lisättävä tarvike on jo valitulla ostoslistalla
+    const olemassaOlevaTarvike = this.state.ostoslista.tarvikkeet.find(tarvike => tarvike.id === this.state.tarvike.id)
+    
+    console.log('Olemassaolevatarvike', olemassaOlevaTarvike);
+    
 
-    const newOstoslista = {
-      id: this.state.ostoslista.id,
-      tarvikkeet: [...vanhaOstoslista.tarvikkeet,
-      { id: this.state.tarvike.id, maara: this.state.maara, nimi: this.state.tarvike.nimi }]
+    let newOstoslista
+
+    if (olemassaOlevaTarvike) {
+      vanhaOstoslista.tarvikkeet.forEach(tarvike => tarvike.id === olemassaOlevaTarvike.id ? tarvike.maara = tarvike.maara + this.state.maara : tarvike)
+      console.log(vanhaOstoslista)
+      
+      newOstoslista = {
+        id: this.state.ostoslista.id,
+        tarvikkeet: [...vanhaOstoslista.tarvikkeet]
+      }
+
+
+      
+      console.log('uusilista olemassa olevalla tarvikkeella', newOstoslista);
+      
+    } else {
+      newOstoslista = {
+        nimi: this.state.ostoslista.nimi,
+        id: this.state.ostoslista.id,
+        tarvikkeet: [...vanhaOstoslista.tarvikkeet,
+        { id: this.state.tarvike.id, maara: this.state.maara, nimi: this.state.tarvike.nimi }]
+      }
+      console.log('uusilista uudella tarvikkeella',newOstoslista);
     }
     
     // Add item via addItem action
     this.props.updateOstoslista(newOstoslista)
 
-    // muuta alkutilan määrä yhteen
-    this.setState({ maara: 1 })
+    // valitaan päivitetty lista valituksi ostoslistaksi
+    this.props.selectOstoslista(newOstoslista)
+
+    // muuta alkutilan määrä yhteen ja uusi ostoslista
+    this.setState({ ostoslista: newOstoslista, maara: 1 })
 
     // Lähetetään viesti onnistuneesta lisäyksestä
 
@@ -149,6 +176,7 @@ class LisaaOstosModal extends Component {
                   placeholder='Lisättävä määrä'
                   onChange={this.onChange}
                   required errorMessage="Syötä määrä"
+                  value={this.state.maara}
                   style={{ weight: '50px' }} />
               </AvGroup>
               <Button id='lisaa-ostoslistalle-modal-button' color='dark' style={{ marginTop: '2rem' }} block>
