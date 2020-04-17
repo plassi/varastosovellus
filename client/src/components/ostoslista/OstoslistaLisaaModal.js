@@ -13,9 +13,9 @@ import {
 import { connect } from 'react-redux'
 import { addOstoslista } from '../../actions/ostoslistaActions'
 import { returnMessages, clearMessages } from '../../actions/messageActions'
-
 import PropTypes from 'prop-types'
 import '../componentStyles.css'
+import { AvForm, AvGroup, AvInput, AvFeedback, AvField } from 'availity-reactstrap-validation';
 
 class TarvikeModal extends Component {
   state = {
@@ -78,22 +78,23 @@ class TarvikeModal extends Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Lisää ostoslista</ModalHeader>
           <ModalBody>
-            <Form onSubmit={this.onSubmit}>
-              <FormGroup>
-                <Label for='ostoslista'>Ostoslista</Label>
-                <Input
+          <AvForm onSubmit={this.onSubmit}>
+              <AvGroup>
+                <AvInput
+                  id='nimi'
                   type='text'
                   name='nimi'
                   placeholder='Nimi'
                   onChange={this.onChange}
+                  required
                 />
-              </FormGroup>
-
+                <AvFeedback>Syötä nimi</AvFeedback>
+              </AvGroup>
               <Button id='lisaa-ostoslista-modal-button' color='dark' style={{ marginTop: '2rem' }} block>
                 Lisää ostoslista
               </Button>
-
-            </Form>
+              </AvForm>
+          
           </ModalBody>
         </Modal>
       </div>
