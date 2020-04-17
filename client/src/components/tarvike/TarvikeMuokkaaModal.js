@@ -14,6 +14,7 @@ import { deleteTarvike, updateTarvike } from '../../actions/tarvikeActions'
 import PropTypes from 'prop-types'
 import '../componentStyles.css'
 import { FaRegEdit } from 'react-icons/fa'
+import { AvForm, AvGroup, AvInput, AvFeedback, AvField } from 'availity-reactstrap-validation';
 
 class TarvikeMuokkaaModal extends Component {
   state = {
@@ -82,20 +83,21 @@ class TarvikeMuokkaaModal extends Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Muokkaa</ModalHeader>
           <ModalBody>
-            <Form onSubmit={this.onSubmit}>
-              <FormGroup>
-                <Label for='tarvike'>Tarvike</Label>
-                <Input
+            <AvForm onSubmit={this.onSubmit}>
+              <AvGroup>
+                <AvInput
                   id='nimi'
                   type='text'
                   name='nimi'
                   defaultValue={this.props.row.nimi}
                   placeholder='Nimi'
                   onChange={this.onChange}
+                  required
                 />
-              </FormGroup>
-              <FormGroup>
-                <Input
+                <AvFeedback>Syötä nimi</AvFeedback>
+              </AvGroup>
+              <AvGroup>
+                <AvInput
                   id='kategoria'
                   type='text'
                   name='kategoria'
@@ -103,9 +105,9 @@ class TarvikeMuokkaaModal extends Component {
                   placeholder='Kategoria'
                   onChange={this.onChange}
                 />
-              </FormGroup>
-              <FormGroup>
-                <Input
+              </AvGroup>
+              <AvGroup>
+                <AvInput
                   id='kuvaus'
                   type='textarea'
                   name='kuvaus'
@@ -113,29 +115,32 @@ class TarvikeMuokkaaModal extends Component {
                   placeholder='Kuvaus'
                   onChange={this.onChange}
                 />
-              </FormGroup>
-              <FormGroup>
-                <Input
+              </AvGroup>
+              <AvGroup>
+                <AvField
                   id='maara'
-                  type='number'
-                  name='maara'
+                  name="maara"
+                  type="number"
+                  min="0"
                   defaultValue={this.props.row.maara}
                   placeholder='Määrä'
                   onChange={this.onChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Input
+                  required errorMessage="Syötä määrä" />
+              </AvGroup>
+              <AvGroup>
+                <AvInput
                   id='maarayksikko'
                   type='text'
                   name='maarayksikko'
                   defaultValue={this.props.row.maarayksikko}
                   placeholder='Määräyksikkö'
                   onChange={this.onChange}
+                  required
                 />
-              </FormGroup>
-              <FormGroup>
-                <Input
+                <AvFeedback>Syötä yksikkö</AvFeedback>
+              </AvGroup>
+              <AvGroup>
+                <AvInput
                   id='sijainti'
                   type='text'
                   name='sijainti'
@@ -143,19 +148,19 @@ class TarvikeMuokkaaModal extends Component {
                   placeholder='Sijainti'
                   onChange={this.onChange}
                 />
-              </FormGroup>
-              <FormGroup>
-                <Input
+              </AvGroup>
+              <AvGroup>
+                <AvField
                   id='hinta'
-                  type='text'
-                  name='hinta'
+                  name="hinta"
+                  type="number"
+                  min="0"
                   defaultValue={this.props.row.hinta}
                   placeholder='Hinta'
-                  onChange={this.onChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Input
+                  onChange={this.onChange} />
+              </AvGroup>
+              <AvGroup>
+                <AvInput
                   id='hankintapaikka'
                   type='text'
                   name='hankintapaikka'
@@ -163,18 +168,18 @@ class TarvikeMuokkaaModal extends Component {
                   placeholder='Hankintapaikka'
                   onChange={this.onChange}
                 />
-              </FormGroup>
+              </AvGroup>
               <Button id='tarvike-tallenna-button' color='dark' style={{ marginTop: '2rem' }} block>
                 Tallenna
               </Button>
               <Button
                 id='tarvike-poista-button'
                 color='danger' block
-                onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.onDeleteClick.bind(this, this.props.row.id)}}
+                onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.onDeleteClick.bind(this, this.props.row.id) }}
               >
                 Poista tarvike {this.props.row.nimi}
               </Button>
-            </Form>
+            </AvForm>
           </ModalBody>
         </Modal>
       </div>

@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import { addTarvike } from '../../actions/tarvikeActions'
 import PropTypes from 'prop-types'
 import '../componentStyles.css'
-import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
+import { AvForm, AvGroup, AvInput, AvFeedback, AvField } from 'availity-reactstrap-validation';
 
 class TarvikeModal extends Component {
   state = {
@@ -80,13 +80,15 @@ class TarvikeModal extends Component {
           <ModalBody>
             <AvForm onSubmit={this.onSubmit}>
               <AvGroup>
-              <AvField name="nimi" label="Name" type="text" errorMessage="Invalid name" onChange={this.onChange} placeholder='Nimi' validate={{
-            required: {value: true},
-            pattern: {value: '^[A-Za-z0-9]+$'},
-            minLength: {value: 6},
-            maxLength: {value: 16},
-          }} />
-                <AvFeedback>Syötä nimi!</AvFeedback>
+                <AvInput
+                  id='nimi'
+                  type='text'
+                  name='nimi'
+                  placeholder='Nimi'
+                  onChange={this.onChange}
+                  required
+                />
+                <AvFeedback>Syötä nimi</AvFeedback>
               </AvGroup>
               <AvGroup>
                 <AvInput
@@ -95,9 +97,7 @@ class TarvikeModal extends Component {
                   name='kategoria'
                   placeholder='Kategoria'
                   onChange={this.onChange}
-                  
                 />
-                
               </AvGroup>
               <AvGroup>
                 <AvInput
@@ -109,15 +109,14 @@ class TarvikeModal extends Component {
                 />
               </AvGroup>
               <AvGroup>
-                <AvInput
+                <AvField
                   id='maara'
-                  type='number'
-                  name='maara'
+                  name="maara"
+                  type="number"
+                  min="0"
                   placeholder='Määrä'
                   onChange={this.onChange}
-                  required
-                />
-                <AvFeedback>Syötä määrä!</AvFeedback>
+                  required errorMessage="Syötä määrä" />
               </AvGroup>
               <AvGroup>
                 <AvInput
@@ -128,7 +127,7 @@ class TarvikeModal extends Component {
                   onChange={this.onChange}
                   required
                 />
-                <AvFeedback>Syötä yksikkö!</AvFeedback>
+                <AvFeedback>Syötä yksikkö</AvFeedback>
               </AvGroup>
               <AvGroup>
                 <AvInput
@@ -140,13 +139,13 @@ class TarvikeModal extends Component {
                 />
               </AvGroup>
               <AvGroup>
-                <AvInput
+                <AvField
                   id='hinta'
-                  type='text'
-                  name='hinta'
+                  name="hinta"
+                  type="number"
+                  min="0"
                   placeholder='Hinta'
-                  onChange={this.onChange}
-                />
+                  onChange={this.onChange} />
               </AvGroup>
               <AvGroup>
                 <AvInput
@@ -157,11 +156,9 @@ class TarvikeModal extends Component {
                   onChange={this.onChange}
                 />
               </AvGroup>
-              
               <Button id='modal-lisaa-tarvike-button' color='dark' style={{ marginTop: '2rem' }} block>
                 Lisää tarvike
               </Button>
-
             </AvForm>
           </ModalBody>
         </Modal>

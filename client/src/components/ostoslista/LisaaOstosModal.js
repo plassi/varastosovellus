@@ -16,6 +16,7 @@ import { TiShoppingCart } from 'react-icons/ti'
 import { updateOstoslista, selectOstoslista } from '../../actions/ostoslistaActions'
 import { returnErrors, clearErrors } from '../../actions/errorActions'
 import { returnMessages, clearMessages } from '../../actions/messageActions'
+import { AvForm, AvGroup, AvInput, AvFeedback, AvField } from 'availity-reactstrap-validation';
 
 class LisaaOstosModal extends Component {
   state = {
@@ -113,7 +114,7 @@ class LisaaOstosModal extends Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Lisää ostoslistalle</ModalHeader>
           <ModalBody>
-            <Form onSubmit={this.onSubmit}>
+            <AvForm onSubmit={this.onSubmit}>
               <FormGroup>
                 <Label for="exampleSelect"><h6>Valitse lista</h6></Label>
                 <Input type="select" name="select" defaultValue={this.state.ostoslista ? this.state.ostoslista.id : null} onChange={(e) => this.valitseOstoslista(e)}>
@@ -132,21 +133,22 @@ class LisaaOstosModal extends Component {
                   {this.props.row.maara} {this.props.row.maarayksikko}
                 </Label>
               </FormGroup>
-              <FormGroup>
+              <AvGroup>
                 <Label for='tarvike'><h6>Määrä ostoslistalle: </h6></Label><br />
-                <Input
-                  type='number'
-                  name='maara'
-                  defaultValue='1'
+                <AvField
+                  id='maara'
+                  name="maara"
+                  type="number"
+                  min="0"
                   placeholder='Lisättävä määrä'
                   onChange={this.onChange}
-                  style={{ weight: '50px' }}
-                />
-              </FormGroup>
+                  required errorMessage="Syötä määrä"
+                  style={{ weight: '50px' }} />
+              </AvGroup>
               <Button id='lisaa-ostoslistalle-modal-button' color='dark' style={{ marginTop: '2rem' }} block>
                 Lisää
               </Button>
-            </Form>
+            </AvForm>
           </ModalBody>
         </Modal>
       </div>
