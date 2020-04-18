@@ -7,7 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
 import { Button } from 'reactstrap'
 import { AiOutlineDelete } from 'react-icons/ai'
-import { deleteOstoslista } from '../../actions/ostoslistaActions'
+import { updateOstoslista, deleteOstoslista, selectOstoslista } from '../../actions/ostoslistaActions'
+import { returnMessages, clearMessages } from '../../actions/messageActions'
 
 class OstoslistaTable extends Component {
   state = {
@@ -34,13 +35,13 @@ class OstoslistaTable extends Component {
       },
       {
         dataField: 'hankintapaikka',
-        text: 'Myyjä',
+        text: 'Hankintapaikka',
         sort: true,
       },
       {
         dataField: 'poista',
         text: 'Poista',
-       
+
       },
 
     ],
@@ -49,10 +50,24 @@ class OstoslistaTable extends Component {
   static propTypes = {
     ostoslista: PropTypes.object.isRequired,
     tarvikkeet: PropTypes.array.isRequired,
+    updateOstoslista: PropTypes.func.isRequired,
     deleteOstoslista: PropTypes.func.isRequired
   }
 
-  onDeleteClick = (id) => {
+  onDeleteClick = async (id) => {
+    const ostoslistanTarvikkeet = this.props.ostoslista.selected.tarvikkeet.filter(tarvike => tarvike.id === id ? null : tarvike)
+    const uusiOstoslista = {
+      nimi: this.props.ostoslista.selected.nimi,
+      id: this.props.ostoslista.selected.id,
+      tarvikkeet: [ ...ostoslistanTarvikkeet ]
+    }
+    console.log(uusiOstoslista)
+
+    const promise = new Promise(() => this.props.updateOstoslista(uusiOstoslista))
+    promise.then(this.props.selectOstoslista(uusiOstoslista))
+    
+    this.props.returnMessages('Tarvike poistettu ostoslistalta')
+    setTimeout(() => this.props.clearMessages(), 5000)
 
   }
 
@@ -76,15 +91,15 @@ class OstoslistaTable extends Component {
             hinta: kokoTarvike.hinta,
             hankintapaikka: kokoTarvike.hankintapaikka,
             poista: <Button className='remove-btn'
-            color='danger'
-            size='sm'
-            onClick={this.onDeleteClick.bind(kokoTarvike.id)}
-          >
-            <AiOutlineDelete /></Button>
+              color='danger'
+              size='sm'
+              onClick={() => this.onDeleteClick(kokoTarvike.id)}
+            >
+              <AiOutlineDelete /></Button>
           }
         )
       })
-    
+
       return (
         <>
           <h5>{selected.nimi}</h5>
@@ -95,11 +110,11 @@ class OstoslistaTable extends Component {
             columns={this.state.columns}
           />
           <ReactToPrint
-          bodyClass="p-5"
+            bodyClass="p-5"
             trigger={() => <Button
               color='dark'
               style={{ marginBottom: '2rem' }}>Tulosta</Button>}
-            content={() => this.componentRef }
+            content={() => this.componentRef}
           />
 
         </>
@@ -115,5 +130,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {deleteOstoslista}
+  { deleteOstoslista, updateOstoslista, selectOstoslista, returnMessages, clearMessages }
 )(OstoslistaTable)

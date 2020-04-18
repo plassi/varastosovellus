@@ -60,21 +60,21 @@ class TarvikeMuokkaaModal extends Component {
   }
 
   onDeleteClick = id => {
-    confirm({
+    const varmistus = confirm({
       title: (
-          <>
-              HUOM!
-          </>
+        <>
+          HUOM!
+        </>
       ),
       message: "Oletko varma, että haluat poistaa tarvikkeen?",
       confirmText: "Poista",
       confirmColor: "dark",
       cancelColor: "link text-danger",
       cancelText: "Peruuta"
-  }
-  );
-  //this.props.deleteTarvike(id)
-
+    })
+      .then((varmistus) =>
+        varmistus === true ? this.props.deleteTarvike(id) : null
+      )
 
     // Close modal
     this.toggle()
@@ -199,7 +199,7 @@ class TarvikeMuokkaaModal extends Component {
               <Button
                 id='tarvike-poista-button'
                 color='danger' block
-                onClick={this.onDeleteClick.bind(this, this.props.row.id) }
+                onClick={this.onDeleteClick.bind(this, this.props.row.id)}
               >
                 Poista tarvike {this.props.row.nimi}
               </Button>

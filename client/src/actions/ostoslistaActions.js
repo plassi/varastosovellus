@@ -62,8 +62,6 @@ export const updateOstoslista = ostoslista => (dispatch, getState) => {
         type: UPDATE_OSTOSLISTA,
         payload: res.data
       })
-
-      console.log(ostoslista)
     }
     )
     .catch(err =>
