@@ -5,7 +5,6 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  Label,
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import { addTarvike } from '../../actions/tarvikeActions'

@@ -4,7 +4,6 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  Form,
   FormGroup,
   Label,
   Input
@@ -16,7 +15,7 @@ import { TiShoppingCart } from 'react-icons/ti'
 import { updateOstoslista, selectOstoslista } from '../../actions/ostoslistaActions'
 import { returnErrors, clearErrors } from '../../actions/errorActions'
 import { returnMessages, clearMessages } from '../../actions/messageActions'
-import { AvForm, AvGroup, AvInput, AvFeedback, AvField } from 'availity-reactstrap-validation';
+import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
 
 class LisaaOstosModal extends Component {
   state = {

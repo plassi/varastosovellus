@@ -4,10 +4,6 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  Form,
-  FormGroup,
-  Label,
-  Input,
   Col
 } from 'reactstrap'
 import { connect } from 'react-redux'
@@ -15,7 +11,7 @@ import { addOstoslista } from '../../actions/ostoslistaActions'
 import { returnMessages, clearMessages } from '../../actions/messageActions'
 import PropTypes from 'prop-types'
 import '../componentStyles.css'
-import { AvForm, AvGroup, AvInput, AvFeedback, AvField } from 'availity-reactstrap-validation';
+import { AvForm, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 
 class TarvikeModal extends Component {
   state = {

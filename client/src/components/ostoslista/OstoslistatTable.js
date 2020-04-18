@@ -3,9 +3,9 @@ import { Button, Table } from 'reactstrap'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { AiOutlineDelete, AiOutlineUnorderedList } from 'react-icons/ai'
-
 import { deleteOstoslista, selectOstoslista } from '../../actions/ostoslistaActions'
 import { returnMessages, clearMessages } from '../../actions/messageActions'
+import confirm from "reactstrap-confirm";
 
 class OstoslistatTable extends Component {
 
@@ -25,7 +25,21 @@ class OstoslistatTable extends Component {
   renderItem(ostoslista) {
 
     const onDeleteClick = (id) => {
-      this.props.deleteOstoslista(id)
+      confirm({
+        title: (
+            <>
+                HUOM!
+            </>
+        ),
+        message: "Oletko varma, että haluat poistaa tarvikkeen?",
+        confirmText: "Poista",
+        confirmColor: "dark",
+        cancelColor: "link text-danger",
+        cancelText: "Peruuta"
+    }
+    );
+
+     // this.props.deleteOstoslista(id)
       this.props.returnMessages('ostoslista poistettu')
       setTimeout(() => this.props.clearMessages(), 5000)
     }
