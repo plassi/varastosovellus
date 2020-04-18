@@ -3,11 +3,7 @@ import {
   Button,
   Modal,
   ModalHeader,
-  ModalBody,
-  Form,
-  FormGroup,
-  Label,
-  Input
+  ModalBody
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import { deleteTarvike, updateTarvike } from '../../actions/tarvikeActions'
@@ -15,6 +11,7 @@ import PropTypes from 'prop-types'
 import '../componentStyles.css'
 import { FaRegEdit } from 'react-icons/fa'
 import { AvForm, AvGroup, AvInput, AvFeedback, AvField } from 'availity-reactstrap-validation';
+import confirm from "reactstrap-confirm";
 
 class TarvikeMuokkaaModal extends Component {
   state = {
@@ -63,7 +60,21 @@ class TarvikeMuokkaaModal extends Component {
   }
 
   onDeleteClick = id => {
-    this.props.deleteTarvike(id)
+    confirm({
+      title: (
+          <>
+              HUOM!
+          </>
+      ),
+      message: "Oletko varma, että haluat poistaa tarvikkeen?",
+      confirmText: "Poista",
+      confirmColor: "dark",
+      cancelColor: "link text-danger",
+      cancelText: "Peruuta"
+  }
+  );
+  //this.props.deleteTarvike(id)
+
 
     // Close modal
     this.toggle()
@@ -188,7 +199,7 @@ class TarvikeMuokkaaModal extends Component {
               <Button
                 id='tarvike-poista-button'
                 color='danger' block
-                onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.onDeleteClick.bind(this, this.props.row.id) }}
+                onClick={this.onDeleteClick.bind(this, this.props.row.id) }
               >
                 Poista tarvike {this.props.row.nimi}
               </Button>

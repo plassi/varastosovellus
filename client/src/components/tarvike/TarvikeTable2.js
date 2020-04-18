@@ -48,29 +48,14 @@ class TarvikeTable2 extends Component {
       onlyOneExpanding: true,
       renderer: row => (
         <Container>
+          
+          <Row style={{ paddingBottom: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }} >
+              <Col>
+                <h6>Kuvaus</h6>
+                <p>{row.kuvaus} </p>
+              </Col>
+            </Row>
           <Row style={{ paddingBottom: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>
-            <Col xs='6'>
-              <h6>Kuvaus</h6>
-              <p>{row.kuvaus} </p>
-            </Col>
-            <Col >
-              <h6>Muokkaa</h6>
-              <TarvikeMaara row={row} />
-            </Col>
-            <Col >
-              <Row >
-                <Col style={{ paddingLeft: '0', paddingRight: '0', textAlign: 'right' }}>
-                  <h6>Muokkaa</h6>
-                  <TarvikeMuokkaaModal row={row} />
-                </Col>
-                <Col style={{ paddingRight: '5px' }}>
-                  <h6>Lisää</h6>
-                  <LisaaOstosModal row={row} />
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <Row style={{ paddingTop: '5px' }}>
             <Col>
               <h6>Hinta</h6>
               <p>{row.hinta} e/{row.maarayksikko}</p>
@@ -81,6 +66,25 @@ class TarvikeTable2 extends Component {
             </Col>
 
             <Col></Col>
+          </Row>
+          <Row style={{ paddingBottom: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>
+              <Col >
+                <h6>Muokkaa määrää</h6>
+                <TarvikeMaara row={row} />
+              </Col>
+              <Col >
+                <Row >
+                  <Col style={{ paddingLeft: '0', paddingRight: '0', textAlign: 'right' }}>
+                    <h6>Muokkaa</h6>
+                    <TarvikeMuokkaaModal row={row} />
+                  </Col>
+                  <Col style={{ paddingRight: '5px' }}>
+                    <h6>Lisää ostoslistalle</h6>
+                    <LisaaOstosModal row={row} />
+                  </Col>
+                </Row>
+              </Col>
+            
           </Row>
         </Container>
       ),
