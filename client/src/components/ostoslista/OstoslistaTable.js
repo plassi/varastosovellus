@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import BootstrapTable from 'react-bootstrap-table-next'
+import ReactToPrint from 'react-to-print'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
 import { Button } from 'reactstrap'
@@ -45,18 +46,15 @@ class OstoslistaTable extends Component {
 
   render() {
 
-    
-    
     if (this.props.ostoslista.selected === null) {
       return (<></>)
     } else {
       const { selected } = this.props.ostoslista
-      
+
       const data = selected.tarvikkeet.map(tarvike => {
         const suodatin = this.props.tarvikkeet.filter(muuTarvike => muuTarvike.id === tarvike.id)
 
         const kokoTarvike = suodatin[0]
-
 
         return (
           {
@@ -68,18 +66,24 @@ class OstoslistaTable extends Component {
           }
         )
       })
-            
+    
       return (
         <>
           <h5>{selected.nimi}</h5>
           <BootstrapTable
+            ref={el => (this.componentRef = el)}
             keyField="id"
             data={data}
             columns={this.state.columns}
           />
-          <Button
-            color='dark'
-            style={{ marginBottom: '2rem' }}>Tulosta</Button>
+          <ReactToPrint
+          bodyClass="p-5"
+            trigger={() => <Button
+              color='dark'
+              style={{ marginBottom: '2rem' }}>Tulosta</Button>}
+            content={() => this.componentRef }
+          />
+
         </>
       )
     }
