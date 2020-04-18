@@ -50,9 +50,11 @@ class TarvikeTable2 extends Component {
         <Container>
           
           <Row style={{ paddingBottom: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }} >
-              <Col>
-                <h6>Kuvaus</h6>
-                <p>{row.kuvaus} </p>
+              <Col xs="3">
+                <h6>Kuvaus:</h6>               
+              </Col>
+              <Col> 
+              <p>{row.kuvaus} </p>
               </Col>
             </Row>
           <Row style={{ paddingBottom: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>

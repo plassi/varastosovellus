@@ -5,6 +5,8 @@ import BootstrapTable from 'react-bootstrap-table-next'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
 import { Button } from 'reactstrap'
+import { AiOutlineDelete } from 'react-icons/ai'
+import { deleteOstoslista } from '../../actions/ostoslistaActions'
 
 class OstoslistaTable extends Component {
   state = {
@@ -31,8 +33,13 @@ class OstoslistaTable extends Component {
       },
       {
         dataField: 'hankintapaikka',
-        text: 'Hankintapaikka',
+        text: 'Myyjä',
         sort: true,
+      },
+      {
+        dataField: 'poista',
+        text: 'Poista',
+       
       },
 
     ],
@@ -40,7 +47,12 @@ class OstoslistaTable extends Component {
 
   static propTypes = {
     ostoslista: PropTypes.object.isRequired,
-    tarvikkeet: PropTypes.array.isRequired
+    tarvikkeet: PropTypes.array.isRequired,
+    deleteOstoslista: PropTypes.func.isRequired
+  }
+
+  onDeleteClick = (id) => {
+
   }
 
   render() {
@@ -64,7 +76,13 @@ class OstoslistaTable extends Component {
             nimi: kokoTarvike.nimi,
             maarayksikko: kokoTarvike.maarayksikko,
             hinta: kokoTarvike.hinta,
-            hankintapaikka: kokoTarvike.hankintapaikka
+            hankintapaikka: kokoTarvike.hankintapaikka,
+            poista: <Button className='remove-btn'
+            color='danger'
+            size='sm'
+            onClick={this.onDeleteClick.bind(kokoTarvike.id)}
+          >
+            <AiOutlineDelete /></Button>
           }
         )
       })
@@ -93,5 +111,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  {deleteOstoslista}
 )(OstoslistaTable)
