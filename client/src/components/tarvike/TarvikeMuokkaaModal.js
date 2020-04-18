@@ -7,6 +7,7 @@ import {
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import { deleteTarvike, updateTarvike } from '../../actions/tarvikeActions'
+import { returnErrors, clearErrors } from '../../actions/errorActions'
 import PropTypes from 'prop-types'
 import '../componentStyles.css'
 import { FaRegEdit } from 'react-icons/fa'
@@ -22,7 +23,8 @@ class TarvikeMuokkaaModal extends Component {
   };
 
   static propTypes = {
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    ostoslista: PropTypes.object.isRequired
   }
 
   toggle = () => {
@@ -60,21 +62,39 @@ class TarvikeMuokkaaModal extends Component {
   }
 
   onDeleteClick = id => {
-    const varmistus = confirm({
-      title: (
-        <>
-          HUOM!
-        </>
-      ),
-      message: "Oletko varma, että haluat poistaa tarvikkeen?",
-      confirmText: "Poista",
-      confirmColor: "dark",
-      cancelColor: "link text-danger",
-      cancelText: "Peruuta"
+    // Jos tarvike on jollain ostoslistalla, sitä ei voi poistaa
+    let onOstosListalla = false
+
+    this.props.ostoslista.ostoslistat.forEach(ostoslista => {
+      ostoslista.tarvikkeet.forEach(tarvike => {
+        if (tarvike.id === id) {
+
+          this.props.returnErrors('Ostoslistalla olevaa tarviketta ei voi poistaa')
+          onOstosListalla = true
+
+          setTimeout(() => this.props.clearErrors(), 5000)
+        }
+      })
     })
-      .then((varmistus) =>
-        varmistus === true ? this.props.deleteTarvike(id) : null
-      )
+
+    if (!onOstosListalla) {
+      const varmistus = confirm({
+        title: (
+          <>
+            HUOM!
+          </>
+        ),
+        message: "Oletko varma, että haluat poistaa tarvikkeen?",
+        confirmText: "Poista",
+        confirmColor: "dark",
+        cancelColor: "link text-danger",
+        cancelText: "Peruuta"
+      })
+        .then((varmistus) =>
+          varmistus === true ? this.props.deleteTarvike(id) : null
+        )
+
+    }
 
     // Close modal
     this.toggle()
@@ -213,10 +233,11 @@ class TarvikeMuokkaaModal extends Component {
 
 const mapStateToProps = state => ({
   item: state.item,
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  ostoslista: state.ostoslista
 })
 
 export default connect(
   mapStateToProps,
-  { deleteTarvike, updateTarvike }
+  { deleteTarvike, updateTarvike, returnErrors, clearErrors }
 )(TarvikeMuokkaaModal)
