@@ -27,21 +27,24 @@ class OstoslistatTable extends Component {
     const onDeleteClick = (id) => {
       confirm({
         title: (
-            <>
-                HUOM!
-            </>
+          <>
+            HUOM!
+          </>
         ),
-        message: "Oletko varma, että haluat poistaa tarvikkeen?",
+        message: "Oletko varma, että haluat poistaa ostoslistan?",
         confirmText: "Poista",
         confirmColor: "dark",
         cancelColor: "link text-danger",
         cancelText: "Peruuta"
-    }
-    );
+      })
+        .then((varmistus) => {
+          if (varmistus) {
+            this.props.deleteOstoslista(id)
+            this.props.returnMessages('ostoslista poistettu')
+            setTimeout(() => this.props.clearMessages(), 5000)
+          }
+        })
 
-     // this.props.deleteOstoslista(id)
-      this.props.returnMessages('ostoslista poistettu')
-      setTimeout(() => this.props.clearMessages(), 5000)
     }
 
     const openClick = () => {

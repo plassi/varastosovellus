@@ -78,7 +78,7 @@ class TarvikeMuokkaaModal extends Component {
     })
 
     if (!onOstosListalla) {
-      const varmistus = confirm({
+      confirm({
         title: (
           <>
             HUOM!
