@@ -56,7 +56,7 @@ class App extends Component {
                 <Col>
                   <Alert color='success'>{this.props.message.msg}</Alert>
                 </Col>
-              ) : null}
+              ) : <div className='py-3'></div>}
               {this.props.error.msg ? (
                 <Col>
                   <Alert color='danger'>{this.props.error.msg}</Alert>
