@@ -15,7 +15,8 @@ import { TiShoppingCart } from 'react-icons/ti'
 import { updateOstoslista, selectOstoslista } from '../../actions/ostoslistaActions'
 import { returnErrors, clearErrors } from '../../actions/errorActions'
 import { returnMessages, clearMessages } from '../../actions/messageActions'
-import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation';
+import { AvForm, AvGroup, AvField } from 'availity-reactstrap-validation'
+import ostoslistanJarjestaja from './ostoslistanJarjestaja'
 
 class LisaaOstosModal extends Component {
   state = {
@@ -66,40 +67,36 @@ class LisaaOstosModal extends Component {
 
     if (olemassaOlevaTarvike) {
       vanhaOstoslista.tarvikkeet.forEach(tarvike => tarvike.id === olemassaOlevaTarvike.id ? tarvike.maara = tarvike.maara + this.state.maara : tarvike)
-      console.log(vanhaOstoslista)
       
       newOstoslista = {
         id: this.state.ostoslista.id,
         tarvikkeet: [...vanhaOstoslista.tarvikkeet]
-      }
-
-
-      
-      console.log('uusilista olemassa olevalla tarvikkeella', newOstoslista);
-      
+      }   
     } else {
       newOstoslista = {
         nimi: this.state.ostoslista.nimi,
         id: this.state.ostoslista.id,
         tarvikkeet: [...vanhaOstoslista.tarvikkeet,
-        { id: this.state.tarvike.id, maara: this.state.maara, nimi: this.state.tarvike.nimi }]
+        { id: this.state.tarvike.id, maara: this.state.maara }]
       }
-      console.log('uusilista uudella tarvikkeella',newOstoslista);
     }
+
+    const jarjestettyUusiOstoslista = ostoslistanJarjestaja(newOstoslista, this.props.tarvikkeet)
+    
     
     // Add item via addItem action
-    this.props.updateOstoslista(newOstoslista)
+    this.props.updateOstoslista(jarjestettyUusiOstoslista)
 
     // valitaan päivitetty lista valituksi ostoslistaksi
-    this.props.selectOstoslista(newOstoslista)
+    this.props.selectOstoslista(jarjestettyUusiOstoslista)
 
     // muuta alkutilan määrä yhteen ja uusi ostoslista
-    this.setState({ ostoslista: newOstoslista, maara: 1 })
+    this.setState({ ostoslista: jarjestettyUusiOstoslista, maara: 1 })
 
     // Lähetetään viesti onnistuneesta lisäyksestä
 
-    this.props.returnMessages(`Tarvike ${this.state.tarvike.nimi} lisätty ostoslistalle ${this.state.ostoslista.nimi}`)
-    setTimeout(() => this.props.clearMessages(), 7000)
+    this.props.returnMessages(`tarvike ${this.state.tarvike.nimi} lisätty ostoslistalle ${this.state.ostoslista.nimi}`)
+    setTimeout(() => this.props.clearMessages(), 5000)
 
     // Close modal
     this.toggle()
@@ -107,11 +104,6 @@ class LisaaOstosModal extends Component {
   }
 
   valitseOstoslista(e) {
-    console.log(e.target.value)
-    console.log(this.props.ostoslista.ostoslistat.find(ostoslista => ostoslista.id === e.target.value))
-    
-    
-    e.preventDefault()
     const valittuLista = this.props.ostoslista.ostoslistat.find(ostoslista => ostoslista.id === e.target.value)
     this.props.selectOstoslista(valittuLista)
     this.setState({ ostoslista: valittuLista })
@@ -190,7 +182,7 @@ class LisaaOstosModal extends Component {
 }
 
 const mapStateToProps = state => ({
-  item: state.item,
+  tarvikkeet: state.tarvike.tarvikkeet,
   ostoslista: state.ostoslista,
   isAuthenticated: state.auth.isAuthenticated
 })

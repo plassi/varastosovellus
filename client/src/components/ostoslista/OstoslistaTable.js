@@ -12,6 +12,7 @@ import { returnMessages, clearMessages } from '../../actions/messageActions'
 
 class OstoslistaTable extends Component {
   state = {
+    tulostus: false,
     columns: [
       {
         dataField: 'nimi',
@@ -60,19 +61,36 @@ class OstoslistaTable extends Component {
     const uusiOstoslista = {
       nimi: this.props.ostoslista.selected.nimi,
       id: this.props.ostoslista.selected.id,
-      tarvikkeet: [ ...ostoslistanTarvikkeet ]
+      tarvikkeet: [...ostoslistanTarvikkeet]
     }
     console.log(uusiOstoslista)
 
     const promise = new Promise(() => this.props.updateOstoslista(uusiOstoslista))
     promise.then(this.props.selectOstoslista(uusiOstoslista))
-    
+
     this.props.returnMessages('Tarvike poistettu ostoslistalta')
     setTimeout(() => this.props.clearMessages(), 5000)
 
   }
 
+  yhteishinta(data) {
+    
+    const hinnat = data.map(tarvike => tarvike.hinta)
+
+    const reducer = (total, num) => total + num
+    
+    return hinnat.reduce(reducer)
+  }
+
+  onBeforeGetContent = () => {
+
+    return new Promise((resolve, reject) => {
+      this.setState({ tulostus: true }, () => resolve());
+    });
+  }
+
   render() {
+
 
     if (this.props.ostoslista.selected === null) {
       return (<></>)
@@ -101,25 +119,63 @@ class OstoslistaTable extends Component {
         )
       })
 
+      const printableColumns = this.state.columns.slice(0, -1)
+      console.log(data);
+
+      const printableData = data.map(tarvike => {
+        return (
+          {
+            id: tarvike.id,
+            nimi: tarvike.nimi,
+            maarayksikko: tarvike.maarayksikko,
+            hinta: tarvike.hinta,
+            hankintapaikka: tarvike.hankintapaikka,
+          }
+        )
+      })
+
+      const yhteishinta = this.yhteishinta(data)
+
       return (
-        <>
-          <h5>{selected.nimi}</h5>
-          <BootstrapTable
-            ref={el => (this.componentRef = el)}
-            keyField="id"
-            data={data}
-            columns={this.state.columns}
-            bordered={false}
-          />
+        <div>
+          <div>
+            <h5>{selected.nimi}</h5>
+
+            <BootstrapTable
+              keyField="id"
+              data={data}
+              columns={this.state.columns}
+            />
+            <p className="ml-1">Yhteishinta: {yhteishinta} €</p>
+
+          </div>
+
+          {/* Määritetään erikseen tulostettava versio taulukosta: */}
+
+          <div style={{ display: 'none' }}>
+            <div ref={el => (this.componentRef = el)}>
+
+              <h5>{selected.nimi}</h5>
+              <BootstrapTable
+                keyField="id"
+                data={printableData}
+                columns={printableColumns}
+              />
+              <p className="ml-1">Yhteishinta: {yhteishinta} €</p>
+
+            </div>
+          </div>
+
           <ReactToPrint
             bodyClass="p-5"
             trigger={() => <Button
               color='dark'
               style={{ marginBottom: '2rem' }}>Tulosta</Button>}
             content={() => this.componentRef}
+            onBeforeGetContent={() => this.onBeforeGetContent}
           />
 
-        </>
+        </div>
       )
     }
   }
