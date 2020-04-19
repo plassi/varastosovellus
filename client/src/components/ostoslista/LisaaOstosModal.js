@@ -104,11 +104,6 @@ class LisaaOstosModal extends Component {
   }
 
   valitseOstoslista(e) {
-    console.log(e.target.value)
-    console.log(this.props.ostoslista.ostoslistat.find(ostoslista => ostoslista.id === e.target.value))
-    
-    
-    e.preventDefault()
     const valittuLista = this.props.ostoslista.ostoslistat.find(ostoslista => ostoslista.id === e.target.value)
     this.props.selectOstoslista(valittuLista)
     this.setState({ ostoslista: valittuLista })
