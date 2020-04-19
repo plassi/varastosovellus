@@ -73,7 +73,12 @@ class OstoslistaTable extends Component {
   }
 
   yhteishinta(data) {
-    return 1000
+    
+    const hinnat = data.map(tarvike => tarvike.hinta)
+
+    const reducer = (total, num) => total + num
+    
+    return hinnat.reduce(reducer)
   }
 
   onBeforeGetContent = () => {
