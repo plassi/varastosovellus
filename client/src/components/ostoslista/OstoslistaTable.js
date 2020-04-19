@@ -74,22 +74,24 @@ class OstoslistaTable extends Component {
 
   yhteishinta(data) {
 
-    console.log(data);
-
     if (data.length > 0) {
       const hinnat = data.map(tarvike => {
         if (tarvike.hinta) {
           return tarvike.maara * tarvike.hinta
         }
-        return 0
+        return 0.00
       })
   
       const reducer = (total, num) => total + num
       
-      return hinnat.reduce(reducer)
+      const yhteishinta = hinnat.reduce(reducer)
+
+      const pyoristettyYhteishinta = Number.parseFloat(yhteishinta).toFixed(2)
+
+      return pyoristettyYhteishinta
     }
 
-    return 0
+    return 0.00
     
   }
 
