@@ -48,7 +48,7 @@ class TarvikeTable2 extends Component {
       onlyOneExpanding: true,
       renderer: row => (
         <Container>
-          <Row style={{ paddingBottom: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }} >
+          <Row style={{ paddingBottom: '5px', paddingTop: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }} >
             <Col xs="4">
               <h6>Kuvaus:</h6>
             </Col>
@@ -76,7 +76,7 @@ class TarvikeTable2 extends Component {
             <Col xs="4">
               <h6>Muokkaa määrää:</h6>
             </Col>
-            <Col style={{textAlign: "center"}}>
+            <Col>
               <TarvikeMaara row={row} />
             </Col>
           </Row >
@@ -84,7 +84,7 @@ class TarvikeTable2 extends Component {
             <Col xs="4">
               <h6>Muokkaa:</h6>
             </Col>
-            <Col style={{textAlign: "center"}}>
+            <Col>
               <TarvikeMuokkaaModal row={row} />
             </Col>
           </Row>
@@ -92,7 +92,7 @@ class TarvikeTable2 extends Component {
             <Col xs="4">
               <h6>Lisää ostoslistalle:</h6>
             </Col>
-            <Col style={{textAlign: "center"}}>
+            <Col>
               <LisaaOstosModal row={row} />
             </Col>
           </Row>

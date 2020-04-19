@@ -98,7 +98,7 @@ class LisaaOstosModal extends Component {
 
     // Lähetetään viesti onnistuneesta lisäyksestä
 
-    this.props.returnMessages(`tarvike ${this.state.tarvike.nimi} lisätty ostoslistalle ${this.state.ostoslista.nimi}`)
+    this.props.returnMessages(`Tarvike ${this.state.tarvike.nimi} lisätty ostoslistalle ${this.state.ostoslista.nimi}`)
     setTimeout(() => this.props.clearMessages(), 7000)
 
     // Close modal
@@ -133,7 +133,7 @@ class LisaaOstosModal extends Component {
       <div>
         {this.props.isAuthenticated ? (
 
-          <Button id='tarvike-lisaa-ostoslistalle-button' color='dark' onClick={this.toggle}>
+          <Button id='Tarvike-lisaa-ostoslistalle-button' color='dark' onClick={this.toggle}>
             <TiShoppingCart />
           </Button>
 

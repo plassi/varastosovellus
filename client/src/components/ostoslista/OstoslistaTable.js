@@ -41,7 +41,8 @@ class OstoslistaTable extends Component {
       {
         dataField: 'poista',
         text: 'Poista',
-
+        headerAlign: 'center',
+        align: 'center'
       },
 
     ],
@@ -108,6 +109,7 @@ class OstoslistaTable extends Component {
             keyField="id"
             data={data}
             columns={this.state.columns}
+            bordered={false}
           />
           <ReactToPrint
             bodyClass="p-5"
