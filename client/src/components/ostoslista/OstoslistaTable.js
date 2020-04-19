@@ -5,7 +5,7 @@ import BootstrapTable from 'react-bootstrap-table-next'
 import ReactToPrint from 'react-to-print'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
-import { Button } from 'reactstrap'
+import { Button, Row, Col } from 'reactstrap'
 import { AiOutlineDelete } from 'react-icons/ai'
 import { updateOstoslista, deleteOstoslista, selectOstoslista } from '../../actions/ostoslistaActions'
 import { returnMessages, clearMessages } from '../../actions/messageActions'
@@ -137,16 +137,18 @@ class OstoslistaTable extends Component {
       const yhteishinta = this.yhteishinta(data)
 
       return (
-        <div>
+        <div style={{marginTop: '100px'}}>
           <div>
-            <h5>{selected.nimi}</h5>
+            <h2 style={{textAlign: 'center', marginBottom: '20px'}}>{selected.nimi}</h2>
 
             <BootstrapTable
               keyField="id"
               data={data}
               columns={this.state.columns}
+              bordered={false}
+              rowStyle={{ backgroundColor: 'whitesmoke' }}
             />
-            <p className="ml-1">Yhteishinta: {yhteishinta} €</p>
+            <p style={{textAlign: 'right', marginTop: '30px', fontWeight: 'bold'}} className="ml-1">Yhteishinta: {yhteishinta} €</p>
 
           </div>
 
@@ -165,16 +167,18 @@ class OstoslistaTable extends Component {
 
             </div>
           </div>
-
+<Row style={{marginTop: '30px'}}>
+  <Col style={{textAlign: 'right'}}>
           <ReactToPrint
             bodyClass="p-5"
             trigger={() => <Button
               color='dark'
-              style={{ marginBottom: '2rem' }}>Tulosta</Button>}
+              style={{ marginBottom: '2rem' }}>Tulosta lista</Button>}
             content={() => this.componentRef}
             onBeforeGetContent={() => this.onBeforeGetContent}
           />
-
+          </Col>
+</Row>
         </div>
       )
     }

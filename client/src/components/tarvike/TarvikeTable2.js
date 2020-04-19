@@ -11,6 +11,7 @@ import { TiPlus, TiMinus } from 'react-icons/ti'
 import TarvikeMuokkaaModal from './TarvikeMuokkaaModal'
 import LisaaOstosModal from '../ostoslista/LisaaOstosModal'
 import TarvikeMaara from './TarvikeMaara'
+import TarvikeModal from './TarvikeModal'
 
 class TarvikeTable2 extends Component {
   state = {
@@ -60,7 +61,7 @@ class TarvikeTable2 extends Component {
             <Col xs="4">
               <h6>Hinta: </h6>
             </Col>
-              <p style={{paddingLeft: '15px'}}>{row.hinta} e/{row.maarayksikko}</p>
+            <p style={{ paddingLeft: '15px' }}>{row.hinta} e/{row.maarayksikko}</p>
             <Col>
             </Col>
           </Row>
@@ -160,7 +161,14 @@ class TarvikeTable2 extends Component {
           {
             props => (
               <div>
-                <SearchBar className='search' placeholder="Hae" {...props.searchProps} />
+                <Row>
+                  <Col>
+                    <SearchBar className='search' placeholder="Hae" {...props.searchProps} />
+                  </Col>
+                  <Col style={{textAlign: 'right'}}>
+                    <TarvikeModal />
+                  </Col>
+                </Row>
                 <BootstrapTable
                   hover
                   {...props.baseProps}

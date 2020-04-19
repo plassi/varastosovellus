@@ -54,10 +54,11 @@ class OstoslistatTable extends Component {
     }
 
     const ostoslistaRows = [
-      <tr id="hiddenRow" key={'row-data-' + ostoslista.id}>
+      <tr id="hiddenRow" key={'row-data-' + ostoslista.id} style={{background: 'whitesmoke'}}>
         <td >{ostoslista.nimi}</td>
         <td style={{ textAlign: 'center' }}>
           <Row>
+            <Col></Col>
             <Col style={{textAlign:'right'}}>
               <Button
                 id='ostoslista-avaa-button'
@@ -69,7 +70,7 @@ class OstoslistatTable extends Component {
                 <AiOutlineUnorderedList />
               </Button>
             </Col>
-            <Col style={{textAlign:'left'}}>
+            <Col style={{textAlign:'center'}}>
               <Button
                 className='remove-btn'
                 color='danger'
@@ -103,7 +104,7 @@ class OstoslistatTable extends Component {
           <thead>
             <tr>
               <th>Ostoslista</th>
-              <th style={{ textAlign: 'center' }}><Row><Col style={{ textAlign: 'right' }}>Avaa</Col><Col style={{ textAlign: 'left' }}>Poista</Col></Row></th>
+              <th style={{ textAlign: 'center' }}><Row><Col></Col><Col style={{ textAlign: 'right' }}>Avaa</Col><Col style={{ textAlign: 'center' }}>Poista</Col></Row></th>
             </tr>
           </thead>
           <tbody>
