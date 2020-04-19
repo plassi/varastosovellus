@@ -129,7 +129,7 @@ class LisaaOstosModal extends Component {
       <div>
         {this.props.isAuthenticated ? (
 
-          <Button id='tarvike-lisaa-ostoslistalle-button' color='dark' onClick={this.toggle}>
+          <Button id='Tarvike-lisaa-ostoslistalle-button' color='dark' onClick={this.toggle}>
             <TiShoppingCart />
           </Button>
 

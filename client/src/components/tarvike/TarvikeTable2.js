@@ -11,6 +11,7 @@ import { TiPlus, TiMinus } from 'react-icons/ti'
 import TarvikeMuokkaaModal from './TarvikeMuokkaaModal'
 import LisaaOstosModal from '../ostoslista/LisaaOstosModal'
 import TarvikeMaara from './TarvikeMaara'
+import TarvikeModal from './TarvikeModal'
 
 class TarvikeTable2 extends Component {
   state = {
@@ -48,45 +49,53 @@ class TarvikeTable2 extends Component {
       onlyOneExpanding: true,
       renderer: row => (
         <Container>
-          
-          <Row style={{ paddingBottom: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }} >
-              <Col xs="3">
-                <h6>Kuvaus:</h6>               
-              </Col>
-              <Col> 
-              <p>{row.kuvaus} </p>
-              </Col>
-            </Row>
-          <Row style={{ paddingBottom: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>
-            <Col>
-              <h6>Hinta</h6>
-              <p>{row.hinta} e/{row.maarayksikko}</p>
+          <Row style={{ paddingBottom: '5px', paddingTop: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }} >
+            <Col xs="4">
+              <h6>Kuvaus:</h6>
             </Col>
             <Col>
-              <h6>Hankintapaikka</h6>
+              <p>{row.kuvaus} </p>
+            </Col>
+          </Row>
+          <Row style={{ paddingBottom: '5px', paddingTop: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>
+            <Col xs="4">
+              <h6>Hinta: </h6>
+            </Col>
+            <p style={{ paddingLeft: '15px' }}>{row.hinta} e/{row.maarayksikko}</p>
+            <Col>
+            </Col>
+          </Row>
+          <Row style={{ paddingBottom: '5px', paddingTop: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>
+            <Col xs="4">
+              <h6>Hankintapaikka:</h6>
+            </Col>
+            <Col>
               {row.hankintapaikka}
             </Col>
-
-            <Col></Col>
           </Row>
-          <Row style={{ paddingBottom: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>
-              <Col >
-                <h6>Muokkaa määrää</h6>
-                <TarvikeMaara row={row} />
-              </Col>
-              <Col >
-                <Row >
-                  <Col style={{ paddingLeft: '0', paddingRight: '0', textAlign: 'right' }}>
-                    <h6>Muokkaa</h6>
-                    <TarvikeMuokkaaModal row={row} />
-                  </Col>
-                  <Col style={{ paddingRight: '5px' }}>
-                    <h6>Lisää ostoslistalle</h6>
-                    <LisaaOstosModal row={row} />
-                  </Col>
-                </Row>
-              </Col>
-            
+          <Row style={{ paddingBottom: '5px', paddingTop: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>
+            <Col xs="4">
+              <h6>Muokkaa määrää:</h6>
+            </Col>
+            <Col>
+              <TarvikeMaara row={row} />
+            </Col>
+          </Row >
+          <Row style={{ paddingBottom: '5px', paddingTop: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>
+            <Col xs="4">
+              <h6>Muokkaa:</h6>
+            </Col>
+            <Col>
+              <TarvikeMuokkaaModal row={row} />
+            </Col>
+          </Row>
+          <Row style={{ paddingBottom: '5px', paddingTop: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>
+            <Col xs="4">
+              <h6>Lisää ostoslistalle:</h6>
+            </Col>
+            <Col>
+              <LisaaOstosModal row={row} />
+            </Col>
           </Row>
         </Container>
       ),
@@ -152,7 +161,14 @@ class TarvikeTable2 extends Component {
           {
             props => (
               <div>
-                <SearchBar className='search' placeholder="Hae" {...props.searchProps} />
+                <Row>
+                  <Col>
+                    <SearchBar className='search' placeholder="Hae" {...props.searchProps} />
+                  </Col>
+                  <Col style={{textAlign: 'right'}}>
+                    <TarvikeModal />
+                  </Col>
+                </Row>
                 <BootstrapTable
                   hover
                   {...props.baseProps}

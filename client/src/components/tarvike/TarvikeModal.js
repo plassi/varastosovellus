@@ -76,13 +76,14 @@ class TarvikeModal extends Component {
     return (
       <div>
         {this.props.isAuthenticated ? (
-          <Col>
+         
             <Button
               id='lisaa-tarvike-button'
               color='dark'
               onClick={this.toggle}
+              style={{marginTop: '32px', marginBottom: '8px'}}
             > Lisää tarvike</Button>
-          </Col>
+         
         ) :
 
           (

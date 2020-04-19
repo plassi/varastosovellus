@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Col } from 'reactstrap'
 import PropTypes from 'prop-types'
-import TarvikeModal from './TarvikeModal'
+//import TarvikeModal from './TarvikeModal'
 import TarvikeTable2 from './TarvikeTable2'
 import { loadUser } from '../../actions/authActions'
 import { getTarvikkeet } from '../../actions/tarvikeActions'
@@ -33,10 +33,10 @@ class TarvikeView extends Component {
     return (
       <Col>
         
-        <div>
+        <div style={{marginTop: '30px', marginBottom: '30px', textAlign: 'center'}}>
           <h1>Tarvikkeet</h1>
         </div>
-        <TarvikeModal />
+      
         <TarvikeTable2 />
       </Col>
     )

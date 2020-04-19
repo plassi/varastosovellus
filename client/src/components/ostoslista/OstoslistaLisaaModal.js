@@ -4,7 +4,8 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  Col
+  Col,
+  Row
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import { addOstoslista } from '../../actions/ostoslistaActions'
@@ -64,7 +65,8 @@ class TarvikeModal extends Component {
     return (
       <div>
         {this.props.isAuthenticated ? (
-          <Col>
+          <Row>
+          <Col style={{textAlign: 'right'}}>
             <Button
               id='ostoslista-lisaa-button'
               color='dark'
@@ -72,6 +74,7 @@ class TarvikeModal extends Component {
               onClick={this.toggle}
             > Lisää ostoslista</Button>
           </Col>
+          </Row>
         ) :
 
           (

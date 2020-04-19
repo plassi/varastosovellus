@@ -33,7 +33,7 @@ class OstoslistaView extends Component {
       return (
         <Col>
 
-          <div>
+          <div style={{marginTop: '30px', marginBottom: '30px', textAlign: 'center'}}>
             <h1>Ostoslistat</h1>
           </div>
           <OstoslistaLisaaModal />
