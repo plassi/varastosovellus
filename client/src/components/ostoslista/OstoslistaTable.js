@@ -12,7 +12,6 @@ import { returnMessages, clearMessages } from '../../actions/messageActions'
 
 class OstoslistaTable extends Component {
   state = {
-    tulostus: false,
     columns: [
       {
         dataField: 'nimi',
@@ -75,21 +74,25 @@ class OstoslistaTable extends Component {
 
   yhteishinta(data) {
 
-    console.log(data);
-    
-    
-    const hinnat = data.map(tarvike => tarvike.maara * tarvike.hinta)
+    if (data.length > 0) {
+      const hinnat = data.map(tarvike => {
+        if (tarvike.hinta) {
+          return tarvike.maara * tarvike.hinta
+        }
+        return 0.00
+      })
+  
+      const reducer = (total, num) => total + num
+      
+      const yhteishinta = hinnat.reduce(reducer)
 
-    const reducer = (total, num) => total + num
+      const pyoristettyYhteishinta = Number.parseFloat(yhteishinta).toFixed(2)
+
+      return pyoristettyYhteishinta
+    }
+
+    return 0.00
     
-    return hinnat.reduce(reducer)
-  }
-
-  onBeforeGetContent = () => {
-
-    return new Promise((resolve, reject) => {
-      this.setState({ tulostus: true }, () => resolve());
-    });
   }
 
   render() {
@@ -123,7 +126,6 @@ class OstoslistaTable extends Component {
       })
 
       const printableColumns = this.state.columns.slice(0, -1)
-      console.log(data);
 
       const printableData = data.map(tarvike => {
         return (
@@ -133,6 +135,7 @@ class OstoslistaTable extends Component {
             maarayksikko: tarvike.maarayksikko,
             hinta: tarvike.hinta,
             hankintapaikka: tarvike.hankintapaikka,
+            maara: tarvike.maara
           }
         )
       })

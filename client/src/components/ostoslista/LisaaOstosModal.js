@@ -50,7 +50,11 @@ class LisaaOstosModal extends Component {
   }
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
+    if (e.target.name === 'maara') {
+      this.setState({ [e.target.name]: Number(e.target.value) })  
+    } else {
+      this.setState({ [e.target.name]: e.target.value })
+    }
   }
 
   onSubmit = e => {

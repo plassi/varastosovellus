@@ -1,5 +1,6 @@
 const ostosListanJarjestaja = (ostoslista, tarvikkeet) => {
 
+  // Haetaan ostoslistaan tarvikkeiden tietoja
   const data = ostoslista.tarvikkeet.map(tarvike => {
     const suodatin = tarvikkeet.filter(muuTarvike => muuTarvike.id === tarvike.id)
 
