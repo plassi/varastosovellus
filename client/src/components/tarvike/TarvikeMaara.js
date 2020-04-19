@@ -35,7 +35,7 @@ class TarvikeMaara extends Component {
 	render() {
 
 		return (
-			<InputGroup style={{width: '125px'}}>
+			<InputGroup style={{width: '130px'}}>
 				<InputGroupAddon addonType="prepend">
 					<Button color="dark" onClick={this.buttonMinusClick}> - </Button>
 				</InputGroupAddon>

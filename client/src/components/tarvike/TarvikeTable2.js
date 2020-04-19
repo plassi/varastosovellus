@@ -83,7 +83,7 @@ class TarvikeTable2 extends Component {
           </Row >
           <Row style={{ paddingBottom: '5px', paddingTop: '5px', borderBottomStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>
             <Col xs="4">
-              <h6>Muokkaa:</h6>
+              <h6>Muokkaa tarviketta:</h6>
             </Col>
             <Col>
               <TarvikeMuokkaaModal row={row} />

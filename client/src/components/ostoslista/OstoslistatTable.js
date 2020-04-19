@@ -40,7 +40,7 @@ class OstoslistatTable extends Component {
         .then((varmistus) => {
           if (varmistus) {
             this.props.deleteOstoslista(id)
-            this.props.returnMessages('ostoslista poistettu')
+            this.props.returnMessages('Ostoslista poistettu')
             setTimeout(() => this.props.clearMessages(), 5000)
           }
         })
