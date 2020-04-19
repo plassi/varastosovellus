@@ -74,8 +74,11 @@ class OstoslistaTable extends Component {
   }
 
   yhteishinta(data) {
+
+    console.log(data);
     
-    const hinnat = data.map(tarvike => tarvike.hinta)
+    
+    const hinnat = data.map(tarvike => tarvike.maara * tarvike.hinta)
 
     const reducer = (total, num) => total + num
     
