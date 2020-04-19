@@ -73,6 +73,7 @@ class LisaaOstosModal extends Component {
       vanhaOstoslista.tarvikkeet.forEach(tarvike => tarvike.id === olemassaOlevaTarvike.id ? tarvike.maara = tarvike.maara + this.state.maara : tarvike)
       
       newOstoslista = {
+        nimi: this.state.ostoslista.nimi,
         id: this.state.ostoslista.id,
         tarvikkeet: [...vanhaOstoslista.tarvikkeet]
       }   
