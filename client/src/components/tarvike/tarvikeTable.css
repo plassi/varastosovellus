@@ -6,3 +6,11 @@
 .react-bs-table-sizePerPage-dropdown > .dropdown-menu > .dropdown-item > a {
   color: rgb(58, 58, 58) !important;
 }
+
+.react-bootstrap-table-page-btns-ul > .page-item > .page-link {
+  color: rgb(207, 207, 207) !important;
+}
+
+.react-bootstrap-table-page-btns-ul > .active > .page-link {
+  color: white !important;
+}
