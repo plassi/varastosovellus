@@ -21,7 +21,7 @@ class TarvikeTable2 extends Component {
         text: 'Nimi',
         sort: true
       }, {
-        dataField: 'maara',
+        dataField: 'maaraJaYks',
         text: 'Määrä',
         sort: true
       }, {
@@ -150,11 +150,23 @@ class TarvikeTable2 extends Component {
       }]
     }
 
+    const data = tarvikkeet.map(tarvike => {
+      return {
+        ...tarvike,
+        maaraJaYks: tarvike.maara + " " + tarvike.maarayksikko
+      }
+
+    })
+
+    console.log(data);
+    
+
     return (
+
       <div>
         <ToolkitProvider
           keyField="id"
-          data={tarvikkeet}
+          data={data}
           columns={this.state.columns}
           search
         >

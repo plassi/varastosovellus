@@ -19,15 +19,8 @@ class OstoslistaTable extends Component {
         sort: true,
       },
       {
-        dataField: 'maara',
+        dataField: 'maaraJaYks',
         text: 'Määrä',
-        sort: true,
-        headerAlign: 'center',
-        align: 'center'
-      },
-      {
-        dataField: 'maarayksikko',
-        text: 'Yksikkö',
         sort: true,
         headerAlign: 'center',
         align: 'center'
@@ -36,6 +29,13 @@ class OstoslistaTable extends Component {
         dataField: 'hankintapaikka',
         text: 'Hankintapaikka',
         sort: true,
+      },
+      {
+        dataField: 'ahinta',
+        text: 'a Hinta €',
+        sort: true,
+        headerAlign: 'center',
+        align: 'center'
       },
       {
         dataField: 'hinta',
@@ -118,8 +118,11 @@ class OstoslistaTable extends Component {
           {
             ...tarvike,
             nimi: kokoTarvike.nimi,
+            maara: tarvike.maara,
             maarayksikko: kokoTarvike.maarayksikko,
-            hinta: Number.parseFloat(kokoTarvike.hinta).toFixed(2),
+            maaraJaYks: tarvike.maara + " " + kokoTarvike.maarayksikko,
+            ahinta: Number.parseFloat(kokoTarvike.hinta).toFixed(2),
+            hinta: Number.parseFloat(kokoTarvike.hinta * tarvike.maara).toFixed(2),
             hankintapaikka: kokoTarvike.hankintapaikka,
             poista: <Button className='remove-btn'
               color='danger'
@@ -139,9 +142,11 @@ class OstoslistaTable extends Component {
             id: tarvike.id,
             nimi: tarvike.nimi,
             maarayksikko: tarvike.maarayksikko,
-            hinta: Number.parseFloat(tarvike.hinta).toFixed(2),
+            ahinta: tarvike.ahinta,
+            hinta: tarvike.hinta,
             hankintapaikka: tarvike.hankintapaikka,
-            maara: tarvike.maara
+            maara: tarvike.maara,
+            maaraJaYks: tarvike.maara + " " + tarvike.maarayksikko
           }
         )
       })
