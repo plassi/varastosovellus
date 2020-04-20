@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { Container, Alert, Col } from 'reactstrap'
+import { Container, Alert, Col, Toast, ToastBody, ToastHeader } from 'reactstrap'
 import PropTypes from 'prop-types'
 import AppNavbar from './components/AppNavbar'
 import LoginForm from './components/auth/LoginForm'
@@ -53,14 +53,32 @@ class App extends Component {
             <AppNavbar />
             <Container>
               {this.props.message.msg ? (
-                <Col>
-                  <Alert color='success'>{this.props.message.msg}</Alert>
-                </Col>
-              ) : <div className='py-3'></div>}
+                <div className="p-3 my-5 ml-auto rounded fixed-top" >
+                  <Col>
+                  <Toast>
+                    <ToastHeader icon="success">
+                      Ilmoitus
+                  </ToastHeader>
+                    <ToastBody>
+                      {this.props.message.msg}
+                  </ToastBody>
+                  </Toast>
+                  </Col>
+                </div>
+              ) : null }
               {this.props.error.msg ? (
+                <div className="p-3 my-5 ml-auto rounded fixed-top" >
                 <Col>
-                  <Alert color='danger'>{this.props.error.msg}</Alert>
+                <Toast>
+                  <ToastHeader icon="danger">
+                    Virhe
+                </ToastHeader>
+                  <ToastBody>
+                    {this.props.error.msg}
+                </ToastBody>
+                </Toast>
                 </Col>
+              </div>
               ) : null}
               <Switch>
                 <Route path="/tarvikkeet" >
