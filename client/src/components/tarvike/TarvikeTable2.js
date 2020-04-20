@@ -12,6 +12,7 @@ import TarvikeMuokkaaModal from './TarvikeMuokkaaModal'
 import LisaaOstosModal from '../ostoslista/LisaaOstosModal'
 import TarvikeMaara from './TarvikeMaara'
 import TarvikeModal from './TarvikeModal'
+import './tarvikeTable.css'
 
 class TarvikeTable2 extends Component {
   state = {
