@@ -100,7 +100,7 @@ class LisaaOstosModal extends Component {
 
     // Lähetetään viesti onnistuneesta lisäyksestä
 
-    this.props.returnMessages(`tarvike ${this.state.tarvike.nimi} lisätty ostoslistalle ${this.state.ostoslista.nimi}`)
+    this.props.returnMessages(`Tarvike ${this.state.tarvike.nimi} lisätty ostoslistalle ${this.state.ostoslista.nimi}`)
     setTimeout(() => this.props.clearMessages(), 5000)
 
     // Close modal

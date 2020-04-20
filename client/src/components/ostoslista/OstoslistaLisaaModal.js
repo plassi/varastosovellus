@@ -45,7 +45,7 @@ class TarvikeModal extends Component {
     // Add item via addItem action
     this.props.addOstoslista(newOstoslista)
 
-    this.props.returnMessages(`ostoslista ${newOstoslista.nimi} lisätty ja avattu`)
+    this.props.returnMessages(`Ostoslista ${newOstoslista.nimi} lisätty ja avattu`)
     setTimeout(() => this.props.clearMessages(), 7000)
 
     // Close modal

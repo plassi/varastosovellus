@@ -22,21 +22,27 @@ class OstoslistaTable extends Component {
         dataField: 'maara',
         text: 'Määrä',
         sort: true,
+        headerAlign: 'center',
+        align: 'center'
       },
       {
         dataField: 'maarayksikko',
         text: 'Yksikkö',
+        sort: true,
+        headerAlign: 'center',
+        align: 'center'
+      },
+      {
+        dataField: 'hankintapaikka',
+        text: 'Hankintapaikka',
         sort: true,
       },
       {
         dataField: 'hinta',
         text: 'Hinta €',
         sort: true,
-      },
-      {
-        dataField: 'hankintapaikka',
-        text: 'Hankintapaikka',
-        sort: true,
+        headerAlign: 'center',
+        align: 'center'
       },
       {
         dataField: 'poista',
@@ -163,13 +169,23 @@ class OstoslistaTable extends Component {
           <div style={{ display: 'none' }}>
             <div ref={el => (this.componentRef = el)}>
 
-              <h5>{selected.nimi}</h5>
+              <h5 style={{paddingBottom:'15px'}}>{selected.nimi}</h5>
               <BootstrapTable
                 keyField="id"
                 data={printableData}
                 columns={printableColumns}
+                bordered={false}
+                
               />
-              <p className="ml-1">Yhteishinta: {yhteishinta} €</p>
+              <Row style={{paddingTop:'15px', marginRight: '2px', marginLeft: '2px' ,borderTopStyle: 'solid', borderWidth: '1px', borderColor: 'lightgray' }}>
+                <Col ></Col>
+                <Col></Col>
+                <Col></Col>
+                <Col><p style={{textAlign: 'right', fontWeight: 'bold'}} className="ml-1">Yhteishinta:</p></Col>
+                <Col><p style={{textAlign: 'center', fontWeight: 'bold'}} className="ml-1">{yhteishinta} €</p></Col>
+              </Row>
+              
+              
 
             </div>
           </div>

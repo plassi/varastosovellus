@@ -3,7 +3,10 @@ import {
   Button,
   Modal,
   ModalHeader,
-  ModalBody
+  ModalBody,
+  Col,
+  Row,
+  Container
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import { deleteTarvike, updateTarvike } from '../../actions/tarvikeActions'
@@ -105,7 +108,7 @@ class TarvikeMuokkaaModal extends Component {
     const disabled = this.state.nimi === '' || this.state.maara === '' || this.state.maarayksikko === ''
 
     return (
-      <Button id='tarvike-tallenna-button' disabled={disabled} color='dark' style={{ marginTop: '2rem' }} block>
+      <Button id='tarvike-tallenna-button' disabled={disabled} color='dark' block>
         Tallenna
       </Button>
     )
@@ -215,14 +218,22 @@ class TarvikeMuokkaaModal extends Component {
                   onChange={this.onChange}
                 />
               </AvGroup>
-              {this.renderMuokkaaButton()}
+          <Container>
+            <Row>
+              <Col style={{paddingLeft: '0px'}}>
               <Button
                 id='tarvike-poista-button'
                 color='danger' block
                 onClick={this.onDeleteClick.bind(this, this.props.row.id)}
               >
-                Poista tarvike {this.props.row.nimi}
+                Poista {this.props.row.nimi}
               </Button>
+              </Col>
+              <Col style={{paddingRight: '0px'}}>
+              {this.renderMuokkaaButton()}
+              </Col>
+              </Row>
+              </Container>
             </AvForm>
           </ModalBody>
         </Modal>
