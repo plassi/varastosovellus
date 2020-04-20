@@ -69,7 +69,7 @@ class LoginForm extends Component {
 
     return (
       <Container>
-        <Col sm="12" md={{ size: 6, offset: 3 }}>
+        <Col sm="12" md={{ size: 6, offset: 3 }} style={{marginTop: '100px'}}> 
           <Card>
             <CardBody>
               <CardTitle><h4>Kirjaudu sisään</h4></CardTitle>
