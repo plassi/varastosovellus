@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { Container, Alert, Col, Toast, ToastBody, ToastHeader } from 'reactstrap'
+import { Container, Col, Toast, ToastBody, ToastHeader } from 'reactstrap'
 import PropTypes from 'prop-types'
 import AppNavbar from './components/AppNavbar'
 import LoginForm from './components/auth/LoginForm'
@@ -42,7 +42,7 @@ class App extends Component {
 
   render() {
 
-    const { isAuthenticated, user } = this.props.auth
+    const { isAuthenticated } = this.props.auth
     // console.log('isAuhenticated', isAuthenticated);
 
     if (isAuthenticated) {

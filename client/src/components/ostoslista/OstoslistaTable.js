@@ -82,8 +82,8 @@ class OstoslistaTable extends Component {
 
     if (data.length > 0) {
       const hinnat = data.map(tarvike => {
-        if (tarvike.hinta) {
-          return tarvike.maara * tarvike.hinta
+        if (tarvike.ahinta) {
+          return tarvike.maara * tarvike.ahinta
         }
         return 0.00
       })
