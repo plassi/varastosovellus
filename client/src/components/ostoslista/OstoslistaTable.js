@@ -119,7 +119,7 @@ class OstoslistaTable extends Component {
             ...tarvike,
             nimi: kokoTarvike.nimi,
             maarayksikko: kokoTarvike.maarayksikko,
-            hinta: kokoTarvike.hinta,
+            hinta: Number.parseFloat(kokoTarvike.hinta).toFixed(2),
             hankintapaikka: kokoTarvike.hankintapaikka,
             poista: <Button className='remove-btn'
               color='danger'
@@ -139,7 +139,7 @@ class OstoslistaTable extends Component {
             id: tarvike.id,
             nimi: tarvike.nimi,
             maarayksikko: tarvike.maarayksikko,
-            hinta: tarvike.hinta,
+            hinta: Number.parseFloat(tarvike.hinta).toFixed(2),
             hankintapaikka: tarvike.hankintapaikka,
             maara: tarvike.maara
           }

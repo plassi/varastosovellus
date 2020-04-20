@@ -61,7 +61,7 @@ class TarvikeTable2 extends Component {
             <Col xs="4">
               <h6>Hinta: </h6>
             </Col>
-            <p style={{ paddingLeft: '15px' }}>{row.hinta} e/{row.maarayksikko}</p>
+            <p style={{ paddingLeft: '15px' }}>{Number.parseFloat(row.hinta).toFixed(2)} e/{row.maarayksikko}</p>
             <Col>
             </Col>
           </Row>
