@@ -120,8 +120,8 @@ class OstoslistaTable extends Component {
             maara: tarvike.maara,
             maarayksikko: kokoTarvike.maarayksikko,
             maaraJaYks: tarvike.maara + " " + kokoTarvike.maarayksikko,
-            ahinta: Number.parseFloat(kokoTarvike.hinta).toFixed(2),
-            hinta: Number.parseFloat(kokoTarvike.hinta * tarvike.maara).toFixed(2),
+            ahinta: kokoTarvike.hinta ? Number.parseFloat(kokoTarvike.hinta).toFixed(2) : null,
+            hinta: kokoTarvike.hinta ? Number.parseFloat(kokoTarvike.hinta * tarvike.maara).toFixed(2) : null,
             hankintapaikka: kokoTarvike.hankintapaikka,
             poista: <Button className='remove-btn'
               color='danger'

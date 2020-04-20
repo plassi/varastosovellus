@@ -42,6 +42,16 @@ class TarvikeTable2 extends Component {
     isAuthenticated: PropTypes.bool
   }
 
+  renderHinta(row) {
+    if (row.hinta) {
+      return (
+        <>
+          {Number.parseFloat(row.hinta).toFixed(2)} e/{ row.maarayksikko}
+        </>
+      )
+    }
+  }
+
   render() {
     const { tarvikkeet } = this.props.tarvike
     const { SearchBar } = Search
@@ -62,7 +72,10 @@ class TarvikeTable2 extends Component {
             <Col xs="4">
               <h6>Hinta: </h6>
             </Col>
-            <p style={{ paddingLeft: '15px' }}>{Number.parseFloat(row.hinta).toFixed(2)} e/{row.maarayksikko}</p>
+            <p style={{ paddingLeft: '15px' }}>
+              {this.renderHinta(row)}
+            </p>
+
             <Col>
             </Col>
           </Row>
@@ -175,7 +188,7 @@ class TarvikeTable2 extends Component {
                   <Col>
                     <SearchBar className='search' placeholder="Hae" {...props.searchProps} />
                   </Col>
-                  <Col style={{textAlign: 'right'}}>
+                  <Col style={{ textAlign: 'right' }}>
                     <TarvikeModal />
                   </Col>
                 </Row>
