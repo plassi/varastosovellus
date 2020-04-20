@@ -13,7 +13,6 @@ app.use(cors())
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'local-build') {
   // Set static folder
-  console.log(process.env.NODE_ENV)
 
   app.use(express.static('client/build'))
 }

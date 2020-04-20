@@ -58,7 +58,6 @@ class Ostoslista extends Component {
     ]
 
     if (this.state.expandedRows.includes(tarvike.id)) {
-      console.log(tarvike)
 
       tarvikeRows.push(
         <tr key={'row-expanded-' + tarvike.id}>

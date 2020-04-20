@@ -25,9 +25,6 @@ export default function(state = initialState, action) {
         tarvikkeet: state.tarvikkeet.filter(tarvike => tarvike.id !== action.payload)
       }
     case UPDATE_TARVIKE:
-      console.log(state)
-      console.log(action.payload)
-
       return {
         ...state,
         tarvikkeet: [...state.tarvikkeet.map(tarvike => tarvike.id === action.payload.id ? tarvike = action.payload : tarvike)]

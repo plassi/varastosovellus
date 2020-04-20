@@ -158,9 +158,6 @@ class TarvikeTable2 extends Component {
 
     })
 
-    console.log(data);
-    
-
     return (
 
       <div>

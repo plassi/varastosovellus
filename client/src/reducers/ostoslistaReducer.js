@@ -35,8 +35,6 @@ export default function (state = initialState, action) {
         ostoslistat: state.ostoslistat.filter(ostoslista => ostoslista.id !== action.payload)
       }
     case UPDATE_OSTOSLISTA:
-      console.log('State on UPDATE_OSTOSLISTA', state)
-      console.log('action.payload on UPDATE_OSTOSLISTA', action.payload)
 
       return {
         ...state,

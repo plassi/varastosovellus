@@ -115,7 +115,6 @@ class TarvikeMuokkaaModal extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div>
         {this.props.isAuthenticated

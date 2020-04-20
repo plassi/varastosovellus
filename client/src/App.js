@@ -43,7 +43,6 @@ class App extends Component {
   render() {
 
     const { isAuthenticated } = this.props.auth
-    // console.log('isAuhenticated', isAuthenticated);
 
     if (isAuthenticated) {
 

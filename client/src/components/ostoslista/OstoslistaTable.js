@@ -68,7 +68,6 @@ class OstoslistaTable extends Component {
       id: this.props.ostoslista.selected.id,
       tarvikkeet: [...ostoslistanTarvikkeet]
     }
-    console.log(uusiOstoslista)
 
     const promise = new Promise(() => this.props.updateOstoslista(uusiOstoslista))
     promise.then(this.props.selectOstoslista(uusiOstoslista))

@@ -64,9 +64,6 @@ class LisaaOstosModal extends Component {
     // jos lisättävä tarvike on jo valitulla ostoslistalla
     const olemassaOlevaTarvike = this.state.ostoslista.tarvikkeet.find(tarvike => tarvike.id === this.state.tarvike.id)
     
-    console.log('Olemassaolevatarvike', olemassaOlevaTarvike);
-    
-
     let newOstoslista
 
     if (olemassaOlevaTarvike) {
@@ -116,8 +113,6 @@ class LisaaOstosModal extends Component {
 
 
   render() {
-
-    console.log(this.state);
     
     const allOstoslistaRows = this.props.ostoslista.ostoslistat.map(ostoslista => {
       return (

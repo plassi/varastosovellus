@@ -21,7 +21,6 @@ class TarvikeView extends Component {
   }
 
   componentDidMount() {
-    console.log('tarvikeView didMount')
     this.props.loadUser()
     this.props.returnMessages()
     this.props.getTarvikkeet()
