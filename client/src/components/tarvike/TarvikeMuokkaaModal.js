@@ -41,7 +41,6 @@ class TarvikeMuokkaaModal extends Component {
   }
 
   onSubmit = e => {
-    e.preventDefault()
 
     const newTarvike = {
       id: this.props.row.id,
@@ -138,7 +137,7 @@ class TarvikeMuokkaaModal extends Component {
                   id='nimi'
                   type='text'
                   name='nimi'
-                  defaultValue={this.props.row.nimi}
+                  value={this.props.row.nimi}
                   placeholder='Nimi'
                   onChange={this.onChange}
                   required
@@ -150,7 +149,7 @@ class TarvikeMuokkaaModal extends Component {
                   id='kategoria'
                   type='text'
                   name='kategoria'
-                  defaultValue={this.props.row.kategoria}
+                  value={this.props.row.kategoria}
                   placeholder='Kategoria'
                   onChange={this.onChange}
                 />
@@ -160,7 +159,7 @@ class TarvikeMuokkaaModal extends Component {
                   id='kuvaus'
                   type='textarea'
                   name='kuvaus'
-                  defaultValue={this.props.row.kuvaus}
+                  value={this.props.row.kuvaus}
                   placeholder='Kuvaus'
                   onChange={this.onChange}
                 />
@@ -171,7 +170,7 @@ class TarvikeMuokkaaModal extends Component {
                   name="maara"
                   type="number"
                   min="0"
-                  defaultValue={this.props.row.maara}
+                  value={this.props.row.maara}
                   placeholder='Määrä'
                   onChange={this.onChange}
                   required errorMessage="Syötä määrä" />
@@ -181,7 +180,7 @@ class TarvikeMuokkaaModal extends Component {
                   id='maarayksikko'
                   type='text'
                   name='maarayksikko'
-                  defaultValue={this.props.row.maarayksikko}
+                  value={this.props.row.maarayksikko}
                   placeholder='Määräyksikkö'
                   onChange={this.onChange}
                   required
@@ -193,7 +192,7 @@ class TarvikeMuokkaaModal extends Component {
                   id='sijainti'
                   type='text'
                   name='sijainti'
-                  defaultValue={this.props.row.sijainti}
+                  value={this.props.row.sijainti}
                   placeholder='Sijainti'
                   onChange={this.onChange}
                 />
@@ -204,7 +203,7 @@ class TarvikeMuokkaaModal extends Component {
                   name="hinta"
                   type="number"
                   min="0"
-                  defaultValue={this.props.row.hinta}
+                  value={this.props.row.hinta}
                   placeholder='Hinta'
                   onChange={this.onChange} />
               </AvGroup>
@@ -213,7 +212,7 @@ class TarvikeMuokkaaModal extends Component {
                   id='hankintapaikka'
                   type='text'
                   name='hankintapaikka'
-                  defaultValue={this.props.row.hankintapaikka}
+                  value={this.props.row.hankintapaikka}
                   placeholder='Hankintapaikka'
                   onChange={this.onChange}
                 />

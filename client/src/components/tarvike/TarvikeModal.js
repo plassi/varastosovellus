@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-  Col,
   Button,
   Modal,
   ModalHeader,
@@ -10,7 +9,7 @@ import { connect } from 'react-redux'
 import { addTarvike } from '../../actions/tarvikeActions'
 import PropTypes from 'prop-types'
 import '../componentStyles.css'
-import { AvForm, AvGroup, AvInput, AvFeedback, AvField } from 'availity-reactstrap-validation';
+import { AvForm, AvGroup, AvInput, AvFeedback, AvField } from 'availity-reactstrap-validation'
 
 class TarvikeModal extends Component {
   state = {

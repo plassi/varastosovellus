@@ -59,14 +59,6 @@ class AppNavbar extends Component {
           </DropdownToggle>
           <DropdownMenu className="asetukset-dropdown">
             <DropdownItem>
-              Profiili
-            </DropdownItem>
-            <Link to="/kayttajat">
-              <DropdownItem>
-                Käyttäjien hallinta
-            </DropdownItem>
-            </Link>
-            <DropdownItem>
               <Logout />
             </DropdownItem>
           </DropdownMenu>
