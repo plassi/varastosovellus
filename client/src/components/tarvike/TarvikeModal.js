@@ -4,6 +4,7 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
+  Label,
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import { addTarvike } from '../../actions/tarvikeActions'
@@ -59,7 +60,7 @@ class TarvikeModal extends Component {
 
   renderLisaaButton = () => {
 
-    const disabled = this.state.nimi === '' || this.state.maara === '' || this.state.maarayksikko === '' 
+    const disabled = this.state.nimi === '' || this.state.maara === '' || this.state.maarayksikko === ''
 
     return (
       <Button id='modal-lisaa-tarvike-button' disabled={disabled} color='dark' style={{ marginTop: '2rem' }} block>
@@ -74,14 +75,14 @@ class TarvikeModal extends Component {
     return (
       <div>
         {this.props.isAuthenticated ? (
-         
-            <Button
-              id='lisaa-tarvike-button'
-              color='dark'
-              onClick={this.toggle}
-              style={{marginTop: '32px', marginBottom: '8px'}}
-            > Lisää tarvike</Button>
-         
+
+          <Button
+            id='lisaa-tarvike-button'
+            color='dark'
+            onClick={this.toggle}
+            style={{ marginTop: '32px', marginBottom: '8px' }}
+          > Lisää tarvike</Button>
+
         ) :
 
           (
@@ -94,6 +95,7 @@ class TarvikeModal extends Component {
             <p><i>Nimi, Määrä ja Määräyksikkö ovat pakollisia kenttiä</i></p>
             <AvForm onSubmit={this.onSubmit}>
               <AvGroup>
+                <Label for="nimi">Nimi</Label>
                 <AvInput
                   id='nimi'
                   type='text'
@@ -105,6 +107,7 @@ class TarvikeModal extends Component {
                 <AvFeedback>Syötä nimi</AvFeedback>
               </AvGroup>
               <AvGroup>
+                <Label for="kategoria">Kategoria</Label>
                 <AvInput
                   id='kategoria'
                   type='text'
@@ -114,6 +117,7 @@ class TarvikeModal extends Component {
                 />
               </AvGroup>
               <AvGroup>
+                <Label for="kuvaus">Kuvaus</Label>
                 <AvInput
                   id='kuvaus'
                   type='textarea'
@@ -123,6 +127,7 @@ class TarvikeModal extends Component {
                 />
               </AvGroup>
               <AvGroup>
+                <Label for="maara">Määrä</Label>
                 <AvField
                   id='maara'
                   name="maara"
@@ -133,6 +138,7 @@ class TarvikeModal extends Component {
                   required errorMessage="Syötä määrä" />
               </AvGroup>
               <AvGroup>
+                <Label for="maarayksikko">Määräyksikkö</Label>
                 <AvInput
                   id='maarayksikko'
                   type='text'
@@ -144,6 +150,7 @@ class TarvikeModal extends Component {
                 <AvFeedback>Syötä yksikkö</AvFeedback>
               </AvGroup>
               <AvGroup>
+                <Label for="sijainti">Sijainti</Label>
                 <AvInput
                   id='sijainti'
                   type='text'
@@ -153,6 +160,7 @@ class TarvikeModal extends Component {
                 />
               </AvGroup>
               <AvGroup>
+                <Label for="hinta">Hinta</Label>
                 <AvField
                   id='hinta'
                   name="hinta"
@@ -162,6 +170,7 @@ class TarvikeModal extends Component {
                   onChange={this.onChange} />
               </AvGroup>
               <AvGroup>
+                <Label for="hankintapaikka">Hankintapaikka</Label>
                 <AvInput
                   id='hankintapaikka'
                   type='text'

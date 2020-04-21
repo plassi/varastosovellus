@@ -6,7 +6,8 @@ import {
   ModalBody,
   Col,
   Row,
-  Container
+  Container,
+  Label
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import { deleteTarvike, updateTarvike } from '../../actions/tarvikeActions'
@@ -132,6 +133,7 @@ class TarvikeMuokkaaModal extends Component {
           <ModalBody>
             <AvForm onSubmit={this.onSubmit}>
               <AvGroup>
+                <Label for="nimi">Nimi</Label>
                 <AvInput
                   id='nimi'
                   type='text'
@@ -144,6 +146,7 @@ class TarvikeMuokkaaModal extends Component {
                 <AvFeedback>Syötä nimi</AvFeedback>
               </AvGroup>
               <AvGroup>
+                <Label for="kategoria">Kategoria</Label>
                 <AvInput
                   id='kategoria'
                   type='text'
@@ -154,6 +157,7 @@ class TarvikeMuokkaaModal extends Component {
                 />
               </AvGroup>
               <AvGroup>
+                <Label for="kuvaus">Kuvaus</Label>
                 <AvInput
                   id='kuvaus'
                   type='textarea'
@@ -164,6 +168,7 @@ class TarvikeMuokkaaModal extends Component {
                 />
               </AvGroup>
               <AvGroup>
+                <Label for="maara">Määrä</Label>
                 <AvField
                   id='maara'
                   name="maara"
@@ -175,6 +180,7 @@ class TarvikeMuokkaaModal extends Component {
                   required errorMessage="Syötä määrä" />
               </AvGroup>
               <AvGroup>
+                <Label for="maarayksikko">Määräyksikkö</Label>
                 <AvInput
                   id='maarayksikko'
                   type='text'
@@ -187,6 +193,7 @@ class TarvikeMuokkaaModal extends Component {
                 <AvFeedback>Syötä yksikkö</AvFeedback>
               </AvGroup>
               <AvGroup>
+                <Label for="sijainti">Sijainti</Label>
                 <AvInput
                   id='sijainti'
                   type='text'
@@ -197,6 +204,7 @@ class TarvikeMuokkaaModal extends Component {
                 />
               </AvGroup>
               <AvGroup>
+                <Label for="hinta">Hinta</Label>
                 <AvField
                   id='hinta'
                   name="hinta"
@@ -207,6 +215,7 @@ class TarvikeMuokkaaModal extends Component {
                   onChange={this.onChange} />
               </AvGroup>
               <AvGroup>
+                <Label for="hankintapaikka">Hankintapaikka</Label>
                 <AvInput
                   id='hankintapaikka'
                   type='text'
@@ -216,21 +225,21 @@ class TarvikeMuokkaaModal extends Component {
                   onChange={this.onChange}
                 />
               </AvGroup>
-          <Container>
-            <Row>
-              <Col style={{paddingLeft: '0px'}}>
-              <Button
-                id='tarvike-poista-button'
-                color='danger' block
-                onClick={this.onDeleteClick.bind(this, this.props.row.id)}
-              >
-                Poista {this.props.row.nimi}
-              </Button>
-              </Col>
-              <Col style={{paddingRight: '0px'}}>
-              {this.renderMuokkaaButton()}
-              </Col>
-              </Row>
+              <Container>
+                <Row>
+                  <Col style={{ paddingLeft: '0px' }}>
+                    <Button
+                      id='tarvike-poista-button'
+                      color='danger' block
+                      onClick={this.onDeleteClick.bind(this, this.props.row.id)}
+                    >
+                      Poista {this.props.row.nimi}
+                    </Button>
+                  </Col>
+                  <Col style={{ paddingRight: '0px' }}>
+                    {this.renderMuokkaaButton()}
+                  </Col>
+                </Row>
               </Container>
             </AvForm>
           </ModalBody>
