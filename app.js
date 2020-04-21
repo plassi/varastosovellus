@@ -47,7 +47,10 @@ app.use(mLogger(':date :method :url :status :remote-addr :response-time :http-ve
 // Use Routes
 app.use('/api/tarvikkeet', require('./routes/api/tarvikkeet'))
 app.use('/api/ostoslistat', require('./routes/api/ostoslistat'))
-app.use('/api/users', require('./routes/api/users'))
+// User routes ei ole käytössä tuotantoympäristössä
+if (!process.env.NODE_ENV === 'production') {
+  app.use('/api/users', require('./routes/api/users'))
+}
 app.use('/api/auth', require('./routes/api/auth'))
 
 if (process.env.NODE_ENV === 'test') {

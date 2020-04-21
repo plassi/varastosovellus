@@ -5,11 +5,3 @@ Nyt voit käyttää requests-kansiossa olevaa create_user_admin.rest
 tiedostoa tehdäksesi palvelimelle pyynnön admin-käyttäjän luomiseksi.
 
 Kirjaudu sovellukseen käyttäjätunnus: admin, salasana: admin
-
-
-
-HUOM. Jos palvelin ei vastaa
-
-Tiedostossa app.js käy tarkistamassa että rivillä 50 route 
-"app.use('/api/users', require('./routes/api/users'))" on käytössä, 
-eikä kommentoituna pois käytöstä.
