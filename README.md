@@ -1,4 +1,12 @@
-# Varastosovelluksen kehitysversion asentaminen
+# Varastosovellus
+
+## Varastosovelluksen tuotantoversio
+
+* Sovellus löytyy osoitteesta http://varastosovellus.herokuapp.com
+
+* Käyttäjätunnus: admin salasana: sgDYqCCOCz
+
+## Varastosovelluksen kehitysversion asentaminen
 
 * Tarvitaan mongodb community server ja node.js
 
