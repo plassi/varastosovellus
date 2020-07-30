@@ -1,3 +1,4 @@
+config/production.json
 node_modules
 package-lock.json
 git-password
@@ -1418,3 +1419,5 @@ client/.yarn/cache/yarn-upgrade-all-npm-0.5.2-be48cf155f-1.zip
 client/.yarn/releases/yarn-rc.js
 npm-debug.log
 .vscode/launch.json
+esitys.txt
+README-not-public.md

@@ -4,7 +4,7 @@
 
 * Sovellus löytyy osoitteesta http://varastosovellus.herokuapp.com
 
-* Käyttäjätunnus: admin salasana: sgDYqCCOCz
+* Käyttäjätunnus: XXXXX salasana: XXXXXXXXXXX (jos haluat päästä kokeilemaan sovellusta, pyydä tunnukset erikseen)
 
 ## Varastosovelluksen kehitysversion asentaminen
 
